@@ -2683,7 +2683,7 @@ blockquote.style2:before, blockquote.style2:after {
 .travelo-box {
   background: #fff;
   padding: 20px;
-  margin-bottom: 30px;
+ 
 }
 .travelo-box > *:last-child {
   margin-bottom: 0;

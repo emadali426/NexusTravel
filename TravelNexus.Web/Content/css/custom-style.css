@@ -36,6 +36,8 @@
 }
 .travelo-box{
     padding:20px 10px;
+        top: 45px;
+    margin-top: -5px;
 }
 .travelo-box h4.lead {
     font-size: 16px;
@@ -55,7 +57,7 @@
     position: absolute;
     display: inline-block;
     height: 450px;
-    top: 104px;
+    top: 106px;
     left: 100px;
 }
 
@@ -63,7 +65,7 @@
     position: absolute;
     display: inline-block;
     height: 423px;
-    top: 104px;
+    top: 106px;
     right: 76px;
 }
 

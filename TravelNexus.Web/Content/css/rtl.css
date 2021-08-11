@@ -1629,6 +1629,7 @@ ul.menu.mini li a {
     text-align: right;
     padding-right: 20px;
 	padding-left: 0;
+
 }
 
 .travelo-signup-box .login-social .button i, .travelo-login-box .login-social .button i {
@@ -1644,6 +1645,7 @@ ul.menu.mini li a {
 
 .travelo-signup-box .form-group, .travelo-login-box .form-group {
     text-align: right;
+    color:blue;
 }
 
 .travelo-signup-box .signup-email i {

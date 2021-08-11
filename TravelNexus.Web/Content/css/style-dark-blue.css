@@ -1523,10 +1523,13 @@ h1.box-title small {
 
 /* 2.1. Form Elements ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 input.input-text, select, textarea, span.custom-select {
-  background: #f5f5f5;
-  border: none;
-  line-height: normal;
+    background: #f5f5f5;
+    border: none;
+    line-height: normalclass="btn-medium soap-popupbox"
+
 }
+
+
 
 input.input-text, textarea, span.custom-select {
   padding-left: 15px;
@@ -7627,6 +7630,7 @@ ul.menu.mini li:hover a, ul.menu.mini li.active a {
 .travelo-signup-box .form-group, .travelo-login-box .form-group {
   margin-bottom: 10px;
   text-align: left;
+
 }
 .travelo-signup-box .checkbox label, .travelo-login-box .checkbox label {
   font-size: 1em;
