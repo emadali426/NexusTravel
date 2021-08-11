@@ -370,6 +370,7 @@ ViewBag.Title = "Home Page";
                             {
                                 <div id="carousel-Packages" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
+
                                         <li data-target="#carousel-Packages" data-slide-to="0" class="active"></li>
                                         @for (int i = 1; i < Model.Packages.Count; i++)
                                         {
@@ -385,7 +386,7 @@ ViewBag.Title = "Home Page";
                                         <div class="item active">
                                             <p>@Model.Packages[0].Title</p>
                                             <a href="/adminmanage/PackageDetatils/@Model.Packages[0].Id">
-                                                <img title="@Model.Packages[0].Title" width="222" height="222" class="image-100" src="@Model.Packages[0].MainImageName" />
+                                                <img title="@Model.Packages[0].Title" width="222" height="222" class="image-100" src="~/NexusImages/PackagesImages/PackagesMainImages/1 website homepage thumbnail desert rose.jpg.jpg" />
                                             </a>
                                         </div>
                                         @for (int i = 1; i < Model.Packages.Count; i++)
@@ -414,6 +415,8 @@ ViewBag.Title = "Home Page";
 
                         <div class="travelo-box contact-box">
                             <h4 class="lead">Nexus News</h4>
+                            
+
                             @if (Model.NexusNews != null && Model.NexusNews.Count > 0)
                             {
                                 <div id="carousel-News" class="carousel slide" data-ride="carousel">
@@ -459,6 +462,7 @@ ViewBag.Title = "Home Page";
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    
                                                     <h4 class="modal-title">Nexus News</h4>
                                                 </div>
                                                 <div class="modal-body">
@@ -530,7 +534,7 @@ ViewBag.Title = "Home Page";
 
                         <div class="parallax0" >
                             <div class="background-container1" style="background-image: url('/Content/images/image1.png');">
-                                <img src="~/Content/images/image2.png" class="background-image-1" >
+                                <img src="~/Content/images/image2.png" style="top: 105px;" class="background-image-1" >
                                 <img src="~/Content/images/image3.png" class="background-image-2"  >
                             
                             </div>
