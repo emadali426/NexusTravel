@@ -141,6 +141,7 @@ namespace TravelNexus.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SentToMailList(string Email)
         {
             string Host =  SMTP2GoConfig.Host;
@@ -150,7 +151,8 @@ namespace TravelNexus.Web.Controllers
             string Username = SMTP2GoConfig.UserName;
 
             SmtpClient smtpClient = new SmtpClient(Host,Port);
-            smtpClient.Credentials = new System.Net.NetworkCredential("m.hamouda@travel-nexus.com", "M@nexus_2020");
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential(Username, Password);
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.EnableSsl = true;
 

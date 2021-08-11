@@ -1,140 +1,140 @@
 ﻿@model TravelNexus.Web.Models.SearchModel
-@{ 
+@{
 
-if (string.IsNullOrEmpty(Model.SelectedTab))
-{
-    Model.SelectedTab = "Hotels";
-}
-var hotelsTabClass = Model.SelectedTab == "Hotels" ? "active" : "inactive";
-var hotelsdivClass = Model.SelectedTab == "Hotels" ? "tab-pane fade active in" : "tab-pane fade";
-var flightsTabClass = Model.SelectedTab == "Flights" ? "active" : "inactive";
-var flightsdivClass = Model.SelectedTab == "Flights" ? "tab-pane fade active in" : "tab-pane fade";
-ViewBag.Title = "Home Page";
+    if (string.IsNullOrEmpty(Model.SelectedTab))
+    {
+        Model.SelectedTab = "Hotels";
+    }
+    var hotelsTabClass = Model.SelectedTab == "Hotels" ? "active" : "inactive";
+    var hotelsdivClass = Model.SelectedTab == "Hotels" ? "tab-pane fade active in" : "tab-pane fade";
+    var flightsTabClass = Model.SelectedTab == "Flights" ? "active" : "inactive";
+    var flightsdivClass = Model.SelectedTab == "Flights" ? "tab-pane fade active in" : "tab-pane fade";
+    ViewBag.Title = "Home Page";
 }
 
 
 
 <!-- Start of Index Page -->
 
-    <section id="content" style="padding-top:0px">
-        <div style="padding-top:25px;background-image:url('/Content/images/maroma.jpg');background-size: cover;background-repeat: no-repeat; height:670px">
-            <div class="container">
-                <div class="row">
-                    <div id="main" class="col-sm-8 col-md-9">
-                        <div class="search-box-wrapper style1">
-                            <div class="search-box">
-                                <ul class="search-tabs clearfix">
-                                    <li class="active"><a href="#hotels-tab" data-toggle="tab"><i class="soap-icon-hotel"></i>HOTELS</a></li>
-                                   @* <li class=""><a href="#flights-tab" data-toggle="tab"><i class="soap-icon-plane-right takeoff-effect"></i>FLIGHTS</a></li>*@
-                                    <li><a href="#cars-tab" data-toggle="tab"><i class="soap-icon-car"></i>CARS</a></li>
+<section id="content" style="padding-top:0px">
+    <div style="padding-top:25px;background-image:url('/Content/images/maroma.jpg');background-size: cover;background-repeat: no-repeat; height:670px">
+        <div class="container">
+            <div class="row">
+                <div id="main" class="col-sm-8 col-md-9">
+                    <div class="search-box-wrapper style1">
+                        <div class="search-box">
+                            <ul class="search-tabs clearfix">
+                                <li class="active"><a href="#hotels-tab" data-toggle="tab"><i class="soap-icon-hotel"></i>HOTELS</a></li>
+                                @* <li class=""><a href="#flights-tab" data-toggle="tab"><i class="soap-icon-plane-right takeoff-effect"></i>FLIGHTS</a></li>*@
+                                <li><a href="#cars-tab" data-toggle="tab"><i class="soap-icon-car"></i>CARS</a></li>
 
+                            </ul>
+                            <div class="visible-mobile">
+                                <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                                    <li class="active"><a href="#hotels-tab">HOTELS</a></li>
+                                    <li class=""><a href="#flights-tab">FLIGHTS</a></li>
+                                    <li><a href="#flight-and-hotel-tab">FLIGHT &amp; HOTELS</a></li>
+                                    <li><a href="#cars-tab">CARS</a></li>
+                                    <li><a href="#cruises-tab">CRUISES</a></li>
+                                    <li><a href="#flight-status-tab">FLIGHT STATUS</a></li>
+                                    <li><a href="#online-checkin-tab">ONLINE CHECK IN</a></li>
                                 </ul>
-                                <div class="visible-mobile">
-                                    <ul id="mobile-search-tabs" class="search-tabs clearfix">
-                                        <li class="active"><a href="#hotels-tab">HOTELS</a></li>
-                                        <li class=""><a href="#flights-tab">FLIGHTS</a></li>
-                                        <li><a href="#flight-and-hotel-tab">FLIGHT &amp; HOTELS</a></li>
-                                        <li><a href="#cars-tab">CARS</a></li>
-                                        <li><a href="#cruises-tab">CRUISES</a></li>
-                                        <li><a href="#flight-status-tab">FLIGHT STATUS</a></li>
-                                        <li><a href="#online-checkin-tab">ONLINE CHECK IN</a></li>
-                                    </ul>
+                            </div>
+
+                            <div class="search-tab-content">
+                                <div class="tab-pane fade active in" id="hotels-tab">
+
+                                    <form action="/Hotels/SearchHotels" method="post">
+                                        <div class="title-container">
+                                            <h2 class="search-title">Search and Book Hotels</h2>
+                                            <p>We're bringing you a new level of comfort.</p>
+                                            <i class="soap-icon-hotel"></i>
+                                        </div>
+                                        <div class="search-content">
+                                            <h5 class="title">Where</h5>
+                                            <div class="row">
+                                                <div id="InvalidCityNameId" class="text-danger message-error"></div>
+                                                <div class="col-xs-9">
+                                                    <label for='HotelSearchModel_CountryNam'>Your Destination</label>
+                                                    <input type="hidden" name="Runno" id="RunoId" value="-1" />
+                                                    <input class="form-control" id="CitiesNames" name="City.Name" required="required" type="text">
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <label for="c">Your Nationality</label>
+                                                    <input class="form-control" id="CountriesNames" name="Nationality" required="required" type="text">
+
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h5 class="title">When</h5>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <label for="check-in">Check In</label>
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="HotelSearchModel.CheckInDate" id="check-in" class="form-control input-text full-width" placeholder="mm/dd/yy">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <label for="check-out">Check Out</label>
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="HotelSearchModel.CheckOutDate" id="check-out" class="form-control input-text full-width" placeholder="mm/dd/yy">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h5 class="title">Who</h5>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <label>ROOMS</label>
+                                                    <div class="selector">
+                                                        <select data-val="true" data-val-number="The field Rooms must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.NoOfRooms">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>ADULTS</label>
+                                                    <div class="selector">
+                                                        <select data-val="true" data-val-number="The field Adults must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.RoomGuests.AdultCount">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>KIDS</label>
+                                                    <div class="selector">
+                                                        <select data-val="true" data-val-number="The field Kids must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.RoomGuests.ChildCount">
+                                                            <option value="0" selected>0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>Kid Age</label>
+                                                    <div class="selector">
+                                                        <input type="text" name="HotelSearchModel.ChildAge" class="input-text full-width" placeholder="Age">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <button type="submit" id="hotelsSearch" class="full-width uppercase">Proceed To Result</button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <div class="search-tab-content">
-                                    <div class="tab-pane fade active in" id="hotels-tab">
-
-                                        <form action="/Hotels/SearchHotels" method="post">
-                                            <div class="title-container">
-                                                <h2 class="search-title">Search and Book Hotels</h2>
-                                                <p>We're bringing you a new level of comfort.</p>
-                                                <i class="soap-icon-hotel"></i>
-                                            </div>
-                                            <div class="search-content">
-                                                <h5 class="title">Where</h5>
-                                                <div class="row">
-                                                    <div id="InvalidCityNameId" class="text-danger message-error"></div>
-                                                    <div class="col-xs-9">
-                                                        <label for='HotelSearchModel_CountryNam'>Your Destination</label>
-                                                        <input type="hidden" name="Runno" id="RunoId" value="-1" />
-                                                        <input class="form-control" id="CitiesNames" name="City.Name" required="required" type="text">
-                                                    </div>
-
-                                                    <div class="col-xs-4">
-                                                        <label for="c">Your Nationality</label>
-                                                        <input class="form-control" id="CountriesNames" name="Nationality" required="required" type="text">
-
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <h5 class="title">When</h5>
-                                                <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <label for="check-in">Check In</label>
-                                                        <div class="datepicker-wrap">
-                                                            <input type="text" name="HotelSearchModel.CheckInDate" id="check-in" class="form-control input-text full-width" placeholder="mm/dd/yy">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <label for="check-out">Check Out</label>
-                                                        <div class="datepicker-wrap">
-                                                            <input type="text" name="HotelSearchModel.CheckOutDate" id="check-out" class="form-control input-text full-width" placeholder="mm/dd/yy">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <h5 class="title">Who</h5>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <label>ROOMS</label>
-                                                        <div class="selector">
-                                                            <select data-val="true" data-val-number="The field Rooms must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.NoOfRooms">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>ADULTS</label>
-                                                        <div class="selector">
-                                                            <select data-val="true" data-val-number="The field Adults must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.RoomGuests.AdultCount">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>KIDS</label>
-                                                        <div class="selector">
-                                                            <select data-val="true" data-val-number="The field Kids must be a number." data-val-required="The NoOfRooms field is required." id="HotelSearchModel_NoOfRooms" name="HotelSearchModel.RoomGuests.ChildCount">
-                                                                <option value="0" selected>0</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Kid Age</label>
-                                                        <div class="selector">
-                                                            <input type="text" name="HotelSearchModel.ChildAge" class="input-text full-width" placeholder="Age">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <button type="submit" id="hotelsSearch" class="full-width uppercase">Proceed To Result</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    @*<div class="tab-pane fade" id="flights-tab">
+                                @*<div class="tab-pane fade" id="flights-tab">
                                         <form action="flight-list-view.html" method="post">
                                             <div class="title-container">
                                                 <h2 class="search-title">Search and Book Flights</h2>
@@ -253,298 +253,294 @@ ViewBag.Title = "Home Page";
                                         </form>
                                     </div>*@
 
-                                    <div class="tab-pane fade" id="cars-tab">
-                                        <form action="car-list-view.html" method="post">
-                                            <div class="title-container">
-                                                <h2 class="search-title">Search Cars</h2>
-                                                <p>We're bringing you a new level of comfort.</p>
-                                                <i class="soap-icon-car"></i>
-                                            </div>
-                                            <div class="search-content">
-                                                <div class="row">
-                                                    <h5 class="title">Where</h5>
-                                                    <div class="col-xs-6">
-                                                        <label>Pick Up</label>
-                                                        <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <label>Drop Off</label>
-                                                        <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
-                                                    </div>
+                                <div class="tab-pane fade" id="cars-tab">
+                                    <form action="car-list-view.html" method="post">
+                                        <div class="title-container">
+                                            <h2 class="search-title">Search Cars</h2>
+                                            <p>We're bringing you a new level of comfort.</p>
+                                            <i class="soap-icon-car"></i>
+                                        </div>
+                                        <div class="search-content">
+                                            <div class="row">
+                                                <h5 class="title">Where</h5>
+                                                <div class="col-xs-6">
+                                                    <label>Pick Up</label>
+                                                    <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
                                                 </div>
-                                                <hr>
-                                                <h5 class="title">When</h5>
-                                                <label>Pick-Up Date / Time</label>
-                                                <div class="form-group row">
-                                                    <div class="col-xs-6">
-                                                        <div class="datepicker-wrap">
-                                                            <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <div class="selector">
-                                                            <select class="full-width">
-                                                                <option value="1">anytime</option>
-                                                                <option value="2">morning</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <label>Drop-Off Date / Time</label>
-                                                <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <div class="datepicker-wrap">
-                                                            <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <div class="selector">
-                                                            <select class="full-width">
-                                                                <option value="1">anytime</option>
-                                                                <option value="2">morning</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <h5 class="title">Who</h5>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <label>Adults</label>
-                                                        <div class="selector">
-                                                            <select class="full-width">
-                                                                <option value="1">01</option>
-                                                                <option value="2">02</option>
-                                                                <option value="3">03</option>
-                                                                <option value="4">04</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Kids</label>
-                                                        <div class="selector">
-                                                            <select class="full-width">
-                                                                <option value="1">01</option>
-                                                                <option value="2">02</option>
-                                                                <option value="3">03</option>
-                                                                <option value="4">04</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <label>Promo Code</label>
-                                                        <input type="text" class="input-text full-width" placeholder="type here" />
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <label>Car Type</label>
-                                                        <div class="selector">
-                                                            <select class="full-width">
-                                                                <option value="">select a car type</option>
-                                                                <option value="economy">Economy</option>
-                                                                <option value="compact">Compact</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="form-group">
-                                                    <button type="submit" class="full-width">PROCEED TO RESULT</button>
+                                                <div class="col-xs-6">
+                                                    <label>Drop Off</label>
+                                                    <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-
+                                            <hr>
+                                            <h5 class="title">When</h5>
+                                            <label>Pick-Up Date / Time</label>
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label>Drop-Off Date / Time</label>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h5 class="title">Who</h5>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <label>Adults</label>
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>Kids</label>
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <label>Promo Code</label>
+                                                    <input type="text" class="input-text full-width" placeholder="type here" />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <label>Car Type</label>
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">select a car type</option>
+                                                            <option value="economy">Economy</option>
+                                                            <option value="compact">Compact</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="form-group">
+                                                <button type="submit" class="full-width">PROCEED TO RESULT</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar col-sm-4 col-md-3">
-
-                        <div class="travelo-box contact-box">
-                            <h4 class="lead">Our Packages</h4>
-
-                            @if (Model.Packages != null && Model.Packages.Count > 0)
-                            {
-                                <div id="carousel-Packages" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-
-                                        <li data-target="#carousel-Packages" data-slide-to="0" class="active"></li>
-                                        @for (int i = 1; i < Model.Packages.Count; i++)
-                                        {
-
-                                            <!-- Indicators -->
-                                            <li data-target="#carousel-Packages" data-slide-to="@i"></li>
-
-                                        }
-                                    </ol>
-
-                                    <!-- Wrapper for slides -->
-                                    <div class="carousel-inner" role="listbox">
-                                        <div class="item active">
-                                            <p>@Model.Packages[0].Title</p>
-                                            <a href="/adminmanage/PackageDetatils/@Model.Packages[0].Id">
-                                                <img title="@Model.Packages[0].Title" width="222" height="222" class="image-100" src="~/NexusImages/PackagesImages/PackagesMainImages/1 website homepage thumbnail desert rose.jpg.jpg" />
-                                            </a>
-                                        </div>
-                                        @for (int i = 1; i < Model.Packages.Count; i++)
-                                        {
-
-                                            <div class="item">
-                                                <p>@Model.Packages[i].Title</p>
-                                                <a href="/adminmanage/PackageDetatils/@Model.Packages[i].Id">
-                                                    <img title="@Model.Packages[i].Title" width="222" height="222" class="image-100" src="@Model.Packages[i].MainImageName" />
-                                                </a>
-                                            </div>
-
-                                        }
-
-
-
-                                    </div>
-                                </div>
-
-                            }
-                            else
-                            {
-                                <p class="lead text-center">No New Packages Yet</p>
-                            }
-                        </div>
-
-                        <div class="travelo-box contact-box">
-                            <h4 class="lead">Nexus News</h4>
-                            
-
-                            @if (Model.NexusNews != null && Model.NexusNews.Count > 0)
-                            {
-                                <div id="carousel-News" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carousel-News" data-slide-to="0" class="active"></li>
-                                        @for (int i = 1; i < Model.NexusNews.Count; i++)
-                                        {
-
-                                            <!-- Indicators -->
-                                            <li data-target="#carousel-News" data-slide-to="@i"></li>
-
-                                        }
-                                    </ol>
-
-                                    <!-- Wrapper for slides -->
-                                    <div class="carousel-inner" role="listbox">
-                                        <div class="item active">
-                                            <p class="lead">@Model.NexusNews[0].Title</p>
-                                            <a href="#" data-toggle="modal" data-target="#Modalnews-0">
-                                                <img title="Test Pack" width="222" height="222" class="image-100" src="@Model.NexusNews[0].FolderImgsName" style="height: 140px !important"/>
-                                            </a>
-                                        </div>
-                                        @for (int i = 1; i < Model.NexusNews.Count; i++)
-                                        {
-
-                                            <div class="item">
-                                                <p class="lead">@Model.NexusNews[i].Title</p>
-                                                <a href="#" data-toggle="modal" data-target="#Modalnews-@i">
-                                                    <img title="Test Pack" width="222" height="222" class="image-100" src="@Model.NexusNews[i].FolderImgsName" style="height: 140px !important" />
-                                                </a>
-                                            </div>
-
-                                        }
-
-
-
-                                    </div>
-                                </div>
-                                for (int i = 0; i < Model.NexusNews.Count; i++)
-                                {
-                                    <div class="modal fade" id="Modalnews-@i" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    
-                                                    <h4 class="modal-title">Nexus News</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>@Html.Raw(Model.NexusNews[i].DescriptionFileName)</p>
-                                                    <img title="Test Pack" style="width:100%;height:200px;" class="image-100" src="@Model.NexusNews[i].FolderImgsName" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <p class="lead text-center">No Available News Yet</p>
-                            }
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div id="main" class="entry-content">
-                <div class="vc_row wpb_row row">
-                    <div class="col-sm-12 ">
-                        <div class="container section Popular destinations">
+                <div class="sidebar col-sm-4 col-md-3">
 
-                            @if (Model.PopHotels != null && Model.PopHotels.Count > 0)
-                            {
-                                <h2 class="lead" style="font-weight:bold">Popular Hotels</h2>
-                                <div class="row hotel image-box listing-style2">
-                                    @foreach (var popHotel in Model.PopHotels)
+                    <div class="travelo-box contact-box">
+                        <h4 class="lead">Our Packages</h4>
+
+                        @if (Model.Packages != null && Model.Packages.Count > 0)
+                        {
+                            <div id="carousel-Packages" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-Packages" data-slide-to="0" class="active"></li>
+                                    @for (int i = 1; i < Model.Packages.Count; i++)
                                     {
 
+                                        <!-- Indicators -->
+                                        <li data-target="#carousel-Packages" data-slide-to="@i"></li>
 
-                                        <div class="col-sm-6 col-sms-6 col-md-3">
-                                            <a href="/adminmanage/popHotelDetails/@popHotel.Id" target="_blank">
+                                    }
+                                </ol>
 
-                                                <article class="box" style="height: auto; min-height: 235px;">
-                                                    <figure>
-                                                        <a href="/adminmanage/popHotelDetails/@popHotel.Id" class="hover-effect">
-                                                            <img style="width:100%;height:175px;" src="@popHotel.MainIamgeName" class="attachment-biggallery-thumb size-biggallery-thumb wp-post-image" alt="" loading="lazy">
-                                                        </a>
-                                                    </figure>
-                                                    <div class="details">
-                                                        <a title="View all" href="/adminmanage/popHotelDetails/@popHotel.Id" class="pull-right button uppercase">select</a>
-                                                        <div class="lead">@popHotel.HotelName</div>
-                                                        @*<label class="price-wrapper">
-                                                            <span class="price-per-unit">@popHotel.AvgPrice LE</span>avg/night
-                                                        </label>*@
-                                                    </div>
-                                                </article>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <p>@Model.Packages[0].Title</p>
+                                        <a href="/adminmanage/PackageDetatils/@Model.Packages[0].Id">
+                                            <img title="@Model.Packages[0].Title" width="222" height="222" class="image-100" src="@Model.Packages[0].MainImageName" />
+                                        </a>
+                                    </div>
+                                    @for (int i = 1; i < Model.Packages.Count; i++)
+                                    {
 
+                                        <div class="item">
+                                            <p>@Model.Packages[i].Title</p>
+                                            <a href="/adminmanage/PackageDetatils/@Model.Packages[i].Id">
+                                                <img title="@Model.Packages[i].Title" width="222" height="222" class="image-100" src="@Model.Packages[i].MainImageName" />
                                             </a>
                                         </div>
 
                                     }
+
+
+
                                 </div>
-                            }
-                            else
+                            </div>
+
+                        }
+                        else
+                        {
+                            <p class="lead text-center">No New Packages Yet</p>
+                        }
+                    </div>
+
+                    <div class="travelo-box contact-box">
+                        <h4 class="lead">Nexus News</h4>
+                        @if (Model.NexusNews != null && Model.NexusNews.Count > 0)
+                        {
+                            <div id="carousel-News" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-News" data-slide-to="0" class="active"></li>
+                                    @for (int i = 1; i < Model.NexusNews.Count; i++)
+                                    {
+
+                                        <!-- Indicators -->
+                                        <li data-target="#carousel-News" data-slide-to="@i"></li>
+
+                                    }
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <p class="lead">@Model.NexusNews[0].Title</p>
+                                        <a href="#" data-toggle="modal" data-target="#Modalnews-0">
+                                            <img title="Test Pack" width="222" height="222" class="image-100" src="@Model.NexusNews[0].FolderImgsName" style="height: 140px !important" />
+                                        </a>
+                                    </div>
+                                    @for (int i = 1; i < Model.NexusNews.Count; i++)
+                                    {
+
+                                        <div class="item">
+                                            <p class="lead">@Model.NexusNews[i].Title</p>
+                                            <a href="#" data-toggle="modal" data-target="#Modalnews-@i">
+                                                <img title="Test Pack" width="222" height="222" class="image-100" src="@Model.NexusNews[i].FolderImgsName" style="height: 140px !important" />
+                                            </a>
+                                        </div>
+
+                                    }
+
+
+
+                                </div>
+                            </div>
+                            for (int i = 0; i < Model.NexusNews.Count; i++)
                             {
-                                <h2 class="lead text-center">Popular Hotels</h2>
-                                <div class="description text-center">
-
-                                    <h1 class="lead">No Available Popular Hotels Yet</h1>
-
+                                <div class="modal fade" id="Modalnews-@i" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Nexus News</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>@Html.Raw(Model.NexusNews[i].DescriptionFileName)</p>
+                                                <img title="Test Pack" style="width:100%;height:200px;" class="image-100" src="@Model.NexusNews[i].FolderImgsName" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             }
+                        }
+                        else
+                        {
+                            <p class="lead text-center">No Available News Yet</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main" class="entry-content">
+            <div class="vc_row wpb_row row">
+                <div class="col-sm-12 ">
+                    <div class="container section Popular destinations">
+
+                        @if (Model.PopHotels != null && Model.PopHotels.Count > 0)
+                        {
+                            <h2 class="lead" style="font-weight:bold">Popular Hotels</h2>
+                            <div class="row hotel image-box listing-style2">
+                                @foreach (var popHotel in Model.PopHotels)
+                                {
+
+
+                                    <div class="col-sm-6 col-sms-6 col-md-3">
+                                        <a href="/adminmanage/popHotelDetails/@popHotel.Id" target="_blank">
+
+                                            <article class="box" style="height: auto; min-height: 235px;">
+                                                <figure>
+                                                    <a href="/adminmanage/popHotelDetails/@popHotel.Id" class="hover-effect">
+                                                        <img style="width:100%;height:175px;" src="@popHotel.MainIamgeName" class="attachment-biggallery-thumb size-biggallery-thumb wp-post-image" alt="" loading="lazy">
+                                                    </a>
+                                                </figure>
+                                                <div class="details">
+                                                    <a title="View all" href="/adminmanage/popHotelDetails/@popHotel.Id" class="pull-right button uppercase">select</a>
+                                                    <div class="lead">@popHotel.HotelName</div>
+                                                    @*<label class="price-wrapper">
+                                                            <span class="price-per-unit">@popHotel.AvgPrice LE</span>avg/night
+                                                        </label>*@
+                                                </div>
+                                            </article>
+
+                                        </a>
+                                    </div>
+
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <h2 class="lead text-center">Popular Hotels</h2>
+                            <div class="description text-center">
+
+                                <h1 class="lead">No Available Popular Hotels Yet</h1>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="parallax0">
+                        <div class="background-container1" style="background-image: url('/Content/images/image1.png');">
+                            <img src="~/Content/images/image2.png" class="background-image-1">
+                            <img src="~/Content/images/image3.png" class="background-image-2">
 
                         </div>
-
-
-                        <div class="parallax0" >
-                            <div class="background-container1" style="background-image: url('/Content/images/image1.png');">
-                                <img src="~/Content/images/image2.png" style="top: 105px;" class="background-image-1" >
-                                <img src="~/Content/images/image3.png" class="background-image-2"  >
-                            
+                        <div id="NexusServices" class="container section offer">
+                            <div>
+                                <h1 class="text-center lead" style="font-weight:bold">Our Services</h1>
                             </div>
-                            <div id="NexusServices" class="container section offer">
-                                <div>
-                                    <h1 class="text-center lead" style="font-weight:bold">Our Services</h1>
-                                </div>
-                                <div class="image-box style2">
-                                    @if (Model.OurServices != null && Model.OurServices.Count > 0)
-                                    {
+                            <div class="image-box style2">
+                                @if (Model.OurServices != null && Model.OurServices.Count > 0)
+                                {
                                     <div class="vc_row wpb_row row vc_inner add-clearfix">
 
                                         @foreach (var ser in Model.OurServices)
@@ -569,96 +565,96 @@ ViewBag.Title = "Home Page";
 
                                         }
                                     </div>
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
                                     <div class="description text-center">
 
                                         <h1 class="lead">No Available Services Yet</h1>
 
                                     </div>
-                                    }
-                                </div>
+                                }
                             </div>
-                            <div class="parallax global-map-area" data-stellar-background-ratio="0.5" style="background: url('/Content/images/global-map.jpg') 0% -25.1719px no-repeat;">
-                                <div class="container section">
-                                    <div>
-                                        <div class="description text-center">
-                                            <h1>Our Customers Favourite Destinations</h1>
-                                        </div>
+                        </div>
+                        <div class="parallax global-map-area" data-stellar-background-ratio="0.5" style="background: url('/Content/images/global-map.jpg') 0% -25.1719px no-repeat;">
+                            <div class="container section">
+                                <div>
+                                    <div class="description text-center">
+                                        <h1>Our Customers Favourite Destinations</h1>
                                     </div>
-                                    @if (Model.FavDests != null && Model.FavDests.Count > 0)
-                                    {
-                                        <div class="image-carousel style3 flex-slider" data-item-margin="30" data-item-width="170">
-                                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
-
-                                            </div><ol class="flex-control-nav flex-control-paging"><li><a href="#" class="">1</a></li></ol><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li><li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li></ul>
-                                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                                <ul class="slides image-box style9" style="width: 1400%; transition-duration: 0.6s; transform: translate3d(-230px, 0px, 0px);">
-                                                    @foreach (var favDest in Model.FavDests)
-                                                    {
-                                                        <li data-thumb-alt="" style="width: 170px; margin-right: 30px; float: left; display: block;">
-                                                            <a href="#" title="" data-toggle="modal" data-target="#ModalCustomers-@favDest.Id" class="yellow">
-                                                                <img src="@favDest.ImgName" class="img-fluid" alt="imageframe-image" draggable="false">
-                                                            </a>
-                                                            <div class="details">
-                                                                <h4 class="box-title">
-                                                                    @favDest.DestinationName
-                                                                    <small>(@favDest.Reviews reviews)</small>
-                                                                </h4>
-                                                                @*<a href="#" class="button" target="_self">MORE</a>*@
-                                                            </div>
-
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </div><ol class="flex-control-nav flex-control-paging">
-                                                @for (int i = 2; i < Model.FavDests.Count; i++)
-                                                {
-                                                    <li><a class="flex-active">@i</a></li>
-                                                }
-                                            </ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="description text-center">
-
-                                            <h1 class="lead">No Available Favourite Destinations Yet</h1>
-
-                                        </div>
-                                    }
                                 </div>
-                            </div>
+                                @if (Model.FavDests != null && Model.FavDests.Count > 0)
+                                {
+                                    <div class="image-carousel style3 flex-slider" data-item-margin="30" data-item-width="170">
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
 
+                                        </div><ol class="flex-control-nav flex-control-paging"><li><a href="#" class="">1</a></li></ol><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li><li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li></ul>
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides image-box style9" style="width: 1400%; transition-duration: 0.6s; transform: translate3d(-230px, 0px, 0px);">
+                                                @foreach (var favDest in Model.FavDests)
+                                                {
+                                                    <li data-thumb-alt="" style="width: 170px; margin-right: 30px; float: left; display: block;">
+                                                        <a href="#" title="" data-toggle="modal" data-target="#ModalCustomers-@favDest.Id" class="yellow">
+                                                            <img src="@favDest.ImgName" class="img-fluid" alt="imageframe-image" draggable="false">
+                                                        </a>
+                                                        <div class="details">
+                                                            <h4 class="box-title">
+                                                                @favDest.DestinationName
+                                                                <small>(@favDest.Reviews reviews)</small>
+                                                            </h4>
+                                                            @*<a href="#" class="button" target="_self">MORE</a>*@
+                                                        </div>
+
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div><ol class="flex-control-nav flex-control-paging">
+                                            @for (int i = 2; i < Model.FavDests.Count; i++)
+                                            {
+                                                <li><a class="flex-active">@i</a></li>
+                                            }
+                                        </ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="description text-center">
+
+                                        <h1 class="lead">No Available Favourite Destinations Yet</h1>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @if (Model.FavDests != null && Model.FavDests.Count > 0)
+    {
+        foreach (var favDest in Model.FavDests)
+        {
+            <div class="modal fade" id="ModalCustomers-@favDest.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">@favDest.DestinationName</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>@favDest.Description</p>
+                            <img title="Test Pack" class="img-fluid" src="@favDest.ImgName" />
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-        @if (Model.FavDests != null && Model.FavDests.Count > 0)
-        {
-            foreach (var favDest in Model.FavDests)
-            {
-                <div class="modal fade" id="ModalCustomers-@favDest.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">@favDest.DestinationName</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>@favDest.Description</p>
-                                <img title="Test Pack" class="img-fluid" src="@favDest.ImgName" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
         }
+    }
 
-        </section>
+</section>
 
 @section IndexPage {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -670,7 +666,7 @@ ViewBag.Title = "Home Page";
             if (window.location.hash == "#NexusServices") {
                 $('html,body').animate({
                     scrollTop: $("#NexusServices").offset().top
-                },1000);
+                }, 1000);
             }
 
             $("#CitiesNames").autocomplete({
@@ -711,7 +707,7 @@ ViewBag.Title = "Home Page";
                     'overflow': 'auto'
                 });
                 return $("<li class='ui-autocomplete-row' ></li>").data("item.autocomplete", item).append(item.label).appendTo(ul);
-                };
+            };
             $("#CountriesNames").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -747,11 +743,11 @@ ViewBag.Title = "Home Page";
                     'height': '150px',
                     'overflow': 'auto'
                 });
-                    return $("<li class='ui-autocomplete-row' ></li>").data("item.autocomplete", item).append(item.label).appendTo(ul);
-                };
+                return $("<li class='ui-autocomplete-row' ></li>").data("item.autocomplete", item).append(item.label).appendTo(ul);
+            };
 
-            
-            
+
+
         });
     </script>
 }
