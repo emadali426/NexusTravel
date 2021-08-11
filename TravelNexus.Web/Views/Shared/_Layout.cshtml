@@ -110,6 +110,7 @@
         #header .logo a, #footer .logo a, .chaser .logo a {
             width: 150px !important;
             height: 60px;
+            margin-left: 15px;
             background-size: cover !important;
         }
 
@@ -182,6 +183,7 @@
             <div class="container">
                 <h1 class="logo navbar-brand">
                     <a href="/home/index" title="Travelo - home">
+                     
                         <img src="~/Content/images/logo.png" alt="Travelo HTML5 Template" />
                     </a>
                 </h1>
@@ -191,7 +193,6 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="pull-right hidden-mobile">
-
 
                         <a class="btn-medium signup" href="/account/SignOut">SIGN OUT</a>
                         @if (User.IsInRole("ADMIN"))
@@ -261,7 +262,7 @@
                         <li class="linkedin"><a title="Linkedin" href="https://www.linkedin.com/company/travel-nexus-egypt/?viewAsMember=true" data-toggle="tooltip"><i class="soap-icon-linkedin"></i></a></li>
                         <li class="facebook"><a title="facebook" href="https://www.facebook.com/TravelNexusEG/" data-toggle="tooltip"><i class="soap-icon-facebook"></i></a></li>
                         <li class="instagram"><a title="instagram" href="https://www.instagram.com/travel_nexus/" data-toggle="tooltip"><i class="soap-icon-instagram"></i></a></li>
-                        <li class="whatsapp"><a title="Whatsapp" href="#" data-toggle="tooltip"><i class="soap-icon-phone"></i></a></li>
+                        <li class="whatsapp"><a title="Whatsapp" href="https://api.whatsapp.com/send/?phone=201012630985&text&app_absent=0" data-toggle="tooltip"><i class="soap-icon-phone"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -325,28 +326,12 @@
                                 <div id="socialLoginList">
                                     @foreach (AuthenticationDescription p in loginProviders)
                                     {
-                                        if (p.AuthenticationType.Equals("Google"))
-                                        {
-                                            <button type="submit" class="button login-googleplus" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="soap-icon-googleplus"></i>Login with Google</button>
-                                        }
-                                        else if (p.AuthenticationType.Equals("Facebook"))
-                                        {
-                                            <button type="submit" class="button login-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
-                                        }
+                                        <button type="submit" class="button login-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
                                     }
                                 </div>
                             }
                         }
                     }
-
-                    @*@using (Html.BeginForm("Facebook", "Account", FormMethod.Post, null))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div id="socialLoginList">
-                            <button type="submit" class="button login-facebook" id="Facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
-                        </div>
-                    }*@
-
                     @*<a href="/Account/" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>*@
                     @* <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>*@
                 </div>
@@ -372,7 +357,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button id="LoginBtn" type="submit" class="input-text full-width" >Login</button>
+                        <input id="LoginBtn" type="submit" class="input-text full-width" value="login" />
+                        
                     </div>
                 </form>
                 <div class="seperator"></div>
