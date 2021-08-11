@@ -1,0 +1,704 @@
+﻿@model TravelNexus.Web.Models.SearchHotelsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var RoomDetails = new TravelNexus.Web.Models.WebbedsHotelBookingModel();
+}
+@*
+@if (Model != null && Model.GetRoomsDetails != null && Model.HotelDetails != null && !string.IsNullOrEmpty(Model.HotelDetails.Hotelid) && Model.GetRoomsDetails.result.Hotel != null)
+{*@
+
+    <section id="content" jstcache="0">
+        <div class="container" jstcache="0">
+            <div class="row" jstcache="0">
+                <div id="main" class="col-sm-8 col-md-9" jstcache="0">
+                    <div class="tab-container style1" id="hotel-main-content" jstcache="0">
+                        <ul class="tabs">
+
+                            <li class="active"><a data-toggle="tab" href="#photos-tab">photos</a></li>
+
+                            <li><a data-toggle="tab" href="#map-tab">map</a></li>
+                            <li><a data-toggle="tab" href="#steet-view-tab">street view</a></li>
+
+                            <li><a data-toggle="tab" href="#calendar-tab">calendar</a></li>
+
+
+                        </ul>
+                        <div class="tab-content" jstcache="0">
+
+                            <div id="photos-tab" class="tab-pane active">
+                                <div id="my-pics" class="carousel slide" data-ride="carousel" style="width:300px;margin:auto;">
+                                    <div class="carousel-inner" role="listbox">
+                                        @if (Model.HotelDetails.Images != null) {
+                                            if (Model.HotelDetails.Images.HotelImages.Image.Any())
+                                            { int i = 0;
+                                                foreach (var item in Model.HotelDetails.Images.HotelImages.Image)
+                                                {
+
+                                                    var checkImage = Model.CheckImageAvailablity(item.Url.CdataSection);
+
+                                                    if (checkImage != null)
+                                                    {
+                                                        i++;
+                                                        var actives = i == 1 ? "active" : "";
+                                                    <div class="item @actives">
+                                                        <img src="@item.Url.CdataSection" alt="">
+                                                    </div>
+                                                    }
+
+
+                                                } } }
+
+                                    </div>
+                                    <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                                        <span class="icon-prev" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                                        <span class="icon-next" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+                            <div id="calendar-tab" class="tab-pane fade">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-md-4 no-lpadding">
+                                        <label>SELECT MONTH</label>
+                                        <div class="selector">
+                                            <select class="full-width" id="select-month">
+                                                <option value="2021-3"> March 2021</option>
+                                                <option value="2021-4"> April 2021</option>
+                                                <option value="2021-5"> May 2021</option>
+                                                <option value="2021-6"> June 2021</option>
+                                                <option value="2021-7"> July 2021</option>
+                                                <option value="2021-8"> August 2021</option>
+                                                <option value="2021-9"> September 2021</option>
+                                                <option value="2021-10"> October 2021</option>
+                                                <option value="2021-11"> November 2021</option>
+                                                <option value="2021-12"> December 2021</option>
+                                                <option value="2022-1"> January 2022</option>
+                                                <option value="2022-2"> February 2022</option>
+                                            </select><span class="custom-select full-width"> March 2021</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 no-lpadding">
+                                        <label>SELECT ROOM TYPE</label>
+                                        <div class="selector">
+                                            <select class="full-width" id="select-room-type">
+                                                <option value="">All Room Types</option>
+                                                <option value="1175">Family Room</option>
+                                                <option value="248">Suite</option>
+                                            </select><span class="custom-select full-width">All Room Types</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="calendar"><table><thead><tr><td>sunday</td><td>monday</td><td>tuesday</td><td>wednesday</td><td>thursday</td><td>friday</td><td>saturday</td></tr></thead><tbody><tr><td class="prev-month"></td><td class="date-passed"><span>1</span></td><td class="date-passed"><span>2</span></td><td class="date-passed"><span>3</span></td><td class="date-passed"><span>4</span></td><td class="date-passed"><span>5</span></td><td class="date-passed"><span>6</span></td></tr><tr><td class="date-passed"><span>7</span></td><td class="date-passed"><span>8</span></td><td class="date-passed"><span>9</span></td><td class="date-passed"><span>10</span></td><td class="date-passed"><span>11</span></td><td class="date-passed"><span>12</span></td><td class="today unavailable"><span>13</span></td></tr><tr><td class="unavailable"><span>14</span></td><td class="unavailable"><span>15</span></td><td class="unavailable"><span>16</span></td><td class="unavailable"><span>17</span></td><td class="unavailable"><span>18</span></td><td class="unavailable"><span>19</span></td><td class="unavailable"><span>20</span></td></tr><tr><td class="unavailable"><span>21</span></td><td class="unavailable"><span>22</span></td><td class="unavailable"><span>23</span></td><td class="unavailable"><span>24</span></td><td class="unavailable"><span>25</span></td><td class="unavailable"><span>26</span></td><td class="unavailable"><span>27</span></td></tr><tr><td class="unavailable"><span>28</span></td><td class="unavailable"><span>29</span></td><td class="unavailable"><span>30</span></td><td class="unavailable"><span>31</span></td></tr></tbody></table></div>
+                                    <div class="calendar-legend">
+                                        <label class="available">available</label>
+                                        <label class="unavailable">unavailable</label>
+                                        <label class="past">past</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="hotel-features" class="tab-container">
+                        <ul class="tabs">
+                            <li class="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
+                            <li><a href="#hotel-availability" data-toggle="tab">Availability</a></li>
+                            <li><a href="#hotel-amenities" data-toggle="tab">Amenities</a></li>
+                            <li><a href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
+                            <li><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                            <li><a href="#hotel-write-review" data-toggle="tab">Write a Review</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="hotel-availability">
+                                <form id="check_availability_form" method="post">
+                                    <input type="hidden" name="accommodation_id" value="192">
+                                    <input type="hidden" name="action" value="acc_get_available_rooms">
+                                    <input type="hidden" id="_wpnonce" name="_wpnonce" value="53243a41fc">                                                                                        <div class="update-search clearfix">
+                                        <div class="alert alert-error" style="display:none;"><span class="message">Please select check in date.</span><span class="close"></span></div>
+                                        <div class="col-md-5">
+                                            <h4 class="title">When</h4>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <label>CHECK IN</label>
+                                                    <div class="datepicker-wrap validation-field from-today">
+                                                        <input name="date_from" type="text" placeholder="dd/mm/yy" class="input-text full-width hasDatepicker" value="" id="dp1615647576552"><img class="ui-datepicker-trigger" src="https://travel-nexus.com/wp-content/themes/Travelo/images/icon/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <label>CHECK OUT</label>
+                                                    <div class="datepicker-wrap validation-field from-today">
+                                                        <input name="date_to" type="text" placeholder="dd/mm/yy" class="input-text full-width hasDatepicker" value="" id="dp1615647576553"><img class="ui-datepicker-trigger" src="https://travel-nexus.com/wp-content/themes/Travelo/images/icon/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h4 class="title">Who</h4>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <label>ROOMS</label>
+                                                    <div class="selector validation-field">
+                                                        <select name="rooms" class="full-width">
+                                                            <option value="1" selected="">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="24">24</option>
+                                                            <option value="25">25</option>
+                                                            <option value="26">26</option>
+                                                            <option value="27">27</option>
+                                                            <option value="28">28</option>
+                                                            <option value="29">29</option>
+                                                            <option value="30">30</option>
+                                                        </select><span class="custom-select full-width">1</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>ADULTS</label>
+                                                    <div class="selector validation-field">
+                                                        <select name="adults" class="full-width">
+                                                            <option value="1" selected="">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="24">24</option>
+                                                            <option value="25">25</option>
+                                                            <option value="26">26</option>
+                                                            <option value="27">27</option>
+                                                            <option value="28">28</option>
+                                                            <option value="29">29</option>
+                                                            <option value="30">30</option>
+                                                        </select><span class="custom-select full-width">1</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>KIDS</label>
+                                                    <div class="selector validation-field">
+                                                        <select name="kids" class="full-width">
+                                                            <option value="0" selected="">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select><span class="custom-select full-width">0</span>
+                                                    </div>
+                                                </div>
+                                                <div class="clearer"></div>
+                                                <div class="col-xs-12 age-of-children no-display">
+                                                    <h5>Age of Children</h5>
+                                                    <div class="row">
+
+                                                        <div class="col-xs-4 child-age-field">
+                                                            <label>Child 1</label>
+                                                            <div class="selector validation-field">
+                                                                <select name="child_ages[]" class="full-width">
+                                                                    <option value="0" selected="">0</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                </select><span class="custom-select full-width">0</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h4 class="visible-md visible-lg">&nbsp;</h4>
+                                            <label class="visible-md visible-lg">&nbsp;</label>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <button id="check_availability" data-animation-duration="1" data-animation-type="bounce" class="full-width icon-check animated bounce" type="submit" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <h2>Available Rooms</h2>
+                                <div class="room-list listing-style3 hotel">
+                                    <input type="hidden" name="pre_searched" value="0">
+                                    @if (Model.GetRoomsDetails.result.Hotel != null)
+                                    {
+                                        if (Model.GetRoomsDetails.result.Hotel.Rooms.Room != null)
+                                        {
+                                            if (Model.GetRoomsDetails.result.Hotel.Rooms.Room.Count > 0)
+                                            {
+
+                                                foreach (var item in Model.GetRoomsDetails.result.Hotel.Rooms.Room)
+                                                {
+                                                    if (item.RoomType.Count > 0)
+                                                    {
+                                                        foreach (var roomDetails in item.RoomType)
+                                                        {
+
+                                                        <article class="box">
+                                                            <figure class="col-sm-4 col-md-3">
+                                                                <a class="hover-effect popup-gallery" data-post_id="1175" href="#" title="popup gallery"><img width="230" height="160" src="@Model.CheckImagesAvailablity(Model.HotelDetails.Images.HotelImages)" class="attachment-list-thumb size-list-thumb wp-post-image" alt="" loading="lazy"></a>
+                                                            </figure>
+                                                            <div class="details col-xs-12 col-sm-8 col-md-9">
+                                                                <div>
+                                                                    <div>
+                                                                        <div class="box-title">
+                                                                            <h4 class="title"><a href="@Model.CheckImagesAvailablity(Model.HotelDetails.Images.HotelImages)">@roomDetails.Name</a></h4>
+                                                                            <dl class="description">
+                                                                                <dt>Max Guests:</dt>
+                                                                                <dd>@roomDetails.RoomInfo.MaxAdult</dd>
+                                                                                <dt>Max Kids:</dt>
+                                                                                <dd>@roomDetails.RoomInfo.MaxChildren</dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="price-section">
+                                                                        <span class="price">
+                                                                            @roomDetails.RateBases.RateBasis[0].Total.Formatted
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+
+                                                                    <div class="action-section">
+
+                                                                        @{ 
+                                                                            RoomDetails.RoomDetailsGetRooms = roomDetails;
+                                                                            //RoomDetails.RoomDetailsSearchHotels = Model.HotelDetails.Rooms.Room.RoomType.Find(g => g.Roomtypecode.Equals(roomDetails.Roomtypecode));
+                                                                            RoomDetails.HotelDetailsGetRooms = Model.GetRoomsDetails.result.Hotel;
+                                                                            RoomDetails.HotelDetailsSearchHotels = Model.HotelDetails;
+
+                                                                            @Html.Partial("_ModalView", RoomDetails)
+
+                                                                            RoomDetails.modalCount += 1;
+                                                                        }
+                                                                        
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                        
+                                                            </div>
+
+                                                        </article>
+
+
+                                                        }
+
+                                                    }
+
+
+                                                }
+
+                                            }
+                                        }
+                                    }
+
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in active" id="hotel-description">
+                                <div class="intro table-wrapper full-width hidden-table-sms">
+                                    <div class="col-sm-4 features table-cell">
+                                        <table>
+                                            @if (Model.HotelDetails != null)
+                                            {
+                                                <tbody><tr><td><label>Type:</label></td><td>Hotel</td></tr><tr><td><label>Rating Stars:</label></td><td>@Model.GetRatings(Model.HotelDetails.Rating)</td></tr><tr><td><label>Country:</label></td><td>@Model.HotelDetails.CountryName</td></tr><tr><td><label>City:</label></td><td>@Model.HotelDetails.CityName</td></tr><tr><td><label>Address:</label></td><td>@Model.HotelDetails.Address</td></tr><tr><td><label>Phone No:</label></td><td>@Model.HotelDetails.HotelPhone</td></tr><tr><td><label>Check In:</label></td><td>@Model.HotelDetails.HotelCheckIn</td></tr><tr><td><label>Check Out:</label></td><td>@Model.HotelDetails.HotelCheckOut</td></tr><tr><td><label>Discount:</label></td><td>6 % Off</td></tr>                                                </tbody>
+}
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-8 table-cell testimonials no-rpadding no-lpadding">
+                                        <div class="testimonial style1"><div class="testimonial-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="width: 1000%; transition-duration: 0s; transform: translate3d(-946px, 0px, 0px);"><li class="clone" aria-hidden="true" style="width: 473px; margin-right: 0px; float: left; display: block; height: auto;"><p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p><div class="author-section clearfix"><a href=""><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author2.png" alt="author-image" width="74" height="74" draggable="false"></a><h5 class="name">Lisa Kimberly</h5></div></li><li style="width: 473px; margin-right: 0px; float: left; display: block; height: auto;" class="" data-thumb-alt=""><p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p><div class="author-section clearfix"><a href=""><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author2.png" alt="author-image" width="74" height="74" draggable="false"></a><h5 class="name">Lisa Kimberly</h5></div></li><li data-thumb-alt="" style="width: 473px; margin-right: 0px; float: left; display: block; height: auto;" class="testimonial-active-slide"><p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p><div class="author-section clearfix"><a href=""><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author1.png" alt="author-image" width="74" height="74" draggable="false"></a><h5 class="name">Jessica Brown</h5></div></li><li data-thumb-alt="" style="width: 473px; margin-right: 0px; float: left; display: block; height: auto;"><p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p><div class="author-section clearfix"><a href=""><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author2.png" alt="author-image" width="74" height="74" draggable="false"></a><h5 class="name">Lisa Kimberly</h5></div></li><li style="width: 473px; margin-right: 0px; float: left; display: block; height: auto;" class="clone" aria-hidden="true"><p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p><div class="author-section clearfix"><a href=""><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author2.png" alt="author-image" width="74" height="74" draggable="false"></a><h5 class="name">Lisa Kimberly</h5></div></li></ul></div><ol class="testimonial-control-nav testimonial-control-paging"><li><a href="#" class="">1</a></li><li><a href="#" class="testimonial-active">2</a></li><li><a href="#">3</a></li></ol></div>
+                                    </div>
+                                </div>
+                                <div class="long-description">
+                                    <div class="box entry-content">
+                                        <h2 class="blue-color">ABOUT @Model.HotelDetails.HotelName</h2>
+                                        <p>@Model.HotelDetails.Description2.Language.CdataSection</p>
+                                    </div>
+                                    <div class="box policies-box">
+                                        <h2 class="blue-color">POLICIES OF @Model.HotelDetails.HotelName</h2>
+                                        <div class="row"><div class="col-md-2"><label>Check-in:</label></div><div class="col-md-10">@Model.HotelDetails.HotelCheckIn</div></div><div class="row"><div class="col-md-2"><label>Check-out:</label></div><div class="col-md-10">@Model.HotelDetails.HotelCheckOut</div></div><div class="row"><div class="col-md-2"><label>Cancellation / prepayment:</label></div><div class="col-md-10">Cancellation and prepayment policies vary according to room type.</div></div><div class="row"><div class="col-md-2"><label>Pets:</label></div><div class="col-md-10">Pets are allowed. Charges may apply.</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="hotel-amenities">
+                                <h2 class="blue-color">AMENITIES OF @Model.HotelDetails.HotelName</h2>
+                                <p>
+                                    @Model.HotelDetails.Description2.Language.CdataSection
+                                </p>
+                                <ul class="amenities clearfix style1">
+
+                                    @if (Model.HotelDetails.Amenitie != null && Model.HotelDetails.Amenitie.Language != null && Model.HotelDetails.Amenitie.Language.AmenitieItem != null)
+                                    {
+                                        foreach (var amn in Model.HotelDetails.Amenitie.Language.AmenitieItem)
+                                        {
+                                            <li class="col-md-6">
+                                                <div class="icon-box style1"><i class="soap-icon-star"></i>@amn.Text</div>
+                                            </li>
+                                        }
+
+
+                                    }
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="hotel-reviews">
+                                <div class="intro table-wrapper full-width hidden-table-sms">
+                                    <div class="rating table-cell col-sm-4">
+                                        <span class="score">@Model.GetRatings(Model.HotelDetails.Rating)</span>
+                                        <div class="five-stars-container"><div class="five-stars" style="width: 0%;"></div></div>
+                                        <a href="#" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
+                                    </div>
+                                    <div class="table-cell col-sm-8 no-rpadding no-lpadding">
+                                        <div class="detailed-rating validation-field">
+                                            <ul class="clearfix">
+                                                <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Comfort</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Location</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Facilities</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Staff</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Value for money</label><div class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><div class="five-stars" style="width: 0%;"></div></div></div></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="guest-reviews">
+                                    <h2>Guest Reviews <small>(0 reviews)</small></h2>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="hotel-faqs">
+                                <h2>Frquently Asked Questions</h2>
+                                <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                                <div class="toggle-container style1" id="accordion1">
+
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc1" data-toggle="collapse" class="collapsed">How do I know a reservation is accepted or confirmed?</a></h4><div class="panel-collapse collapse" id="acc1">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc2" data-toggle="collapse" class="collapsed">What do I do after I receive a reservation request from a guest?</a></h4><div class="panel-collapse collapse" id="acc2">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc3" data-toggle="collapse" class="collapsed">How much time do I have to respond to a reservation request?</a></h4><div class="panel-collapse collapse" id="acc3">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc4" data-toggle="collapse" class="collapsed">Why can’t I call or email hotel or host before booking?</a></h4><div class="panel-collapse collapse" id="acc4">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc5" data-toggle="collapse" class="collapsed">Am I allowed to decline reservation requests?</a></h4><div class="panel-collapse collapse" id="acc5">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc6" data-toggle="collapse" class="collapsed">What happens if I let a reservation request expire?</a></h4><div class="panel-collapse collapse" id="acc6">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel ">
+                                        <h4 class="panel-title"><a href="#acc7" data-toggle="collapse" class="collapsed">How do I set reservation requirements?</a></h4><div class="panel-collapse collapse" id="acc7">
+                                            <div class="panel-content">
+                                                <p>
+                                                    Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="hotel-write-review">
+                                <div class="alert alert-error" style="display: none;"><span class="message"></span><span class="close"></span></div>
+                                <div class="main-rating table-wrapper full-width hidden-table-sms intro">
+                                    <article class="image-box box hotel listing-style1 table-cell col-sm-4 photo">
+                                        <figure>
+                                            <img width="270" height="160" src="https://travel-nexus.com/wp-content/uploads/2014/11/6-270x160.jpg" class="attachment-gallery-thumb size-gallery-thumb wp-post-image" alt="" loading="lazy">
+                                        </figure>
+                                        <div class="details">
+                                            <h4 class="box-title">@Model.HotelDetails.HotelName<small><i class="soap-icon-departure"></i> @Model.HotelDetails.Location</small></h4>
+                                            <div class="feedback">
+                                                <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><span class="five-stars" style="width: 0%;"></span></div>
+                                                <span class="review">0 reviews</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <div class="table-cell col-sm-8 no-rpadding">
+                                        <div class="overall-rating">
+                                            <h4>Your overall Rating of this property</h4>
+                                            <div class="star-rating clearfix">
+                                                <div class="five-stars-container"><div class="five-stars" style="width: 0%;"></div></div>
+                                                <span class="status"></span>
+                                            </div>
+                                            <div class="detailed-rating validation-field">
+                                                <ul class="clearfix">
+                                                    <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                    <li class="col-md-6"><div class="each-rating"><label>Comfort</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                    <li class="col-md-6"><div class="each-rating"><label>Location</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                    <li class="col-md-6"><div class="each-rating"><label>Facilities</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                    <li class="col-md-6"><div class="each-rating"><label>Staff</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                    <li class="col-md-6"><div class="each-rating"><label>Value for money</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="0"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div></div></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="review-form" id="review-form" method="post" novalidate="novalidate">
+                                    <input type="hidden" id="_wpnonce" name="_wpnonce" value="53243a41fc">                                            <input type="hidden" name="review_rating" value="0">
+                                    <input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value=""><input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value=""><input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value=""><input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value=""><input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value=""><input type="hidden" class="rating_detail_hidden" name="review_rating_detail[]" value="">                                            <input type="hidden" name="post_id" value="192">
+                                    <input type="hidden" name="action" value="acc_submit_review">
+                                    <div class="row clearer">
+                                        <div class="form-group col-md-5 no-padding">
+                                            <h4>Booking Number</h4>
+                                            <input type="text" name="booking_no" class="input-text full-width validation-field" value="" data-error-message="Enter your booking number" placeholder="Enter your booking number">
+                                        </div>
+                                        <div class="form-group col-md-5 col-md-offset-1 no-padding">
+                                            <h4>Pin Code</h4>
+                                            <input type="text" name="pin_code" class="input-text full-width validation-field" value="" data-error-message="Enter your pin code" placeholder="Enter your pin code">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-5 no-float no-padding">
+                                        <h4>Title of your review</h4>
+                                        <input type="text" name="review_title" class="input-text full-width validation-field" value="" data-error-message="Enter a review title" placeholder="Enter a review title">
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Your review</h4>
+                                        <textarea name="review_text" class="input-text full-width validation-field" data-error-message="Enter your review" placeholder="Enter your review" rows="5"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>What sort of Trip was this?</h4>
+                                        <ul class="sort-trip clearfix">
+                                            <li class="active"><a href="#"><i class="soap-icon-businessbag circle"></i></a><span>Business</span></li>
+                                            <li><a href="#"><i class="soap-icon-couples circle"></i></a><span>Couples</span></li>
+                                            <li><a href="#"><i class="soap-icon-family circle"></i></a><span>Family</span></li>
+                                            <li><a href="#"><i class="soap-icon-friends circle"></i></a><span>Friends</span></li>
+                                            <li><a href="#"><i class="soap-icon-user circle"></i></a><span>Solo</span></li>
+                                        </ul>
+                                        <input type="hidden" name="trip_type" value="0">
+                                    </div>
+                                    <div class="form-group col-md-5 no-float no-padding no-margin">
+                                        <button type="submit" class="btn-large full-width submit-review">SUBMIT REVIEW</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar col-sm-4 col-md-3">
+                    <article class="detailed-logo">
+                        <figure>
+                            <img width="114" src="@Model.CheckImagesAvailablity(Model.HotelDetails.Images.HotelImages)" alt="">
+                        </figure>
+                        <div class="details">
+                            <h2 class="box-title">
+                                @Model.HotelDetails.HotelName                                         <div class="five-stars-container">
+                                    @*@{ var rate = ((@Model.Rating / 5.00) * 100) + "%";}*@
+                                    @{ var Rate = 0;
+                                        switch (@Model.GetRatings(Model.HotelDetails.Rating).ToString())
+                                        {
+                                            case "OneStar": Rate = 1; break;
+                                            case "TwoStar": Rate = 2; break;
+                                            case "ThreeStar": Rate = 3; break;
+                                            case "FourStar": Rate = 4; break;
+                                            case "FiveStar": Rate = 5; break;
+                                            default: Rate = 0; break;
+                                        }
+                                        var Rating = ((Rate / 5.00) * 100) + "%"; }
+                                    <span class="five-stars" style="width:@Rating"></span>
+                                </div>
+                            </h2>
+                            <span class="price clearfix">
+                                <small class="pull-left">avg/night</small>
+                                @if (@Model.GetRoomsDetails.result.Hotel != null)
+                                {
+                                    <span class="pull-right">@Model.GetRoomsDetails.result.Hotel.Rooms.Room[0].RoomType[0].RateBases.RateBasis[0].Dates.Date[0].Price.Formatted</span>
+                                }
+                            </span>
+                            <div class="feedback clearfix">
+                                <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="0 stars"><span class="five-stars" style="width: 0%;"></span></div>
+                                <span class="review pull-right">0 reviews</span>
+                            </div>
+                            <p class="description">
+                                @Model.HotelDetails.Description1.Language.CdataSection
+                            </p>
+                            <h5>To save your wishlist please login.</h5>
+                            <a href="#travelo-login" class="button yellow-bg full-width uppercase btn-small  soap-popupbox">login</a>
+                        </div>
+                    </article>
+                    <div id="text-2" class="widget travelo-box widget_text">
+                        <h4 class="widgettitle">Why Book with us?</h4>
+                        <div class="textwidget">
+                            <div class="list-with-circle-icon">
+                                <ul>
+                                    <li>
+                                        <i class="soap-icon-hotel-1 circle"></i>
+                                        <h5 class="title"><a href="#">135,00+ Hotels</a></h5>
+                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                    </li>
+                                    <li>
+                                        <i class="soap-icon-savings circle"></i>
+                                        <h5 class="title"><a href="#">Low Rates &amp; Savings</a></h5>
+                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                    </li>
+                                    <li>
+                                        <i class="soap-icon-support circle"></i>
+                                        <h5 class="title"><a href="#">Excellent Support</a></h5>
+                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@*}*@
+
+@section scripts{
+    <script language="javascript" type="text/javascript">
+
+
+        jQuery(document).ready(function () {
+            @*var modalCount = 0;
+            @{ 
+                int i = 0;
+            }
+            for (var modCount = @Model.GetRoomsDetails.result.Hotel.Rooms.Room.Count; modCount > 0; modCount--) {
+
+               
+                modalCount += @Model.GetRoomsDetails.result.Hotel.Rooms.Room[i++].RoomType.Count;
+
+            }
+
+
+
+            for (var k = 0; k < modalCount; modalCount--) {
+
+                jQuery('#SignUpbtn-' + k).click(function () {
+                    var url = jQuery('#signup-' + k).data('url');
+
+                    jQuery.get(url, function (data) {
+                        jQuery('#modalsignupbody-' + k).html(data);
+
+                        jQuery('#signup-' + k).modal('show');
+                    });
+                });
+            }*@
+
+
+            jQuery(function () {
+                jQuery('[data-toggle="tooltip"]').tooltip()
+            })
+
+            // Initialize popover component
+            jQuery(function () {
+                jQuery('[data-toggle="popover"]').popover()
+            })
+        });
+
+    </script>
+
+}

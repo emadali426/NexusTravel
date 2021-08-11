@@ -1,0 +1,443 @@
+﻿@model TravelNexus.Services.TboServiceReference.HotelSearchResponse
+@*@model TravelNexus.Services.TboServiceReference.HotelSearchResponse*@
+L@*ist<TravelNexus.Services.TboServiceReference.Hotel_Result>*@
+<!--List<TravelNexus.Services.Hotel>-->
+@{
+    ViewBag.Title = "Hotels Search Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content">
+    <div class="container">
+        <div id="main">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <a class="button btn-map btn-medium uppercase full-width" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
+                    <h4 class="search-results-title">
+                        <i class="soap-icon-search"></i><b>
+                            <i class="soap-icon-search"></i>
+                            @if (Model != null && Model.HotelResultList != null)
+                            {
+                                <b>@Model.HotelResultList.Count()</b>
+                            }
+                            else
+                            { <b>0</b>}
+                        </b> results found.
+                    </h4>
+                    <div class="toggle-container style1 filters-container">
+                        <div class="panel arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#modify-search-panel" class="">Modify Search</a>
+                            </h4>
+                            <div id="modify-search-panel" class="panel-collapse collapse in" style="height: auto;">
+                                <div class="panel-content">
+                                    <form role="search" method="get" class="acc-searchform" action="https://travel-nexus.com/accommodation/">
+                                        <input type="hidden" name="view" value="list">
+                                        <input type="hidden" name="order_by" value="name">
+                                        <input type="hidden" name="order" value="ASC">
+                                        <div class="form-group">
+                                            <label>Your Destination</label>
+                                            <input type="text" name="s" class="input-text full-width" placeholder="enter a destination or hotel name" value="">
+                                        </div>
+                                        <div class="search-when" data-error-message1="Your check-out date is before your check-in date. Have another look at your date and try again." data-error-message2="Please select current or future dates for check-in and check-out.">
+                                            <div class="form-group">
+                                                <label>CHECK IN</label>
+                                                <div class="datepicker-wrap from-today">
+                                                    <input name="date_from" type="text" class="input-text full-width hasDatepicker" placeholder="dd/mm/yy" value="" id="dp1615647350611"><img class="ui-datepicker-trigger" src="https://travel-nexus.com/wp-content/themes/Travelo/images/icon/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>CHECK OUT</label>
+                                                <div class="datepicker-wrap from-today">
+                                                    <input name="date_to" type="text" class="input-text full-width hasDatepicker" placeholder="dd/mm/yy" value="" id="dp1615647350612"><img class="ui-datepicker-trigger" src="https://travel-nexus.com/wp-content/themes/Travelo/images/icon/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <label>Rooms</label>
+                                                <div class="selector">
+                                                    <select name="rooms" class="full-width">
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="23">23</option>
+                                                        <option value="24">24</option>
+                                                        <option value="25">25</option>
+                                                        <option value="26">26</option>
+                                                        <option value="27">27</option>
+                                                        <option value="28">28</option>
+                                                        <option value="29">29</option>
+                                                        <option value="30">30</option>
+                                                    </select><span class="custom-select full-width">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>Adults</label>
+                                                <div class="selector">
+                                                    <select name="adults" class="full-width">
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="23">23</option>
+                                                        <option value="24">24</option>
+                                                        <option value="25">25</option>
+                                                        <option value="26">26</option>
+                                                        <option value="27">27</option>
+                                                        <option value="28">28</option>
+                                                        <option value="29">29</option>
+                                                        <option value="30">30</option>
+                                                    </select><span class="custom-select full-width">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>Kids</label>
+                                                <div class="selector">
+                                                    <select name="kids" class="full-width">
+                                                        <option value="0" selected>0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select><span class="custom-select full-width">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="age-of-children no-display">
+                                            <h5>Age of Children</h5>
+                                            <div class="row">
+
+                                                <div class="col-xs-4 child-age-field">
+                                                    <label>Child 1</label>
+                                                    <div class="selector validation-field">
+                                                        <select name="child_ages[]" class="full-width">
+                                                            <option value="0" selected="">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                        </select><span class="custom-select full-width">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button class="btn-medium icon-check uppercase full-width">search again</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#price-filter" class="">Price (avg/night)</a>
+                            </h4>
+                            <div id="price-filter" class="panel-collapse collapse in" style="height: auto;">
+                                <div class="panel-content">
+                                    <div id="price-range" data-slide-last-val="200" data-slide-step="50" data-def-currency="$" data-min-price="0" data-max-price="no_max" data-url-noprice="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
+                                    <br>
+                                    <span class="min-price-label pull-left">$0</span>
+                                    <span class="max-price-label pull-right">$200+</span>
+                                    <div class="clearer"></div>
+                                </div><!-- end content -->
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#rating-filter" class="collapsed">User Reviews</a>
+                            </h4>
+                            <div id="rating-filter" class="panel-collapse filters-container collapse" style="height: 0px;">
+                                <div class="panel-content">
+                                    <div id="rating" class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-rating="0" data-url-norating="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0" data-label-norating="All Ratings" data-label-rating="and Above" data-label-fullrating="5 Ratings"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span></div>
+                                    <span>All Ratings</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#accomodation-type-filter" class="">Accommodation Type</a>
+                            </h4>
+                            <div id="accomodation-type-filter" data-url-noacc_type="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0" class="panel-collapse collapse in" style="height: auto;">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li class="all-types"><a href="#">All<small>(8)</small></a></li>
+                                        <li data-term-id="31"><a href="#">Apartment<small>(0)</small></a></li>
+                                        <li data-term-id="70"><a href="#">Hostel<small>(0)</small></a></li>
+                                        <li data-term-id="72"><a href="#">Hotel<small>(8)</small></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#amenities-filter" class="">Amenities</a>
+                            </h4>
+                            <div id="amenities-filter" data-url-noamenities="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0" class="panel-collapse collapse in" style="height: auto;">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li data-term-id="27"><a href="#">AIR CONDITIONING<small>(6)</small></a></li>
+                                        <li data-term-id="49"><a href="#">DOORMAN<small>(3)</small></a></li>
+                                        <li data-term-id="60"><a href="#">FIRE PLACE<small>(1)</small></a></li>
+                                        <li data-term-id="53"><a href="#">ELEVATOR IN BUILDING<small>(4)</small></a></li>
+                                        <li data-term-id="39"><a href="#">COFFEE<small>(3)</small></a></li>
+                                        <li data-term-id="41"><a href="#">COMPLIMENTARY BREAKFAST<small>(3)</small></a></li>
+                                        <li data-term-id="42"><a href="#">CONFERENCE ROOM<small>(1)</small></a></li>
+                                        <li data-term-id="62"><a href="#">FITNESS FACILITY<small>(4)</small></a></li>
+                                        <li data-term-id="86"><a href="#">PICK AND DROP<small>(4)</small></a></li>
+                                        <li data-term-id="87"><a href="#">PLAY PLACE<small>(3)</small></a></li>
+                                        <li data-term-id="92"><a href="#">ROOM SERVICE<small>(3)</small></a></li>
+                                        <li data-term-id="68"><a href="#">HANDICAP ACCESSIBLE<small>(2)</small></a></li>
+                                        <li data-term-id="66"><a href="#">FRIDGE<small>(3)</small></a></li>
+                                        <li data-term-id="96"><a href="#">SUITABLE FOR EVENTS<small>(2)</small></a></li>
+                                        <li data-term-id="98"><a href="#">TELEVISION<small>(2)</small></a></li>
+                                        <li data-term-id="65"><a href="#">FREE PARKING<small>(1)</small></a></li>
+                                        <li data-term-id="94"><a href="#">SECURE VAULT<small>(3)</small></a></li>
+                                        <li data-term-id="105"><a href="#">WI_FI<small>(4)</small></a></li>
+                                        <li data-term-id="71"><a href="#">HOT TUB<small>(1)</small></a></li>
+                                        <li data-term-id="55"><a href="#">ENTERTAINMENT<small>(1)</small></a></li>
+                                        <li data-term-id="95"><a href="#">SMOKING ALLOWED<small>(1)</small></a></li>
+                                        <li data-term-id="97"><a href="#">SWIMMING POOL<small>(2)</small></a></li>
+                                        <li data-term-id="85"><a href="#">PETS ALLOWED<small>(1)</small></a></li>
+                                        <li data-term-id="106"><a href="#">WINE BAR<small>(1)</small></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="sort-by-section clearfix box">
+                        <h4 class="sort-by-title block-sm">Sort results by:</h4>
+                        <ul class="sort-bar clearfix block-sm">
+                            <li class="sort-by-name active"><a class="sort-by-container" href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;order_by=name&amp;order=DESC"><span>name</span></a></li>
+                            <li class="sort-by-price"><a class="sort-by-container" href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;order_by=price&amp;order=ASC"><span>price</span></a></li>
+                            <li class="sort-by-rating"><a class="sort-by-container" href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;order_by=rating&amp;order=DESC"><span>rating</span></a></li>
+                        </ul>
+
+                        <ul class="swap-tiles clearfix block-sm">
+                            <li class="swap-list active"><a href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;view=list" title="List View"><i class="soap-icon-list"></i></a></li>
+                            <li class="swap-grid"><a href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;view=grid" title="Grid View"><i class="soap-icon-grid"></i></a></li>
+                            <li class="swap-block"><a href="/?post_type=accommodation&amp;s&amp;date_from&amp;date_to&amp;rooms=1&amp;adults=1&amp;kids=0&amp;child_ages%5B0%5D=0&amp;view=block" title="Block View"><i class="soap-icon-block"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="hotel-list list-wrapper">
+                        <div class="image-box listing-style3 hotel">
+                            @if (Model != null && Model.HotelResultList != null)
+                            {
+                                if ((Model.HotelResultList.Count() > 0))
+                                {
+                                    foreach (var item in Model.HotelResultList)
+                                    {
+                                        TravelNexus.Web.Models.HotelItem hotel = new TravelNexus.Web.Models.HotelItem();
+
+
+                                        hotel.HotelData = item;
+                                        hotel.SessionId = Model.SessionId;
+                                        hotel.ResultIndex = item.ResultIndex.ToString();
+
+                                        try
+                                        {
+                                            var CheckIn = Model.CheckInDate.Split(' ')[0].Split('/').Select(Int32.Parse).ToList();
+                                            var CheckOut = Model.CheckOutDate.Split(' ')[0].Split('/').Select(Int32.Parse).ToList();
+                                            hotel.CheckInDate = new DateTime(CheckIn[2], CheckIn[1], CheckIn[0]);
+                                            hotel.CheckOutDate = new DateTime(CheckOut[2], CheckOut[1], CheckOut[0]);
+                                        }
+                                        catch (Exception ex)
+                                        {
+
+                                        }
+                                        hotel.NoOfRequestedRoom = Convert.ToInt32(Model.NoOfRoomsRequested);
+                                        hotel.NoOfPersons = Model.RoomGuests[0].AdultCount + Model.RoomGuests[0].ChildCount;
+                                        hotel.HotelImage = item.HotelInfo.HotelPicture;
+                                        hotel.ApiName = item.ResultIndex == -1 ? "Webbeds Api" : "Tbo Api";
+
+                                        @Html.Partial("HotelItem", hotel)
+
+
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (Model != null && Model.Status != null)
+                                {
+                                    if (Model.Status.StatusCode != "01")
+                                    {
+                                        <div style="font-size: 12px; color: red">
+                                            @Html.Raw(Model.Status.Description.Replace(".", ". <br/>").Replace("ValidationErr:", "ValidationErr:  <br/>"))
+                                        </div>
+                                    }
+                                }
+                            }
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+        function getCode(a) {
+            var id = a.getAttribute("data-id");
+            $.ajax({
+                url: '/Hotels/WishList',
+                datatype: "json",
+                type: "POST",
+                data: {
+                    HotelId: id
+                },
+                success: function (data) {
+
+
+
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        }
+        //$(".FavouriteCode").click(e => {
+        //    var id = e.data()
+        //    debugger;
+        //    $.ajax({
+        //        url: '/Hotels/WishList',
+        //        datatype: "json",
+        //        type: "POST",
+        //        data: {
+        //            HotelId: id
+        //        },
+        //        success: function (data) {
+
+                    
+
+        //        },
+        //        error: function (xhr) {
+        //            alert('error');
+        //        }
+        //    });
+
+        //});
+</script>
+
+
+@*<div class="container">
+        <div id="main">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <h4 class="search-results-title">
+                        <i class="soap-icon-search"></i>
+                        @if (Model.HotelResultList != null)
+                        {
+                            <b>@Model.HotelResultList.Count()</b>
+                        }
+                        else
+                        { <b>0</b>}
+                        results found.
+                    </h4>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    @if (Model.HotelResultList != null)
+                    {
+                        if ((Model.HotelResultList.Count() > 0))
+                        {
+                            foreach (var item in Model.HotelResultList)
+                            {
+                                TravelNexus.Web.Models.HotelItem hotel = new TravelNexus.Web.Models.HotelItem();
+                                hotel.HotelData = item;
+                                hotel.SessionId = Model.SessionId;
+                                hotel.ResultIndex = item.ResultIndex.ToString();
+                                var CheckIn = Model.CheckInDate.Split(' ')[0].Split('/').Select(Int32.Parse).ToList();
+                                var CheckOut = Model.CheckOutDate.Split(' ')[0].Split('/').Select(Int32.Parse).ToList();
+                                hotel.CheckInDate = new DateTime(CheckIn[2], CheckIn[1], CheckIn[0]);
+                                hotel.CheckOutDate = new DateTime(CheckOut[2], CheckOut[1], CheckOut[0]);
+                                hotel.NoOfRequestedRoom = Convert.ToInt32(Model.NoOfRoomsRequested);
+                                hotel.NoOfPersons = Model.RoomGuests[0].AdultCount + Model.RoomGuests[0].ChildCount;
+                                hotel.HotelImage = item.HotelInfo.HotelPicture;
+                                hotel.ApiName = item.ResultIndex == 9999 ? "Webbeds Api" : "Tbo Api";
+                                @Html.Partial("HotelItem", hotel)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (Model.Status != null)
+                        {
+                            if (@Model.Status.StatusCode != "01")
+                            {
+                                <div style="font-size: 12px; color: red">
+                                    @Html.Raw(@Model.Status.Description.Replace(".", ". <br/>").Replace("ValidationErr:", "ValidationErr:  <br/>"))
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>*@
+

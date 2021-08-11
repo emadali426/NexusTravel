@@ -1,0 +1,873 @@
+﻿@*@model TravelNexus.Services.Hotel*@
+@using Microsoft.AspNet.Identity;
+@model Fawaterk.Service.PopHotelsModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <div class="row" jstcache="0">
+            <div id="main" class="col-sm-8 col-md-9" jstcache="0">
+                <div class="tab-container style1" id="hotel-main-content" jstcache="0">
+                    <ul class="tabs">
+                        <li class="active"><a data-toggle="tab" href="#photos-tab">Photos</a></li>
+                    </ul>
+                    @if (Model != null && Model.ImagesCount > 0)
+                    {
+                        <div class="tab-content" jstcache="0">
+                            <div id="photos-tab" class="tab-pane active">
+                                <div class="photo-gallery flexslider style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                        <ul class="slides" style="width: 3000%; transition-duration: 0s; transform: translate3d(-870px, 0px, 0px);">
+
+
+                                            @for (int i = 1; i <= Model.ImagesCount; i++)
+                                            {
+                                                <li class="clone" aria-hidden="true">
+                                                    <div class="sider-backgrond-image" style="background: url('@Model.FolderImgsName/@i@{}.jpeg') center center no-repeat;"></div>
+                                                    <!-- <img src="./Content/images/Packages/packagephotoslideahow1.jpg" class="attachment-slider-gallery size-slider-gallery img-responsive" alt="" > -->
+                                                </li>
+                                            }
+
+
+
+                                        </ul>
+                                    </div>
+                                    <ol class="flex-control-nav flex-control-paging">
+                                        <li><a href="#" class="flex-active">1</a></li>
+                                        @for (int i = 2; i <= Model.ImagesCount; i++)
+                                        {
+                                            <li><a href="#">@i</a></li>
+                                        }
+                                    </ol>
+                                    <ul class="flex-direction-nav">
+                                        <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
+                                        <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                        <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                            @for (int i = 1; i <= Model.ImagesCount; i++)
+                                            {
+                                                <li style="width: 70px; margin-right: 10px; float: left; display: block;" data-thumb-alt="" class="flex-active-slide">
+                                                    <img src="@Model.FolderImgsName/@i@{}.jpeg" class="attachment-widget-thumb size-widget-thumb">
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                    <ol class="flex-control-nav flex-control-paging">
+                                        <li><a href="#" class="flex-active">1</a></li>
+                                        @for (int i = 2; i <= Model.ImagesCount; i++)
+                                        {
+                                            <li><a href="#">@i</a></li>
+                                        }
+                                    </ol>
+                                    <ul class="flex-direction-nav">
+                                        <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
+                                        <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div id="hotel-features" class="tab-container">
+                    <ul class="tabs">
+                        <li class="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade in active" id="hotel-description">
+                            <div class="intro table-wrapper full-width hidden-table-sms">
+                            </div>
+                            <div class="long-description">
+                                <div class="box entry-content">
+                                    <h2 class="blue-color">ABOUT @Model.HotelName</h2>
+                                    <p>@Html.Raw(Model.PopHotelsDescription)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar col-sm-4 col-md-3">
+                <article class="detailed-logo">
+                    <figure>
+                        <img width="114" src="@Model.logoIamgeName" alt="Accommodation Logo">
+                    </figure>
+                    <div class="details">
+                        <span class="price clearfix">
+                            <small class="pull-left">Avg/Night</small>
+                            <span class="pull-right">@Model.AvgPrice</span>
+                        </span>
+                    </div>
+                    <div class="update-search clearfix">
+                        <form action="/adminmanage/PopUserRequest" method="post">
+                            <div class="alert alert-error" style="display:none;"><span class="message">Please select check in date.</span><span class="close"></span></div>
+                            <div class="col-md-12">
+                                <h4 class="title">When</h4>
+                                <div class="row">
+                                    <div class="col-md-12" style="width:100%">
+                                        <label>Mobile Phone Number</label>
+                                        <div class="full-width">
+                                            <input name="MPhone" required type="text" placeholder="Add Your Phone Number" class="input-text full-width" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="width:100%">
+                                        <label>CHECK IN</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" required name="CheckIn" id="check-in" class="form-control input-text full-width" placeholder="mm/dd/yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="width:100%">
+                                        <label>CHECK OUT</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" required name="CheckOut" id="check-out" class="form-control input-text full-width" placeholder="mm/dd/yy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <h4 class="title">Who</h4>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>ROOMS</label>
+                                        <div class="row">
+                                            <div class="selector validation-field" style="width:32%">
+                                                <select name="NumOfRooms" class="full-width">
+                                                    <option value="1" selected="">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>ADULTS</label>
+                                        <div class="row">
+                                            <div class="selector validation-field" style="width:32%">
+                                                <select name="NumOfAdults" class="full-width">
+                                                    <option value="1" selected="">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                </select>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>KIDS</label>
+                                            <div class="row">
+                                                <div class="selector validation-field" style="width:32%">
+                                                    <select name="NumOfKids" class="full-width">
+                                                        <option value="0" selected="">0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearer"></div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <h4 class="visible-md visible-lg">&nbsp;</h4>
+                                <label class="visible-md visible-lg">&nbsp;</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <input type="hidden" name="UserId" value="@User.Identity.GetUserId()" />
+                                            <input type="hidden" name="PopHotelsId" value="@Model.Id" />
+                                            <button id="check_availability" data-animation-duration="1" data-animation-type="bounce" class="full-width icon-check animated bounce" type="submit" style="animation-duration: 1s; width: 100%; visibility: visible;">SEND REQUEST</button>
+
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-medium soap-popupbox" style="animation-duration: 1s; width: 100%; visibility: visible;" id="LoginClk" data-target="#travelo-login">LOGIN TO SEND REQUEST</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                    
+                    </form>
+</div>
+                </article>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<div id="page-wrapper">
+        <div class="page-title-container">
+            <div class="container">
+                <div class="page-title pull-left">
+                    <h2 class="entry-title">@Model.HotelDetails.HotelName</h2>
+                </div>
+                <ul class="breadcrumbs pull-right">
+                    <li><a href="#">HOME</a></li>
+                    <li class="active">@Model.HotelDetails.HotelName</li>
+                </ul>
+            </div>
+        </div>
+        <section id="content">
+            <div class="container">
+                <div class="row">
+                    <div id="main" class="col-md-9">
+                        <div class="tab-container style1" id="hotel-main-content">
+                             <ul class="tabs">
+                                <li class="active"><a data-toggle="tab" href="#photos-tab">photos</a></li>
+                                <li><a data-toggle="tab" href="#map-tab">map</a></li>
+                                <li><a data-toggle="tab" href="#steet-view-tab">street view</a></li>
+                                <li><a data-toggle="tab" href="#calendar-tab">calendar</a></li>
+                                    <li class="pull-right"><a class="button btn-small yellow-bg white-color" href="#">TRAVEL GUIDE</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="photos-tab" class="tab-pane fade in active">
+                                                        <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+                                                            <ul class="slides">
+                                                                @foreach (var link in Model.HotelDetails.ImageUrls)
+                                                                {
+                                                                    <li><img src="@link.Value" alt="" /></li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                        <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+                                                            <ul class="slides">
+                                                                @foreach (var link in Model.HotelDetails.ImageUrls)
+                                                                {
+                                                                    <li><img src="@link.Value" alt="" /></li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div id="map-tab" class="tab-pane fade">
+
+                                                    </div>
+                                                    <div id="steet-view-tab" class="tab-pane fade" style="height: 500px;">
+
+                                                    </div>
+                                                    <div id="calendar-tab" class="tab-pane fade">
+                                                        <label>SELECT MONTH</label>
+                                                        <div class="col-sm-6 col-md-4 no-float no-padding">
+                                                            <div class="selector">
+                                                                <select class="full-width" id="select-month">
+                                                                    <option value="2014-6">June 2014</option>
+                                                                    <option value="2014-7">July 2014</option>
+                                                                    <option value="2014-8">August 2014</option>
+                                                                    <option value="2014-9">September 2014</option>
+                                                                    <option value="2014-10">October 2014</option>
+                                                                    <option value="2014-11">November 2014</option>
+                                                                    <option value="2014-12">December 2014</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                <div class="calendar"></div>
+                                                                <div class="calendar-legend">
+                                                                    <label class="available">available</label>
+                                                                    <label class="unavailable">unavailable</label>
+                                                                    <label class="past">past</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <p class="description">
+                                                                    The calendar is updated every five minutes and is only an approximation of availability.
+                                                                    <br /><br />
+                                                                    Some hosts set custom pricing for certain days on their calendar, like weekends or holidays. The rates listed are per day and do not include any cleaning fee or rates for extra people the host may have for this listing. Please refer to the listing's Description tab for more details.
+                                                                    <br /><br />
+                                                                    We suggest that you contact the host to confirm availability and rates before submitting a reservation request.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div
+                                                </div>>
+                        </div>
+
+                        <div id="hotel-features" class="tab-container">
+                            <ul class="tabs">
+                                <li class="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
+                                <li><a href="#hotel-availability" data-toggle="tab">Availability</a></li>
+                                <li><a href="#hotel-amenities" data-toggle="tab">Amenities</a></li>
+                                <li><a href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
+                                <li><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                                <li><a href="#hotel-things-todo" data-toggle="tab">Things to Do</a></li>
+                                <li><a href="#hotel-write-review" data-toggle="tab">Write a Review</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="hotel-description">
+                                    <div class="intro table-wrapper full-width hidden-table-sms">
+                                        <div class="col-sm-5 col-lg-4 features table-cell">
+                                            <ul>
+                                                <li><label>hotel type:</label>@Model.HotelDetails.HotelRating.ToString().Replace("Star", " Star")</li>
+                                                <li><label>Extra people:</label>No Charge</li>
+                                                <li><label>Minimum Stay:</label>1 night</li>
+                                                <li><label>Country:</label>@Model.HotelDetails.CountryName</li>
+                                                <li><label>City:</label>@Model.HotelDetails.CityName</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-7 col-lg-8 table-cell testimonials">
+                                            <div class="testimonial style1">
+
+                                                <div class="testimonial-viewport" style="overflow: hidden; position: relative;">
+                                                    <ul class="slides " style="width: 600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                        <li style="width: 473px; float: left; display: block; height: 175px;" class="testimonial-active-slide">
+                                                            <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                            <div class="author clearfix">
+                                                                <a href="#"><img src="http://placehold.it/270x270" alt="" draggable="false" width="74" height="74"></a>
+                                                                <h5 class="name">Jessica Brown<small>guest</small></h5>
+                                                            </div>
+                                                        </li>
+                                                        <li style="width: 473px; float: left; display: block; height: 175px;">
+                                                            <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                            <div class="author clearfix">
+                                                                <a href="#"><img src="http://placehold.it/270x270" alt="" draggable="false" width="74" height="74"></a>
+                                                                <h5 class="name">Lisa Kimberly<small>guest</small></h5>
+                                                            </div>
+                                                        </li>
+                                                        <li style="width: 473px; float: left; display: block; height: 175px;">
+                                                            <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                            <div class="author clearfix">
+                                                                <a href="#"><img src="http://placehold.it/270x270" alt="" draggable="false" width="74" height="74"></a>
+                                                                <h5 class="name">Jessica Brown<small>guest</small></h5>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div><ol class="testimonial-control-nav testimonial-control-paging"><li><a class="testimonial-active">1</a></li><li><a>2</a></li><li><a>3</a></li></ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="long-description">
+                                        <h2>About @Model.HotelDetails.HotelName</h2>
+                                        <p>
+                                            @Html.Raw(Model.HotelDetails.Description)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="hotel-availability">
+                                    <h2>Available Rooms</h2>
+                                    <div class="room-list listing-style3 hotel">
+                                        @if (Model.Rooms != null)
+                                        {
+                                            if ((Model.Rooms.HotelRooms.Count() > 0))
+                                            {
+                                                foreach (var item in Model.Rooms.HotelRooms)
+                                                {
+                                                    TravelNexus.Web.Models.HotelRoomModel hotelRooms = new TravelNexus.Web.Models.HotelRoomModel();
+                                                    hotelRooms.AvailableHotelRoom = item;
+                                                    hotelRooms.SessionId = Model.SessionId;
+                                                    hotelRooms.ResultIndex = Model.ResultIndex.ToString();
+                                                    hotelRooms.HotelCode = Model.HotelDetails.HotelCode;
+                                                    hotelRooms.CheckInDate = Model.CheckInDate;
+                                                    hotelRooms.CheckOutDate = Model.CheckOutDate;
+                                                    hotelRooms.NoOfRequestedRoom = Model.NoOfRequestedRoom;
+                                                    hotelRooms.NoOfPersons = Model.NoOfPersons;
+                                                    hotelRooms.HotelImage = Model.HotelImage;
+                                                    hotelRooms.RoomIndex = item.RoomIndex;
+                                                    hotelRooms.CountryName = Model.HotelDetails.CountryName;
+                                                    hotelRooms.CityName = Model.HotelDetails.CityName;
+                                                    @Html.Partial("_AvailableHotelRooms", hotelRooms)
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p>No Rooms Available.</p>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="hotel-amenities">
+                                    @Html.Partial("_HotelAmenities", Model.HotelDetails.HotelFacilities)
+                                </div>
+                                <div class="tab-pane fade" id="hotel-reviews">
+                                        <div class="intro table-wrapper full-width hidden-table-sms">
+                                            <div class="rating table-cell col-sm-4">
+                                                @{ var Rate = 0;
+                                                    switch (@Model.HotelDetails.HotelRating.ToString())
+                                                    {
+                                                        case "OneStar": Rate = 1; break;
+                                                        case "TwoStar": Rate = 2; break;
+                                                        case "ThreeStar": Rate = 3; break;
+                                                        case "FourStar": Rate = 4; break;
+                                                        case "FiveStar": Rate = 5; break;
+                                                        default: Rate = 0; break;
+                                                    }
+                                                    var Rating = ((Rate / 5.00) * 100) + "%";
+                                                }
+                                                <span class="score">@Rate/5.0</span>
+
+                                                <div class="five-stars-container"><div class="five-stars" style="width: @Rating;"></div></div>
+                                                <a href="#" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
+                                            </div>
+                                            <div class="table-cell col-sm-8">
+                                                <div class="detailed-rating">
+                                                    <ul class="clearfix">
+                                                        <li class="col-md-6"><div class="each-rating"><label>service</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Value</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Sleep Quality</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>location</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>rooms</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>swimming pool</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guest-reviews">
+                                            <h2>Guest Reviews</h2>
+                                            <div class="guest-review table-wrapper">
+                                                <div class="col-xs-3 col-md-2 author table-cell">
+                                                    <a href="#"><img src="http://placehold.it/270x263" alt="" width="270" height="263" /></a>
+                                                    <p class="name">Jessica Brown</p>
+                                                    <p class="date">NOV, 12, 2013</p>
+                                                </div>
+                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                                    <div class="comment-header clearfix">
+                                                        <h4 class="comment-title">We had great experience while our stay and Hilton Hotels!</h4>
+                                                        <div class="review-score">
+                                                            <div class="five-stars-container"><div class="five-stars" style="width: 80%;"></div></div>
+                                                            <span class="score">4.0/5.0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="guest-review table-wrapper">
+                                                <div class="col-xs-3 col-md-2 author table-cell">
+                                                    <a href="#"><img src="http://placehold.it/270x263" alt="" width="270" height="263" /></a>
+                                                    <p class="name">David Jhon</p>
+                                                    <p class="date">NOV, 12, 2013</p>
+                                                </div>
+                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                                    <div class="comment-header clearfix">
+                                                        <h4 class="comment-title">I love the speediness of their services.</h4>
+                                                        <div class="review-score">
+                                                            <div class="five-stars-container"><div class="five-stars" style="width: 64%;"></div></div>
+                                                            <span class="score">3.2/5.0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="guest-review table-wrapper">
+                                                <div class="col-xs-3 col-md-2 author table-cell">
+                                                    <a href="#"><img src="http://placehold.it/270x263" alt="" width="270" height="263" /></a>
+                                                    <p class="name">Kyle Martin</p>
+                                                    <p class="date">NOV, 12, 2013</p>
+                                                </div>
+                                                <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                                    <div class="comment-header clearfix">
+                                                        <h4 class="comment-title">When you look outside from the windows its breath taking.</h4>
+                                                        <div class="review-score">
+                                                            <div class="five-stars-container"><div class="five-stars" style="width: 76%;"></div></div>
+                                                            <span class="score">3.8/5.0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="button full-width btn-large">LOAD MORE REVIEWS</a>
+                                    </div>
+                                <div class="tab-pane fade" id="hotel-faqs">
+                                    <h2>Frquently Asked Questions</h2>
+                                    <div class="topics">
+                                        <ul class="check-square clearfix">
+                                            <li class="col-sm-6 col-md-4"><a href="#">address &amp; map</a></li>
+                                            <li class="col-sm-6 col-md-4"><a href="#">messaging</a></li>
+                                            <li class="col-sm-6 col-md-4"><a href="#">refunds</a></li>
+                                            <li class="col-sm-6 col-md-4"><a href="#">pricing</a></li>
+                                            <li class="col-sm-6 col-md-4 active"><a href="#">reservation requests</a></li>
+                                            <li class="col-sm-6 col-md-4"><a href="#">your reservation</a></li>
+                                        </ul>
+                                    </div>
+                                    <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                                    <div class="toggle-container">
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question1" data-toggle="collapse">How do I know a reservation is accepted or confirmed?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question1">
+                                                <div class="panel-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question2" data-toggle="collapse">What do I do after I receive a reservation request from a guest?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question2">
+                                                <div class="panel-content">
+                                                    <p>Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="" href="#question3" data-toggle="collapse">How much time do I have to respond to a reservation request?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse in" id="question3">
+                                                <div class="panel-content">
+                                                    <p>Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question4" data-toggle="collapse">Why can’t I call or email hotel or host before booking?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question4">
+                                                <div class="panel-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question5" data-toggle="collapse">Am I allowed to decline reservation requests?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question5">
+                                                <div class="panel-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question6" data-toggle="collapse">What happens if I let a reservation request expire?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question6">
+                                                <div class="panel-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#question7" data-toggle="collapse">How do I set reservation requirements?</a>
+                                            </h4>
+                                            <div class="panel-collapse collapse" id="question7">
+                                                <div class="panel-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="hotel-things-todo">
+                                    <h2>Things to Do</h2>
+                                    <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                                    <div class="activities image-box style2 innerstyle">
+                                        <article class="box">
+                                            <figure>
+                                                <a title="" href="#"><img width="250" height="161" alt="" src="http://placehold.it/250x160"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <div class="details-header">
+                                                    <div class="review-score">
+                                                        <div class="five-stars-container"><div style="width: 60%;" class="five-stars"></div></div>
+                                                        <span class="reviews">25 reviews</span>
+                                                    </div>
+                                                    <h4 class="box-title">Central Park Walking Tour</h4>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat wisi enim don't look even slightly believable.</p>
+                                                <a class="button" title="" href="#">MORE</a>
+                                            </div>
+                                        </article>
+                                        <article class="box">
+                                            <figure>
+                                                <a title="" href="#"><img width="250" height="161" alt="" src="http://placehold.it/250x160"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <div class="details-header">
+                                                    <div class="review-score">
+                                                        <div class="five-stars-container"><div style="width: 60%;" class="five-stars"></div></div>
+                                                        <span class="reviews">25 reviews</span>
+                                                    </div>
+                                                    <h4 class="box-title">Museum of Modern Art</h4>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat wisi enim don't look even slightly believable.</p>
+                                                <a class="button" title="" href="#">MORE</a>
+                                            </div>
+                                        </article>
+                                        <article class="box">
+                                            <figure>
+                                                <a title="" href="#"><img width="250" height="161" alt="" src="http://placehold.it/250x160"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <div class="details-header">
+                                                    <div class="review-score">
+                                                        <div class="five-stars-container"><div style="width: 60%;" class="five-stars"></div></div>
+                                                        <span class="reviews">25 reviews</span>
+                                                    </div>
+                                                    <h4 class="box-title">Crazy Horse Cabaret Show</h4>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat wisi enim don't look even slightly believable.</p>
+                                                <a class="button" title="" href="#">MORE</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="hotel-write-review">
+                                    <div class="main-rating table-wrapper full-width hidden-table-sms intro">
+                                        <article class="image-box box hotel listing-style1 photo table-cell col-sm-4">
+                                            <figure>
+                                                <a class="hover-effect" title="" href="#"><img width="270" height="160" alt="" src="http://placehold.it/270x160"></a>
+                                            </figure>
+                                            <div class="details">
+                                                <h4 class="box-title">@Model.HotelDetails.HotelName <small><i class="soap-icon-departure"></i> @Model.HotelDetails.CityName, @Model.HotelDetails.CountryName</small></h4>
+                                                <div class="feedback">
+                                                    <div title="4 stars" class="five-stars-container" data-toggle="tooltip" data-placement="bottom"><span class="five-stars" style="width: 80%;"></span></div>
+                                                    <span class="review">xxxx reviews</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <div class="table-cell col-sm-8">
+                                            <div class="overall-rating">
+                                                <h4>Your overall Rating of this property</h4>
+                                                <div class="star-rating clearfix">
+                                                    <div class="five-stars-container"><div class="five-stars" style="width: 80%;"></div></div>
+                                                    <span class="status">VERY GOOD</span>
+                                                </div>
+                                                <div class="detailed-rating">
+                                                    <ul class="clearfix">
+                                                        <li class="col-md-6"><div class="each-rating"><label>service</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Value</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Sleep Quality</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>location</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>rooms</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>swimming pool</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                        <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container editable-rating" data-original-stars="4"></div></div></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="review-form">
+                                        <div class="form-group col-md-5 no-float no-padding">
+                                            <h4 class="title">Title of your review</h4>
+                                            <input type="text" name="review-title" class="input-text full-width" value="" placeholder="enter a review title" />
+                                        </div>
+                                        <div class="form-group">
+                                            <h4 class="title">Your review</h4>
+                                            <textarea class="input-text full-width" placeholder="enter your review (minimum 200 characters)" rows="5"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4 class="title">What sort of Trip was this?</h4>
+                                            <ul class="sort-trip clearfix">
+                                                <li><a href="#"><i class="soap-icon-businessbag circle"></i></a><span>Business</span></li>
+                                                <li><a href="#"><i class="soap-icon-couples circle"></i></a><span>Couples</span></li>
+                                                <li><a href="#"><i class="soap-icon-family circle"></i></a><span>Family</span></li>
+                                                <li><a href="#"><i class="soap-icon-friends circle"></i></a><span>Friends</span></li>
+                                                <li><a href="#"><i class="soap-icon-user circle"></i></a><span>Solo</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group col-md-5 no-float no-padding">
+                                            <h4 class="title">When did you travel?</h4>
+                                            <div class="selector">
+                                                <select class="full-width">
+                                                    <option value="2014-6">June 2014</option>
+                                                    <option value="2014-7">July 2014</option>
+                                                    <option value="2014-8">August 2014</option>
+                                                    <option value="2014-9">September 2014</option>
+                                                    <option value="2014-10">October 2014</option>
+                                                    <option value="2014-11">November 2014</option>
+                                                    <option value="2014-12">December 2014</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4 class="title">Add a tip to help travelers choose a good room</h4>
+                                            <textarea class="input-text full-width" rows="3" placeholder="write something here"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-5 no-float no-padding">
+                                            <h4 class="title">Do you have photos to share? <small>(Optional)</small> </h4>
+                                            <div class="fileinput full-width">
+                                                <input type="file" class="input-text" data-placeholder="select image/s" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4 class="title">Share with friends <small>(Optional)</small></h4>
+                                            <p>Share your review with your friends on different social media networks.</p>
+                                            <ul class="social-icons icon-circle clearfix">
+                                                <li class="twitter"><a title="Twitter" href="#" data-toggle="tooltip"><i class="soap-icon-twitter"></i></a></li>
+                                                <li class="facebook"><a title="Facebook" href="#" data-toggle="tooltip"><i class="soap-icon-facebook"></i></a></li>
+                                                <li class="googleplus"><a title="GooglePlus" href="#" data-toggle="tooltip"><i class="soap-icon-googleplus"></i></a></li>
+                                                <li class="pinterest"><a title="Pinterest" href="#" data-toggle="tooltip"><i class="soap-icon-pinterest"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group col-md-5 no-float no-padding no-margin">
+                                            <button type="submit" class="btn-large full-width">SUBMIT REVIEW</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="sidebar col-md-3">
+                        @{ Model.HotelDetails.Image = Model.HotelImage;
+                            var total = Model.Rooms.HotelRooms.Sum(x => x.RoomRate.RoomFare);
+                            var avg = total / Model.Rooms.HotelRooms.Count();
+                            Model.AvgPerNight = Math.Round(avg,2);
+                        }
+                        @Html.Partial("_HotelDataSidebar", Model)
+                        <div class="travelo-box contact-box">
+                            <h4>Need Nexus Help?</h4>
+                            <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+                            <address class="contact-details">
+                                <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+                                <br>
+                                <a class="contact-email" href="#">help@nexus.com</a>
+                            </address>
+                        </div>
+                        <div class="travelo-box">
+                            <h4>Similar Listings</h4>
+                            <div class="image-box style14">
+                                <article class="box">
+                                    <figure>
+                                        <a href="#"><img src="http://placehold.it/63x59" alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h5 class="box-title"><a href="#">Plaza Tour Eiffel</a></h5>
+                                        <label class="price-wrapper">
+                                            <span class="price-per-unit">$170</span>avg/night
+                                        </label>
+                                    </div>
+                                </article>
+                                <article class="box">
+                                    <figure>
+                                        <a href="#"><img src="http://placehold.it/63x59" alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h5 class="box-title"><a href="#">Sultan Gardens</a></h5>
+                                        <label class="price-wrapper">
+                                            <span class="price-per-unit">$620</span>avg/night
+                                        </label>
+                                    </div>
+                                </article>
+                                <article class="box">
+                                    <figure>
+                                        <a href="#"><img src="http://placehold.it/63x59" alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h5 class="box-title"><a href="#">Park Central</a></h5>
+                                        <label class="price-wrapper">
+                                            <span class="price-per-unit">$322</span>avg/night
+                                        </label>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="travelo-box book-with-us-box">
+                            <h4>Why Book with us?</h4>
+                            <ul>
+                                <li>
+                                    <i class="soap-icon-hotel-1 circle"></i>
+                                    <h5 class="title"><a href="#">135,00+ Hotels</a></h5>
+                                    <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                </li>
+                                <li>
+                                    <i class="soap-icon-savings circle"></i>
+                                    <h5 class="title"><a href="#">Low Rates &amp; Savings</a></h5>
+                                    <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                </li>
+                                <li>
+                                    <i class="soap-icon-support circle"></i>
+                                    <h5 class="title"><a href="#">Excellent Support</a></h5>
+                                    <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>*@

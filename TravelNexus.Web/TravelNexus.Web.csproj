@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{88A34B93-5DDF-49A5-9DE0-0D1C5FF1A8A7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TravelNexus.Web</RootNamespace>
+    <AssemblyName>TravelNexus.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44326</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.2.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.2.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.2.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.2.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountViewModels.cs" />
+    <Compile Include="AdminManageViewModels.cs" />
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminManageController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FlightController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\HttpErrorsController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="EntitiesContextInitializer.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModels.cs" />
+    <Compile Include="ManageViewModels.cs" />
+    <Compile Include="MapDOTWResponseToTboResponse.cs" />
+    <Compile Include="Migrations\202108101212481_initial.cs" />
+    <Compile Include="Migrations\202108101212481_initial.designer.cs">
+      <DependentUpon>202108101212481_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\APIsKeysConfig.cs" />
+    <Compile Include="Models\CitiesName.cs" />
+    <Compile Include="Models\CountryVATsConfig.cs" />
+    <Compile Include="Models\CurrenciesConfig.cs" />
+    <Compile Include="Models\FlightBookingModel.cs" />
+    <Compile Include="Models\FrontEndManage.cs" />
+    <Compile Include="Models\HotelBookConfirmationModel.cs" />
+    <Compile Include="Models\FlightDetailsModel.cs" />
+    <Compile Include="Models\HotelBookingModel.cs" />
+    <Compile Include="Models\HotelDetailsModel.cs" />
+    <Compile Include="Models\HotelItem.cs" />
+    <Compile Include="Models\HotelRoomModel.cs" />
+    <Compile Include="Models\SearchHotelsViewModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\WebbedsHotelBookingModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepoServices\IRepo.cs" />
+    <Compile Include="RepoServices\IUnitOfWork.cs" />
+    <Compile Include="RepoServices\Repo.cs" />
+    <Compile Include="RepoServices\UnitOfWork.cs" />
+    <Compile Include="RepoServices\UserRepo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="TransactionsDbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\MailTemplate\AccountConfirmation.html" />
+    <Content Include="App_Data\MailTemplate\FatoraMail.html" />
+    <Content Include="Content\ajax\cruise-slideshow-popup.html" />
+    <Content Include="Content\ajax\slideshow-popup.html" />
+    <Content Include="Content\components\flexslider\flexslider-rtl.css" />
+    <Content Include="Content\components\flexslider\flexslider.css" />
+    <Content Include="Content\components\flexslider\flexslider2.css" />
+    <Content Include="Content\components\flexslider\fonts\flexslider-icon.svg" />
+    <Content Include="Content\components\flexslider\images\bg_play_pause.png" />
+    <Content Include="Content\components\flexslider\jquery.flexslider-min.js" />
+    <Content Include="Content\components\flexslider\jquery.flexslider.js" />
+    <Content Include="Content\components\flexslider\jquery.flexslider2.js" />
+    <Content Include="Content\components\jquery.bxslider\images\bx_loader.gif" />
+    <Content Include="Content\components\jquery.bxslider\images\controls.png" />
+    <Content Include="Content\components\jquery.bxslider\jquery.bxslider.css" />
+    <Content Include="Content\components\jquery.bxslider\jquery.bxslider.js" />
+    <Content Include="Content\components\jquery.bxslider\jquery.bxslider.min.js" />
+    <Content Include="Content\components\jquery.bxslider\plugins\jquery.easing.1.3.js" />
+    <Content Include="Content\components\jquery.bxslider\plugins\jquery.fitvids.js" />
+    <Content Include="Content\components\layerslider\css\blank.gif" />
+    <Content Include="Content\components\layerslider\css\layerslider.css" />
+    <Content Include="Content\components\layerslider\js\greensock.js" />
+    <Content Include="Content\components\layerslider\js\jquery.js" />
+    <Content Include="Content\components\layerslider\js\layerslider.kreaturamedia.jquery.js" />
+    <Content Include="Content\components\layerslider\js\layerslider.transitions.js" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark3d\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark3d\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark3d\shadow.png" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark3d\skin.css" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark3d\skin.png" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark\shadow.png" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark\skin.css" />
+    <Content Include="Content\components\layerslider\skins\borderlessdark\skin.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight3d\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight3d\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight3d\shadow.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight3d\skin.css" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight3d\skin.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight\shadow.png" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight\skin.css" />
+    <Content Include="Content\components\layerslider\skins\borderlesslight\skin.png" />
+    <Content Include="Content\components\layerslider\skins\carousel\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\carousel\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\carousel\skin.css" />
+    <Content Include="Content\components\layerslider\skins\carousel\skin.png" />
+    <Content Include="Content\components\layerslider\skins\darkskin\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\darkskin\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\darkskin\skin.css" />
+    <Content Include="Content\components\layerslider\skins\darkskin\skin.png" />
+    <Content Include="Content\components\layerslider\skins\defaultskin\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\defaultskin\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\defaultskin\skin.css" />
+    <Content Include="Content\components\layerslider\skins\defaultskin\skin.png" />
+    <Content Include="Content\components\layerslider\skins\fullwidthdark\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\fullwidthdark\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\fullwidthdark\skin.css" />
+    <Content Include="Content\components\layerslider\skins\fullwidthdark\skin.png" />
+    <Content Include="Content\components\layerslider\skins\fullwidth\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\fullwidth\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\fullwidth\skin.css" />
+    <Content Include="Content\components\layerslider\skins\fullwidth\skin.png" />
+    <Content Include="Content\components\layerslider\skins\glass\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\glass\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\glass\shadow.png" />
+    <Content Include="Content\components\layerslider\skins\glass\skin.css" />
+    <Content Include="Content\components\layerslider\skins\glass\skin.png" />
+    <Content Include="Content\components\layerslider\skins\lightskin\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\lightskin\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\lightskin\skin.css" />
+    <Content Include="Content\components\layerslider\skins\lightskin\skin.png" />
+    <Content Include="Content\components\layerslider\skins\minimal\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\minimal\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\minimal\skin.css" />
+    <Content Include="Content\components\layerslider\skins\minimal\skin.png" />
+    <Content Include="Content\components\layerslider\skins\noskin\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\noskin\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\noskin\skin.css" />
+    <Content Include="Content\components\layerslider\skins\noskin\skin.png" />
+    <Content Include="Content\components\layerslider\skins\v5\loading.gif" />
+    <Content Include="Content\components\layerslider\skins\v5\nothumb.png" />
+    <Content Include="Content\components\layerslider\skins\v5\skin.css" />
+    <Content Include="Content\components\layerslider\skins\v5\skin.png" />
+    <Content Include="Content\components\revolution_slider\assets\coloredbg.png" />
+    <Content Include="Content\components\revolution_slider\assets\gridtile.png" />
+    <Content Include="Content\components\revolution_slider\assets\gridtile_3x3.png" />
+    <Content Include="Content\components\revolution_slider\assets\gridtile_3x3_white.png" />
+    <Content Include="Content\components\revolution_slider\assets\gridtile_white.png" />
+    <Content Include="Content\components\revolution_slider\assets\loader.gif" />
+    <Content Include="Content\components\revolution_slider\assets\sources\fb.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\fr.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\ig.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\post.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\revolution_slide1.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\revolution_slide2.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\tw.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\vm.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\wc.png" />
+    <Content Include="Content\components\revolution_slider\assets\sources\yt.png" />
+    <Content Include="Content\components\revolution_slider\css\closedhand.cur" />
+    <Content Include="Content\components\revolution_slider\css\index.php" />
+    <Content Include="Content\components\revolution_slider\css\layers.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\ares.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\custom.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\dione.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\erinyen.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\gyges.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\hades.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\hebe.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\hephaistos.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\hermes.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\hesperiden.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\metis.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\persephone.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\uranus.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation-skins\zeus.css" />
+    <Content Include="Content\components\revolution_slider\css\navigation.css" />
+    <Content Include="Content\components\revolution_slider\css\openhand.cur" />
+    <Content Include="Content\components\revolution_slider\css\settings.css" />
+    <Content Include="Content\components\revolution_slider\css\style.css" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\css\helper.css" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\css\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\fonts\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\revicons\index.php" />
+    <Content Include="Content\components\revolution_slider\fonts\revicons\revicons.svg" />
+    <Content Include="Content\components\revolution_slider\index.php" />
+    <Content Include="Content\components\revolution_slider\js\extensions\index.php" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\index.php" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.actions.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.carousel.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.kenburn.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.layeranimation.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.migration.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.navigation.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.parallax.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.slideanims.js" />
+    <Content Include="Content\components\revolution_slider\js\extensions\source\revolution.extension.video.js" />
+    <Content Include="Content\components\revolution_slider\js\index.php" />
+    <Content Include="Content\components\revolution_slider\js\jquery.themepunch.enablelog.js" />
+    <Content Include="Content\components\revolution_slider\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Content\components\revolution_slider\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\components\revolution_slider\js\source\index.php" />
+    <Content Include="Content\components\revolution_slider\js\source\jquery.themepunch.enablelog.js" />
+    <Content Include="Content\components\revolution_slider\js\source\jquery.themepunch.revolution.js" />
+    <Content Include="Content\components\revolution_slider\js\source\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\components\revolution_slider\php\facebook\class-facebook.php" />
+    <Content Include="Content\components\revolution_slider\php\flickr\class-flickr.php" />
+    <Content Include="Content\components\revolution_slider\php\instagram\class-instagram.php" />
+    <Content Include="Content\components\revolution_slider\php\twitter\class-twitter.php" />
+    <Content Include="Content\components\revolution_slider\php\twitter\connection\Application.php" />
+    <Content Include="Content\components\revolution_slider\php\twitter\connection\ConnectionAbstract.php" />
+    <Content Include="Content\components\revolution_slider\php\twitter\connection\User.php" />
+    <Content Include="Content\components\revolution_slider\php\twitter\RestApi.php" />
+    <Content Include="Content\components\revolution_slider\php\vimeo\class-vimeo.php" />
+    <Content Include="Content\components\revolution_slider\php\youtube\class-youtube.php" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\bootstrap-rtl.css" />
+    <Content Include="Content\css\bootstrap-rtl.min.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\custom-style.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\ie.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\rtl.css" />
+    <Content Include="Content\css\soap-icon.css" />
+    <Content Include="Content\css\style-dark-blue.css" />
+    <Content Include="Content\css\style-dark-orange.css" />
+    <Content Include="Content\css\style-light-blue.css" />
+    <Content Include="Content\css\style-light-orange.css" />
+    <Content Include="Content\css\style-light-yellow.css" />
+    <Content Include="Content\css\style-orange.css" />
+    <Content Include="Content\css\style-purple.css" />
+    <Content Include="Content\css\style-red.css" />
+    <Content Include="Content\css\style-sea-blue.css" />
+    <Content Include="Content\css\style-sky-blue.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\updates.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\NexaBlack.svg" />
+    <Content Include="Content\fonts\soap-icons.svg" />
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\images\404-style1.png" />
+    <Content Include="Content\images\about-1.png" />
+    <Content Include="Content\images\about-2.png" />
+    <Content Include="Content\images\about-3.png" />
+    <Content Include="Content\images\about-4.png" />
+    <Content Include="Content\images\about-5.png" />
+    <Content Include="Content\images\about-6.png" />
+    <Content Include="Content\images\about-7.png" />
+    <Content Include="Content\images\about-8.png" />
+    <Content Include="Content\images\about-9.png" />
+    <Content Include="Content\images\about.png" />
+    <Content Include="Content\images\author1.png" />
+    <Content Include="Content\images\author2.png" />
+    <Content Include="Content\images\author3.png" />
+    <Content Include="Content\images\author4.png" />
+    <Content Include="Content\images\favicon.png" />
+    <Content Include="Content\images\global-map.jpg" />
+    <Content Include="Content\images\icon\back-to-top.png" />
+    <Content Include="Content\images\icon\blank.png" />
+    <Content Include="Content\images\icon\calendar.png" />
+    <Content Include="Content\images\icon\discount.png" />
+    <Content Include="Content\images\icon\flags\au.png" />
+    <Content Include="Content\images\icon\flags\en-us.png" />
+    <Content Include="Content\images\icon\hover-effect.png" />
+    <Content Include="Content\images\icon\icon-check.png" />
+    <Content Include="Content\images\icon\minus.png" />
+    <Content Include="Content\images\icon\mobile-menu.png" />
+    <Content Include="Content\images\image1.png" />
+    <Content Include="Content\images\image2.png" />
+    <Content Include="Content\images\image3.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\logo\skin1-logo.png" />
+    <Content Include="Content\images\logo\skin10-logo.png" />
+    <Content Include="Content\images\logo\skin2-logo.png" />
+    <Content Include="Content\images\logo\skin3-logo.png" />
+    <Content Include="Content\images\logo\skin4-logo.png" />
+    <Content Include="Content\images\logo\skin5-logo.png" />
+    <Content Include="Content\images\logo\skin6-logo.png" />
+    <Content Include="Content\images\logo\skin7-logo.png" />
+    <Content Include="Content\images\logo\skin8-logo.png" />
+    <Content Include="Content\images\logo\skin9-logo.png" />
+    <Content Include="Content\images\logo_txt.png" />
+    <Content Include="Content\images\maroma.jpg" />
+    <Content Include="Content\images\nexus.png" />
+    <Content Include="Content\images\nexus.svg" />
+    <Content Include="Content\images\Packages\Test.jpg" />
+    <Content Include="Content\images\Packages\Test2.jpg" />
+    <Content Include="Content\images\themes\footer\style01\sand.png" />
+    <Content Include="Content\images\themes\footer\style02\sky.png" />
+    <Content Include="Content\images\themes\footer\style03\sea.png" />
+    <Content Include="Content\images\themes\footer\style04\sky.png" />
+    <Content Include="Content\images\themes\footer\style05\sky.png" />
+    <Content Include="Content\images\themes\footer\style06\sky.png" />
+    <Content Include="Content\images\tour\home\logo.png" />
+    <Content Include="Content\images\travel.jpg" />
+    <Content Include="Content\images\travelo_process.png" />
+    <Content Include="Content\js\booking.js" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\calendar.js" />
+    <Content Include="Content\js\contact.js" />
+    <Content Include="Content\js\gmap3.infobox.js" />
+    <Content Include="Content\js\gmap3.js" />
+    <Content Include="Content\js\gmap3.min.js" />
+    <Content Include="Content\js\ie8.js" />
+    <Content Include="Content\js\isotope.pkgd.js" />
+    <Content Include="Content\js\isotope.pkgd.min.js" />
+    <Content Include="Content\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\js\jquery-2.0.2.min.js" />
+    <Content Include="Content\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Content\js\jquery-ui.1.10.4.min.js" />
+    <Content Include="Content\js\jquery.fitvids.js" />
+    <Content Include="Content\js\jquery.fitvids.min.js" />
+    <Content Include="Content\js\jquery.noconflict.js" />
+    <Content Include="Content\js\jquery.placeholder.js" />
+    <Content Include="Content\js\jquery.stellar.min.js" />
+    <Content Include="Content\js\modernizr.2.7.1.min.js" />
+    <Content Include="Content\js\pace.min.js" />
+    <Content Include="Content\js\page-loading.js" />
+    <Content Include="Content\js\scripts.js" />
+    <Content Include="Content\js\theme-scripts.js" />
+    <Content Include="Content\js\waypoints.js" />
+    <Content Include="Content\js\waypoints.min.js" />
+    <Content Include="Content\LinkCSS\css.css" />
+    <Content Include="Content\LinkCSS\font-awesome.min.css" />
+    <Content Include="Content\LinkCSS\select2.min.css" />
+    <Content Include="Content\sass\style.css" />
+    <Content Include="Content\sass\style.min.css" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\gridmvc.js" />
+    <Content Include="Content\Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Content\Scripts\gridmvc.min.js" />
+    <None Include="Content\Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-3.4.1.js" />
+    <Content Include="Content\Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Content\Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Content\Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\jq\jQuery-2.1.4.min.js" />
+    <Content Include="Content\Scripts\map-input.js" />
+    <Content Include="Content\Scripts\modernizr-2.8.3.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="readme.txt" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\NexaBlack.eot" />
+    <Content Include="Content\fonts\NexaBlack.otf" />
+    <Content Include="Content\fonts\NexaBlack.ttf" />
+    <Content Include="Content\fonts\NexaBlack.woff" />
+    <Content Include="Content\fonts\soap-icons.eot" />
+    <Content Include="Content\fonts\soap-icons.ttf" />
+    <Content Include="Content\fonts\soap-icons.woff" />
+    <Content Include="Grid.mvc.readme" />
+    <Content Include="Content\sass\base.scss" />
+    <Content Include="Content\sass\custom.scss" />
+    <Content Include="Content\sass\ie.scss" />
+    <Content Include="Content\sass\mixin.scss" />
+    <Content Include="Content\sass\responsive.scss" />
+    <Content Include="Content\sass\soap-icon.scss" />
+    <Content Include="Content\sass\style.scss" />
+    <Content Include="Content\sass\updates.scss" />
+    <Content Include="Content\sass\variables.scss" />
+    <Content Include="Content\components\flexslider\fonts\flexslider-icon.eot" />
+    <Content Include="Content\components\flexslider\fonts\flexslider-icon.ttf" />
+    <Content Include="Content\components\flexslider\fonts\flexslider-icon.woff" />
+    <Content Include="Content\components\jquery.bxslider\bower.json" />
+    <Content Include="Content\components\jquery.bxslider\readme.md" />
+    <Content Include="Content\components\revolution_slider\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\assets\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\css\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\fonts\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\components\revolution_slider\fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="Content\components\revolution_slider\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="Content\components\revolution_slider\fonts\revicons\revicons.eot" />
+    <Content Include="Content\components\revolution_slider\fonts\revicons\revicons.ttf" />
+    <Content Include="Content\components\revolution_slider\fonts\revicons\revicons.woff" />
+    <Content Include="Content\components\revolution_slider\info.cfg" />
+    <Content Include="Content\components\revolution_slider\js\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\js\extensions\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\php\.DS_Store" />
+    <Content Include="Content\components\revolution_slider\php\twitter\.DS_Store" />
+    <Content Include="App_Data\AdminConfigurations\APIsKeysConfig.json" />
+    <Content Include="App_Data\AdminConfigurations\CurrenciesConfig.json" />
+    <Content Include="App_Data\AdminConfigurations\CountryVATsConfig.json" />
+    <Content Include="App_Data\AdminConfigurations\FrontEndManagment.json" />
+    <Content Include="App_Data\AdminConfigurations\SMTP2GoConfig.json" />
+    <Content Include="App_Data\CitiesName.json" />
+    <Content Include="Content\Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Content\Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jq\jQuery-2.1.4.min.js" />
+    <Content Include="Scripts\map-input.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchSection.cshtml" />
+    <Content Include="Views\Flight\FlightDetails.cshtml" />
+    <Content Include="Views\Flight\FlightItem.cshtml" />
+    <Content Include="Views\Flight\SearchFlights.cshtml" />
+    <Content Include="Views\Hotels\SearchHotels.cshtml" />
+    <Content Include="Views\Hotels\HotelItem.cshtml" />
+    <Content Include="Views\Hotels\HotelDetails.cshtml" />
+    <Content Include="Views\Hotels\_AvailableHotelRooms.cshtml" />
+    <Content Include="Views\Hotels\_HotelAmenities.cshtml" />
+    <Content Include="Views\Hotels\_HotelDataSidebar.cshtml" />
+    <Content Include="Views\Hotels\_HotelBooking.cshtml" />
+    <Content Include="Views\Hotels\_ThankYou.cshtml" />
+    <Content Include="Views\Flight\BookFlight.cshtml" />
+    <Content Include="Views\Flight\CompleteBookingFlight.cshtml" />
+    <Content Include="Views\Flight\PriceItem.cshtml" />
+    <Content Include="Views\Shared\_login.cshtml" />
+    <Content Include="Views\Shared\_signup.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Forum\New.cshtml" />
+    <Content Include="Views\Forum\AddReturn.cshtml" />
+    <Content Include="Views\Shared\_SignUpLayout.cshtml" />
+    <Content Include="Views\AdminManage\Approve.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\AdminManage\Index.cshtml" />
+    <Content Include="Views\AdminManage\Dashboard.cshtml" />
+    <Content Include="Views\HttpErrors\NotFound.cshtml" />
+    <Content Include="Views\AdminManage\AddPackage.cshtml" />
+    <Content Include="Views\Shared\_Packages.cshtml" />
+    <Content Include="Views\Home\Message.cshtml" />
+    <Content Include="Views\Hotels\WebbedsHotelDetails.cshtml" />
+    <Content Include="Views\Hotels\_WebbedsHotelRoomDetails.cshtml" />
+    <Content Include="Views\Hotels\_ModalView.cshtml" />
+    <Content Include="Views\Shared\_NexusLogin.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Hotels\ConfirmBooking.cshtml" />
+    <Content Include="Views\Account\PartnerRegister.cshtml" />
+    <Content Include="Views\AdminManage\SMTPConfig.cshtml" />
+    <Content Include="Views\AdminManage\APIsConfig.cshtml" />
+    <Content Include="Views\Account\ResendEmailConfirmationCode.cshtml" />
+    <Content Include="Views\AdminManage\PackageDetatils.cshtml" />
+    <Content Include="Views\AdminManage\EditInvoice.cshtml" />
+    <Content Include="Views\Transactions\UpdateFatora.cshtml" />
+    <Content Include="Views\Transactions\Packages.cshtml" />
+    <Content Include="Views\AdminManage\PackageEdit.cshtml" />
+    <Content Include="Views\AdminManage\SendSpecficMail.cshtml" />
+    <Content Include="Views\AdminManage\AddService.cshtml" />
+    <Content Include="Views\Shared\_currenciesView.cshtml" />
+    <Content Include="Views\AdminManage\AddNews.cshtml" />
+    <Content Include="Views\AdminManage\AddPopularHotel.cshtml" />
+    <Content Include="Views\AdminManage\AddFavDest.cshtml" />
+    <Content Include="Views\AdminManage\popHotelDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NexusImages\FavDestImages\" />
+    <Folder Include="NexusImages\NewsImages\" />
+    <Folder Include="NexusImages\PackagesImages\PackagesMainImages\" />
+    <Folder Include="NexusImages\PopularHotelsImages\PopHotelsLogoImages\" />
+    <Folder Include="NexusImages\PopularHotelsImages\PopHotelsMainImages\" />
+    <Folder Include="NexusImages\ServiceImages\" />
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\Flight\PartialViews\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DOTWconnect.Service\DOTWconnect.Service.csproj">
+      <Project>{c5fc9fa2-e44e-4f06-b540-f097b08399b5}</Project>
+      <Name>DOTWconnect.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fawaterk.Service\Fawaterk.Service.csproj">
+      <Project>{1a6d3fb4-cdbb-49c4-ae4e-7f644e8146c9}</Project>
+      <Name>Fawaterk.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SMTP2Go.Service\SMTP2Go.Service.csproj">
+      <Project>{ab3d40a9-79c7-44f9-9cd7-eb190f61d863}</Project>
+      <Name>SMTP2Go.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelNexus.Services\TravelNexus.Services.csproj">
+      <Project>{444AE211-4220-4DBD-8F85-ED2AD4E2B76C}</Project>
+      <Name>TravelNexus.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202108101212481_initial.resx">
+      <DependentUpon>202108101212481_initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62187</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44326/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

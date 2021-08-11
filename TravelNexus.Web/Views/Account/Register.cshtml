@@ -1,0 +1,377 @@
+﻿@model TravelNexus.Web.RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+    <!-- Page Title -->
+    <title>Nexus - Travel, Tour Booking</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Travelo - Travel, Tour Booking HTML5 Template">
+    <meta name="author" content="SoapTheme">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/favicon.ico" type="image/x-icon">
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link href='~/Content/LinkCSS/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/Content/css/animate.min.css">
+    <style>
+        ::-webkit-input-placeholder { /* Edge */
+            color: #FFF;
+        }
+
+        .copyright p {
+            color: #FFF !important;
+        }
+
+        .soap-login-page.style2 .login-form button {
+            height: 70px;
+            box-shadow: 0 10px 6px rgb(75, 59, 78);
+        }
+
+        .soap-login-page.style2 .welcome-text {
+            text-shadow: 0 10px 6px #48354c;
+        }
+
+        .nav-link {
+            border-radius: 0 !important;
+            margin: 0 !important;
+            font-size: 25px;
+            font-weight: 600;
+            padding: 10px 20px;
+            color: #FFF !important;
+            background-color: #01B7F2 !important;
+        }
+
+        .partner {
+            padding: 10px 52px !important;
+        }
+
+        .nav-item.active .nav-link {
+            color: #01B7F2 !important;
+            background-color: #FFF !important;
+        }
+
+
+
+        .input-cont {
+            width: 100%;
+            padding: 10px 25px;
+        }
+
+        .input-value {
+            width: 100%;
+        }
+
+        .input-submit {
+            background-color: #01B7F2 !important;
+            color: #FFF !important;
+        }
+
+        h1 {
+            font-weight: bold !important;
+            margin-top: 20px !important;
+            color: #FFF !important;
+        }
+    </style>
+    <!-- Main Style -->
+    <link id="main-style" rel="stylesheet" href="~/Content/css/style.css">
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="~/Content/css/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/Content/css/custom.css">
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+    <!-- Javascript Page Loader -->
+    <script type="text/javascript" src="~/Content/js/pace.min.js" data-pace-options='{ "ajax": false }'></script>
+    @*<script type="text/javascript" src="~/Content/js/page-loading.js"></script>*@
+    <style>
+        .message-error {
+            color: #941d1b;
+            font-size: 14px;
+            padding-top: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        .message-error2 {
+            color: #941d1b;
+            font-size: 14px;
+            display: block;
+            text-align: left;
+            margin: 0 0 15px 10px;
+        }
+
+            .message-error2 li {
+                padding: 8px 0;
+            }
+    </style>
+</head>
+<body style="background-image: url(https://travel-nexus.com/wp-content/uploads/2015/06/homepage4.jpg);">
+    <div class="text-center" style="margin-top: 30px;">
+        <img src="~/Content/images/logo.png" alt="logo">
+    </div>
+    <h1 class="text-center text-uppercase">registeration</h1>
+    <div style="width: 400px; margin: auto;  background-color: #FFF;">
+        @*<ul class="nav nav-tabs" id="myTab" role="tablist">*@
+        @*<li class="nav-item ">*@
+        <label class="nav-link partner text-center" style="width: 400px" id="customer-tab" role="tab" aria-controls="home" aria-selected="true">CLIENT SIGN UP</label>
+        @*</li>*@
+        @*<li class="nav-item active">
+                <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="profile" aria-selected="false">CLIENT</a>
+            </li>*@
+        @*</ul>*@
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active in" id="customer" role="tabpanel" aria-labelledby="partner-tab">
+                <form action="Register" method="post">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger message-error2" })
+                    <input type="hidden" name="type" value="CUSTOMER" />
+                    <div class="input-cont">
+                        <input type="text" value="@Model.FirstName" class="input-value form-control" required placeholder="First Name" name="FirstName" />
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    <div class="input-cont">
+                        <input type="text" value="@Model.LastName" class="input-value form-control" required placeholder="Last Name" name="LastName" />
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    <div class="input-cont">
+                        <input type="email" value="@Model.Email" class="input-value form-control" required placeholder="Email" name="Email" />
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    <div class="input-cont">
+                        <input type="text" value="@Model.PhoneNumber" class="input-value form-control" required placeholder="Phone" name="PhoneNumber" />
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    @*<div class="input-cont">
+                        <input type="text" value="@Model.CompanyName" class="input-value form-control" required placeholder="Company Name" name="CompanyName" />
+                    </div>
+                    <div class="input-cont">
+                        <input type="url" value="@Model.CommercialRegister" class="input-value form-control" required placeholder="CommercialRegister" name="CommercialRegister" />
+                    </div>*@
+                    <div class="input-cont">
+                        <input type="password" class="input-value form-control" required placeholder="password" name="Password" autocomplete="new-password" />
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    <div class="input-cont">
+                        <input type="password" class="input-value  form-control" required placeholder="confirm your password" name="ConfirmPassword" autocomplete="new-password" />
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger message-error" })
+
+                    </div>
+                    <div class="input-cont">
+                        <input type="submit" class="input-value input-submit form-control" />
+                    </div>
+                </form>
+            </div>
+            @*<div class="tab-pane fade active in" id="client" role="tabpanel" aria-labelledby="client-tab">
+                    <form action="Register" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger message-error2" })
+                        <input type="hidden" name="type" value="CUSTOMER" />
+                        <div class="input-cont">
+                            <input type="text" value="@Model.FirstName" class="input-value form-control" required placeholder="First Name" name="FirstName" />
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="text" value="@Model.LastName" class="input-value form-control" required placeholder="Last Name" name="lastName" />
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="email" value="@Model.Email" class="input-value form-control" required placeholder="Email" name="Email" />
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="text" value="@Model.PhoneNumber" class="input-value form-control" required placeholder="Phone" name="PhoneNumber" />
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="password" class="input-value form-control" required placeholder="password" name="Password" autocomplete="new-password" />
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="password" class="input-value  form-control" required placeholder="confirm your password" name="ConfirmPassword" autocomplete="new-password" />
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger message-error" })
+
+                        </div>
+                        <div class="input-cont">
+                            <input type="submit" class="input-value input-submit form-control" />
+                        </div>
+                    </form>
+
+                </div>*@
+
+        </div>
+    </div>
+    <div class="copyright text-center" style="margin-top:30px">
+        <p>&copy; @DateTime.Now.Year Travel Nexus</p>
+    </div>
+    @*<div id="page-wrapper" class="">
+            <section id="content">
+                <div class="container">
+                    <div id="main" style="position:relative">
+                        <h1 class="logo block">
+                            <a href="/home" title="Travelo - home">
+                                <img src="~/Content/images/logo_txt.png" style=" max-width: 200px;" alt="Travelo HTML5 Template" />
+                            </a>
+                        </h1>
+
+                        <img src="~/Content/images/nexus.svg" style="position:absolute;right:-42px;top:15%;width:650px" />
+                        <form class="login-form" action="Register" method="post">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger message-error2" })
+                            <div class="form-group text-left col-md-12 white-color" style="font-size:18px">
+                                <label class="d-block">Type</label>
+                                <label style="display: inline-block; margin-right: 10px;">
+                                    <input type="radio" name="type" value="CUSTOMER" checked />
+                                    Customer
+                                </label>
+                                <label style="display: inline-block; margin-right: 10px;">
+                                    <input type="radio" name="type" value="PARTNER" />
+                                    Partner
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="FirstName" value="@Model.FirstName" class="form-control" placeholder="enter your First Name">
+                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="LastName" value="@Model.LastName" class="form-control" placeholder="enter your Last Name">
+                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" placeholder="Enter your Phone Number">
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="Email" name="Email" value="@Model.Email" class="form-control" placeholder="enter your Email">
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="Password" name="Password" autocomplete="new-password" class="form-control" placeholder="enter your Password">
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input type="password" name="ConfirmPassword" autocomplete="new-password" class="form-control" placeholder="Confirm Your Password">
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+
+                            <div id="partner">
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="btn btn-default pull-right" value="Register" />
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>*@
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="~/Content/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.noconflict.js"></script>
+    <script type="text/javascript" src="~/Content/js/modernizr.2.7.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui.1.10.4.min.js"></script>
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="~/Content/js/bootstrap.js"></script>
+
+    <!-- parallax -->
+    <script type="text/javascript" src="~/Content/js/jquery.stellar.min.js"></script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src="~/Content/js/waypoints.min.js"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="~/Content/js/theme-scripts.js"></script>
+    <script type="text/javascript" src="~/Content/js/scripts.js"></script>
+    @*<script>
+            jQuery(document).ready(function () {
+                jQuery('input[type="radio"]').on('change', function () {
+                    var value = jQuery(this).val();
+                    var copy = `
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" name="CompanyName" value="@Model.CompanyName" required class="form-control" placeholder="enter your Company Name">
+                                    @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger message-error" })
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="url" name="CommercialRegister" value="@Model.CommercialRegister" required class="form-control" placeholder="enter your Commercial Register">
+                                    @Html.ValidationMessageFor(m => m.CommercialRegister, "", new { @class = "text-danger message-error" })
+                                </div>
+                            </div>
+                        `;
+                    if (value == 'PARTNER') {
+                        jQuery('#partner').append(copy);
+                    } else if (value == 'CUSTOMER') {
+                        jQuery('#partner').empty();
+                    }
+                });
+            });
+        </script>*@
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
+

@@ -1,0 +1,126 @@
+﻿@model Fawaterk.Service.Package
+@{
+    ViewBag.Title = "PackageDetatils";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <div class="row" jstcache="0">
+            <div id="main" class="col-sm-12 col-md-12" jstcache="0">
+                <div class="tab-container style1" id="hotel-main-content" jstcache="0">
+                    <ul class="tabs">
+                        <li class="active"><a data-toggle="tab" href="#photos-tab">Photos</a></li>
+                    </ul>
+                    @if (Model != null && Model.ImagesCount > 0)
+                    {
+                        <div class="tab-content" jstcache="0">
+                            <div id="photos-tab" class="tab-pane active">
+                                <div class="photo-gallery flexslider style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                        <ul class="slides" style="width: 3000%; transition-duration: 0s; transform: translate3d(-870px, 0px, 0px);">
+
+                                            <li class="clone" aria-hidden="true">
+                                                <div class="sider-backgrond-image" style="background: url('@Model.MainImageName') center center no-repeat;"></div>
+                                                <!-- <img src="./Content/images/Packages/packagephotoslideahow1.jpg" class="attachment-slider-gallery size-slider-gallery img-responsive" alt="" > -->
+                                            </li>
+                                            @for (int i = 1; i <= Model.ImagesCount; i++)
+                                            {
+                                                <li class="clone" aria-hidden="true">
+                                                    <div class="sider-backgrond-image" style="background: url('@Model.FolderImgsName/@i@{}.jpeg') center center no-repeat;"></div>
+                                                    <!-- <img src="./Content/images/Packages/packagephotoslideahow1.jpg" class="attachment-slider-gallery size-slider-gallery img-responsive" alt="" > -->
+                                                </li>
+                                            }
+
+
+
+                                        </ul>
+                                    </div>
+                                    <ol class="flex-control-nav flex-control-paging">
+                                        <li><a href="#" class="flex-active">1</a></li>
+                                        @for (int i = 1; i <= Model.ImagesCount; i++)
+                                        { 
+                                            <li><a href="#">@i</a></li>
+                                        }
+                                    </ol>
+                                    <ul class="flex-direction-nav">
+                                        <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
+                                        <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                        <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                            <li style="width: 70px; margin-right: 10px; float: left; display: block;" data-thumb-alt="" class="flex-active-slide">
+                                                <img src="@Model.MainImageName" class="attachment-widget-thumb size-widget-thumb">
+                                            </li>
+                                            @for (int i = 1; i <= Model.ImagesCount; i++)
+                                            {
+                                                <li style="width: 70px; margin-right: 10px; float: left; display: block;" data-thumb-alt="" class="flex-active-slide">
+                                                    <img src="@Model.FolderImgsName/@i@{}.jpeg" class="attachment-widget-thumb size-widget-thumb">
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                    <ol class="flex-control-nav flex-control-paging">
+                                        <li><a href="#" class="flex-active">1</a></li>
+                                        @for (int i = 1; i <= Model.ImagesCount; i++)
+                                        {
+                                            <li><a href="#">@i</a></li>
+                                        }
+                                    </ol>
+                                    <ul class="flex-direction-nav">
+                                        <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
+                                        <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+    }
+                    </div>
+
+                <div id="hotel-features" class="tab-container">
+                    <ul class="tabs">
+                        <li class="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
+                    </ul>
+                    <div id="packageDetailsId" class="tab-content">
+
+
+                        <h3> Travel Nexus </h3>
+                        <p>
+                            @Html.Raw(Model.PackageDescription)
+                        </p>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <div class="text-right">
+                                <form action="/Transactions/BookAPackage" method="post">
+                                    <input type="hidden" name="PackageId" value="@Model.Id" />
+                                    <label>Enter the Number of People:</label>
+                                    <input type="number" class="input-text border-button" style="width: 70px;" min="1" name="PPLNum" value="1" />
+                                    <input type="submit" class="pull-right input-text button uppercase active fa-2x book-with-us-box" value="BOOK NOW" />
+                                </form>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="text-right">
+                                <button class="btn-medium soap-popupbox" id="LoginClk" data-target="#travelo-login">LOGIN</button>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</section>

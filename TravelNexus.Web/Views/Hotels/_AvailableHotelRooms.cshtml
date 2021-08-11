@@ -1,0 +1,98 @@
+﻿@model TravelNexus.Web.Models.HotelRoomModel
+
+<article class="box">
+    @using (Html.BeginForm("HotelBookDetails", "Hotels", FormMethod.Post))
+    {
+        if (Model != null)
+        {
+            <figure class="col-sm-4 col-md-3">
+                <a class="hover-effect popup-gallery" href="ajax/slideshow-popup.html" title="">
+                    @if (@Model.AvailableHotelRoom.RoomAdditionalInfo != null)
+                    {
+                        <img width="230" height="160" src="@Model.AvailableHotelRoom.RoomAdditionalInfo.ImageURLs[0]" alt="">
+                    }
+                    else
+                    {
+                        <img width="230" height="160" src="" alt="room image">
+                    }
+                </a>
+            </figure>
+            <div class="details col-xs-12 col-sm-8 col-md-9">
+                <div>
+                    <div>
+                        <div class="box-title">
+                            <h4 class="title">@Model.AvailableHotelRoom.RoomTypeName </h4>
+                            <dl class="description">
+                                <dt>Max Guests:</dt>
+                                @if (@Model.AvailableHotelRoom.RoomAdditionalInfo != null
+                                    && @Model.AvailableHotelRoom.RoomAdditionalInfo.MaxAdult != null)
+                                {
+                                    <dd>@Model.AvailableHotelRoom.RoomAdditionalInfo.MaxAdult persons</dd>
+                                }
+                                else
+                                {
+                                    <dd>@Model.NoOfPersons persons</dd>
+                                    if (!string.IsNullOrEmpty(@Model.AvailableHotelRoom.RoomPromtion))
+                                    {
+                                        <dd style="color: #01b7f2; padding-left:30px;">@Model.AvailableHotelRoom.RoomPromtion.Split(':')[0]</dd>
+                                        <dd>: @Model.AvailableHotelRoom.RoomPromtion.Split(':')[1]</dd>
+                                    }
+                                }
+                            </dl>
+                        </div>
+                        <div class="amenities">
+                            @if (@Model.AvailableHotelRoom.Amenities != null)
+                            {
+                                foreach (var amn in @Model.AvailableHotelRoom.Amenities.Split('|'))
+                                {
+                                    string append = "";
+                                    if (amn.ToLower().Contains("wifi"))
+                                    { append = "wifi circle"; }
+                                    else if (amn.ToLower().Contains("movie") || amn.ToLower().Contains("television"))
+                                    { append = "television circle"; }
+                                    else if (amn.ToLower().Contains("fitness"))
+                                    { append = "fitnessfacility circle"; }
+                                    <i class="soap-icon-@append"></i>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="price-section">
+                        <span class="price"><small>PER/NIGHT</small>@Model.AvailableHotelRoom.RoomRate.TotalFare@Model.AvailableHotelRoom.RoomRate.Currency</span>
+                    </div>
+                </div>
+                <div>
+                    @if (@Model.AvailableHotelRoom.RoomAdditionalInfo != null)
+                    {
+                        <p>
+                            @Html.Raw(@Model.AvailableHotelRoom.RoomAdditionalInfo.Description.Replace("<p></p>", "").Replace("<p>", "").Replace("</p>", "").Replace("<br>", "").Replace("<b>", "<br><b>"))
+                        </p>
+                    }
+                    else
+                    {
+                        <p>No description available.</p>
+                    }
+                <div class="action-section">
+                    <button class="button btn-small full-width text-center">BOOK NOW</button>
+                    @Html.HiddenFor(model => Model.ResultIndex)
+                    @Html.HiddenFor(model => Model.SessionId)
+                    @Html.HiddenFor(model => Model.HotelCode)
+                    @Html.HiddenFor(model => Model.RoomIndex)
+                    @Html.HiddenFor(model => Model.CheckInDate)
+                    @Html.HiddenFor(model => Model.CheckOutDate)
+                    @Html.HiddenFor(model => Model.NoOfRequestedRoom)
+                    @Html.HiddenFor(model => Model.NoOfPersons)
+                    @Html.HiddenFor(model => Model.HotelImage)
+                    @Html.HiddenFor(model => Model.AvailableHotelRoom.RoomTypeCode)
+                    @Html.HiddenFor(model => Model.AvailableHotelRoom.RatePlanCode)
+                    @Html.HiddenFor(model => Model.CityName)
+                    @Html.HiddenFor(model => Model.CountryName)
+                </div>
+                </div>
+            </div>
+        }
+
+    }
+</article>
+
+

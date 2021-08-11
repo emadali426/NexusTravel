@@ -1,0 +1,36 @@
+﻿
+@model List<TravelNexus.Services.Flight>
+@{
+    ViewBag.Title = "Flights";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_SearchSection", new TravelNexus.Web.Models.SearchModel() { StartDate = DateTime.Today, EndDate = DateTime.Today, SelectedTab = "Flights" })
+
+<div class="container">
+    <div id="main">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <h4 class="search-results-title"><i class="soap-icon-search"></i><b>@Model.Count()</b> results found.</h4>
+            </div>
+            <div class="col-sm-8 col-md-9">
+
+                @if (Model.Count() > 0)
+                {
+                    for (int i = 0; i < Model.Count(); i++)
+                    {
+                        @Html.Partial("FlightItem", Model[i])
+                    }
+                }
+                else
+                {
+                    <h3> No flights found</h3>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+﻿@model TravelNexus.Services.FlightObject
+@for (int j = 0; j < Model.travelerPricings.Count; j++)// price in Model.prices.flightOffers[i].travelerPricings)
+{
+    using (Html.BeginForm("BookFlight", "Flight", FormMethod.Post))
+    {
+        <article class="box">
+            <figure>
+                <img src="http://placehold.it/120x100" alt="" class="middle-item" />
+            </figure>
+            <div class="details">
+                <h4 class="box-title">@Model.travelerPricings[j].fareOption @Model.travelerPricings[j].travelerType</h4>
+                <p>select your seat now </p>
+            </div>
+            <div class="action">
+                <span class="price"><small>starting at</small>@Model.travelerPricings[j].price.total @Model.travelerPricings[j].price.currency</span>
+                @Html.HiddenFor(model => model.FlightOfferJson)
+                <button class="button btn-small full-width">SELECT NOW</button>
+            </div>
+        </article>
+        <hr>
+    }
+}

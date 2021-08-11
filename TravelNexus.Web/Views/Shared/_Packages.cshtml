@@ -1,0 +1,34 @@
+﻿@model TravelNexus.Web.Models.SearchModel
+
+    @*@if (Model.Packages.Count != 0 )
+    {
+        foreach (var pack in Model.Packages)
+        {
+    <div class="tour-packages row add-clearfix image-box listing-style2">
+        <div>
+
+
+
+            <h1 class="title">@pack.Title </h1>
+            <p>@pack.Description</p>
+
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <article class="box" style="height: auto; min-height: 105px;">
+                <figure>
+                    <a href="#"><img width="500" height="300" src="@pack.ImgPath" class="attachment-biggallery-thumb size-biggallery-thumb wp-post-image" alt="" loading="lazy"></a>
+                    <figcaption>
+                        <h2 class="caption-title">@pack.Title</h2>
+                    </figcaption>
+                </figure>
+            </article>
+        </div>
+        
+    </div>
+            }
+        }
+    else
+    {
+        <h1 class="title">There is no New Packages Yet </h1>
+        <p>...Stay Tuned for our new Packges...</p>
+    }*@

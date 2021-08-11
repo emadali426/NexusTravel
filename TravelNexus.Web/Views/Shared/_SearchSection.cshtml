@@ -1,0 +1,315 @@
+﻿@model TravelNexus.Web.Models.SearchModel
+@{
+    var options = new List<SelectListItem>() { new SelectListItem() { Text = "1", Value = "1", Selected = true }, new SelectListItem() { Text = "2", Value = "2" }, new SelectListItem() { Text = "3", Value = "3" }, new SelectListItem() { Text = "4", Value = "4" } };
+    var Kidsoptions = new List<SelectListItem>() { new SelectListItem() { Text = "0", Value = "0", Selected = true }, new SelectListItem() { Text = "1", Value = "1" }, new SelectListItem() { Text = "2", Value = "2" }, new SelectListItem() { Text = "3", Value = "3" }, new SelectListItem() { Text = "4", Value = "4" } };
+
+    if (string.IsNullOrEmpty(Model.SelectedTab))
+    {
+        Model.SelectedTab = "Hotels";
+    }
+    var hotelsTabClass = Model.SelectedTab == "Hotels" ? "active" : "inactive";
+    var hotelsdivClass = Model.SelectedTab == "Hotels" ? "tab-pane fade active in" : "tab-pane fade";
+    var flightsTabClass = Model.SelectedTab == "Flights" ? "active" : "inactive";
+    var flightsdivClass = Model.SelectedTab == "Flights" ? "tab-pane fade active in" : "tab-pane fade";
+}
+
+<div class="search-box-wrapper">
+    <div class="search-box container">
+        <ul class="search-tabs clearfix">
+            <li class='@hotelsTabClass'><a href="#hotels-tab" data-toggle="tab">HOTELS</a></li>
+            <li class='@flightsTabClass'><a href="#flights-tab" data-toggle="tab">FLIGHTS</a></li>
+            @*<li><a href="#flight-and-hotel-tab" data-toggle="tab">FLIGHT &amp; HOTELS</a></li>*@
+        </ul>
+        <div class="visible-mobile">
+            <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                <li class='@hotelsTabClass'><a href="#hotels-tab">HOTELS</a></li>
+                <li class='@flightsTabClass'><a href="#flights-tab">FLIGHTS</a></li>
+            </ul>
+        </div>
+
+        <div class="search-tab-content">
+            <div class='@hotelsdivClass' id="hotels-tab">
+                @using (Html.BeginForm("SearchHotels", "Hotels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-4">
+                            <h4 class="title">Where</h4>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <label>Destination Country</label>
+                                    @Html.TextBoxFor(m => m.HotelSearchModel.CountryName, new { @class = "input-text full-width", @placeholder = "Destin. Country" })
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>Destination City</label>
+                                    @Html.TextBoxFor(m => m.HotelSearchModel.CityName, new { @class = "input-text full-width", @placeholder = "Destin. City" })
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Nationality</label>
+                                    @Html.TextBoxFor(m => m.HotelSearchModel.GuestNationality, new { @class = "input-text full-width", @placeholder = "Your Country" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-3 col-md-3">
+                            <h4 class="title">When</h4>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Check In</label>
+                                    <div class="datepicker-wrap">
+                                        @Html.TextBoxFor(m => m.HotelSearchModel.CheckInDate, new { @class = "input-text full-width", @placeholder = "mm/dd/yy" })
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Check Out</label>
+                                    <div class="datepicker-wrap">
+                                        @Html.TextBoxFor(m => m.HotelSearchModel.CheckOutDate, new { @class = "input-text full-width", @placeholder = "mm/dd/yy" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6 col-md-3">
+                            <h4 class="title">Who</h4>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label>Rooms</label>
+                                    <div class="selector">
+                                        @Html.DropDownListFor(m => m.HotelSearchModel.NoOfRooms, options)
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Adults</label>
+                                    <div class="selector">
+                                        @Html.DropDownListFor(m => m.HotelSearchModel.RoomGuests.AdultCount, options)
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Kids</label>
+                                    <div class="selector">
+                                        @Html.DropDownListFor(m => m.HotelSearchModel.RoomGuests.ChildCount, Kidsoptions)
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Kid Age</label>
+                                    <div class="selector">
+                                        @Html.TextBoxFor(m => m.HotelSearchModel.ChildAge, new { @class = "input-text full-width", @placeholder = "Age" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6 col-md-2 fixheight">
+                            <label class="hidden-xs">&nbsp;</label>
+                            <button class="full-width icon-check">SERACH NOW</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class='@flightsdivClass' id="flights-tab">
+                @using (Html.BeginForm("SearchFlights", "Flight", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="title">Where</h4>
+                            <div class="form-group">
+                                <label>Leaving From</label>
+                                @Html.TextBoxFor(m => m.From, new { @class = "input-text full-width", @placeholder = "city, distirct or specific airpot" })
+                            </div>
+                            <div class="form-group">
+                                <label>Going To</label>
+                                @Html.TextBoxFor(m => m.To, new { @class = "input-text full-width", @placeholder = "city, distirct or specific airpot" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h4 class="title">When</h4>
+                            <label>Departing On</label>
+                            <div class="form-group row">
+                                <div class="col-xs-6">
+                                    <div class="datepicker-wrap">
+                                        @Html.TextBoxFor(m => m.StartDate, new { @name = "date_from", @class = "input-text full-width", @placeholder = "mm/dd/yy" })
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="selector">
+                                        <select class="full-width">
+                                            <option value="1">anytime</option>
+                                            <option value="2">morning</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Arriving On</label>
+                            <div class="form-group row">
+                                <div class="col-xs-6">
+                                    <div class="datepicker-wrap">
+                                        @Html.TextBoxFor(m => m.EndDate, new { @name = "date_to", @class = "input-text full-width", @placeholder = "mm/dd/yy" })
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="selector">
+                                        <select class="full-width">
+                                            <option value="1">anytime</option>
+                                            <option value="2">morning</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h4 class="title">Who</h4>
+                            <div class="form-group row">
+                                <div class="col-xs-3">
+                                    <label>Adults</label>
+                                    <div class="selector">
+                                        @Html.DropDownListFor(m => m.NoOfAdults, options)
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Kids</label>
+                                    <div class="selector">
+                                        <select class="full-width">
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Promo Code</label>
+                                    <input type="text" class="input-text full-width" placeholder="type here" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xs-3">
+                                    <label>Infants</label>
+                                    <div class="selector">
+                                        <select class="full-width">
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 pull-right">
+                                    <label>&nbsp;</label>
+                                    
+
+                                    <button class="full-width icon-check">SERACH NOW</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @*<div class="tab-pane fade" id="flight-and-hotel-tab">
+                    <form action="flight-list-view.html" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="title">Where</h4>
+                                <div class="form-group">
+                                    <label>Leaving From</label>
+                                    <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Going To</label>
+                                    <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4 class="title">When</h4>
+                                <label>Departing On</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-6">
+                                        <div class="datepicker-wrap">
+                                            <input type="text" name="date_from" class="input-text full-width" placeholder="mm/dd/yy" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="selector">
+                                            <select class="full-width">
+                                                <option value="1">anytime</option>
+                                                <option value="2">morning</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Arriving On</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-6">
+                                        <div class="datepicker-wrap">
+                                            <input type="text" name="date_to" class="input-text full-width" placeholder="mm/dd/yy" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="selector">
+                                            <select class="full-width">
+                                                <option value="1">anytime</option>
+                                                <option value="2">morning</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4 class="title">Who</h4>
+                                <div class="form-group row">
+                                    <div class="col-xs-3">
+                                        <label>Adults</label>
+                                        <div class="selector">
+                                            <select class="full-width">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label>Kids</label>
+                                        <div class="selector">
+                                            <select class="full-width">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label>Promo Code</label>
+                                        <input type="text" class="input-text full-width" placeholder="type here" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xs-3">
+                                        <label>Rooms</label>
+                                        <div class="selector">
+                                            <select class="full-width">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 pull-right">
+                                        <label>&nbsp;</label>
+                                        <button class="full-width icon-check">SERACH NOW</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>*@
+
+
+        </div>
+    </div>
+</div>
+

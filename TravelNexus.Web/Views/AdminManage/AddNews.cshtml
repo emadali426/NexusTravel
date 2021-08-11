@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "AddNews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form action="AddNews" id="AddNewsForm" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input id="titleId" required type="text"  name="Title" class="form-control" style="border-color: #2b9ebd" placeholder="Title" />
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Images Width:</label>
+                    <input type="number" required name="Width" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Width" />
+                    <label>Images Height:</label>
+                    <input type="number" required name="Height" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Height" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select News Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input type="file" id="mainImage" required name="FolderImgsName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Html Description:</label>
+                <div class="col-md-12 form-group" style="margin-bottom:15px">
+                    <div class="">
+                        <textarea name="DescriptionFileName" id="body" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Add News" class="pull-right btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+@section AddNewsPage {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script>
+        $(document).ready(function(){
+            ClassicEditor.create( document.querySelector( '#body' ) )
+                .catch( error => {
+                    console.error(error);
+                   
+                });
+
+            $('#btnSubmitAddPachage').on('click', function (e) {
+                e.preventDefault();
+                var mainImageSize = document.getElementById('mainImage').files[0].size;
+
+                if (( mainImageSize) > 3000000) {
+                    alert('images size exceded 3MB');
+                }
+                else {
+                    $('#AddNewsForm').submit();
+                }
+            })
+        });
+    </script>
+}
+

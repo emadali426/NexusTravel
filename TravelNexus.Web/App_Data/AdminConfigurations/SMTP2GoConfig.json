@@ -1,0 +1,13 @@
+{
+  "APIKey": "api-29C2ECF69A9411EBA02EF23C91BBF4A0",
+  "Host": "mail.smtp2go.com",
+  "Port": 465,
+  "SenderArabicName": "Travel Nexus",
+  "SenderEnglishName": "Travel Nexus",
+  "SenderEmail": "m.hamouda@travel-nexus.com",
+  "UserName": "mail@travel-nexus.com",
+  "Password": "qbb6V5pl8uC4",
+  "Signature": "Travel Nexus",
+  "TimeInterval": null,
+  "EnableSSL": true
+}

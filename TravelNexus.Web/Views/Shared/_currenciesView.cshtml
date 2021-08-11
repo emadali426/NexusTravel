@@ -1,0 +1,19 @@
+﻿@model TravelNexus.Web.CurrenciesModel
+    @if(Model != null && Model.Curr.Count > 0)
+    {
+        <div class="fa fa-icon-pull-left hidden-mobile">
+            <select id="CurrChangeId">
+                @foreach (var item in Model.Curr)
+                {
+                    if (item.Key.Equals(Model.CurrentStateCurrency.Key))
+                    {
+                        <option selected value="@item.Value">@item.Key</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Key</option>
+                    }
+                }
+            </select>
+        </div>
+    }

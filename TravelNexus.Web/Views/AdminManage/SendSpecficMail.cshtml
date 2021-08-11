@@ -1,0 +1,36 @@
+﻿@model TravelNexus.Web.SendToEMail
+@{
+    ViewBag.Title = "SendSpecficMail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form action="SendSpecficMail" enctype="multipart/form-data" method="post">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger message-error2" })
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Send To:</label>
+                    <input id="titleId" required type="email" readonly value="@Model.Email" name="SendTo" class="form-control" style="border-color: #2b9ebd" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Subject:</label>
+                    <input type="text" required name="Subject" class="form-control" style="border-color: #2b9ebd" placeholder="Subject" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Html Body:</label>
+                <div class="col-md-12" style="margin-bottom:15px">
+                    @*<textarea required name="DescriptionFileName" rows="6" style="border-color: #2b9ebd" class="form-control" placeholder="Put Description in HTML Format Here"></textarea>*@
+                    <textarea style="background-color:white" required name="MailBody" rows="20" cols="60"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Send" style="align-items:center" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>

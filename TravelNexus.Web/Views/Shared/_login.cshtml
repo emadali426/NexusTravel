@@ -1,0 +1,130 @@
+﻿
+
+@using Microsoft.AspNet.Identity
+@{
+    var IsAuthenticated = ViewBag.Authenticated == null ? false : ViewBag.Authenticated;
+  
+}
+@if (@IsAuthenticated)
+{
+}
+else
+{
+    <form id="LoginForm">
+        <div class="login-social">
+            <a href="#" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>
+            <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>
+        </div>
+        <div class="seperator"><label>OR</label></div>
+        <div id="loginform">
+            <div class="form-group">
+                <input type="text" class="input-text full-width" placeholder="email" id="LoginUserName" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="input-text full-width" placeholder="password" id="LoginPassword" required>
+            </div>
+            <label id="lblerrorlogin" style="display:none;color:red;">
+
+            </label>
+            <div class="form-group">
+                <a href="#" class="forgot-password pull-right">Forgot password?</a>
+                <div class="checkbox checkbox-inline">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="full-width btn-medium" onclick="submit">LOGIN</button>
+        </div>
+        <div class="seperator"></div>
+        <p>Don't have an account? <a href="#travelo-signup" class="goto-signup soap-popupbox">Sign up</a></p>
+    </form>
+}
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+    function SIGNOUT() {
+        $.ajax({
+            url: "/Account/SignOut",
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+
+                if (result.Result) {
+                    $("#namelbl").html("");
+                    $("#USERNAMElbl").hide();
+                    $("#SIGNOUTlbl").hide();
+                    $("#lblerrorlogin").hide();
+                    $("#LOGINlbl").show();
+                    $("#SIGNUPlbl").show();
+
+                }
+
+            },
+            error: function (result) {
+                $("#lblerrorlogin").html("sorry error occured");
+            }
+        })
+    }
+    $("#LoginForm").submit(function (e) {
+        //debugger;
+        e.preventDefault();
+        var form = $(this);
+        var url = 'Acount/Login';
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                alert(data); // show response from the php script.
+            }
+        });
+    })
+    function LoginUser() {
+        $("#lblerrorlogin").hide();
+        if ($("#LoginUserName").val() == "") {
+            $("#lblerrorlogin").show();
+            $("#lblerrorlogin").html("User Name must be filled out");
+            return false;
+        }
+        if ($("#LoginPassword").val() == "") {
+            $("#lblerrorlogin").show();
+            $("#lblerrorlogin").html("Password must be filled out");
+            return false;
+        }
+        $.ajax({
+            url: "/Account/Login",
+            type: 'POST',
+            data: {
+                UserName: $("#LoginUserName").val(),
+                Password: $("#LoginPassword").val(),
+                returnUrl: "Home/Index",
+            },
+            dataType: 'json',
+            success: function (result) {
+
+                if (result.Result) {
+                    $("#namelbl").html(result.Message);
+                    $("#USERNAMElbl").show();
+                    $("#SIGNOUTlbl").show();
+                    $("#lblerrorlogin").hide();
+                    $("#LOGINlbl").hide();
+                    $("#SIGNUPlbl").hide();
+                    $("#travelo-login").hide();
+
+                }
+                else {
+                    $("#LOGINlbl").show();
+                    $("#USERNAMElbl").hide();
+                    $("#SIGNOUTlbl").hide();
+                    $("#SIGNUPlbl").show();
+                    $("#lblerrorlogin").show();
+                    $("#lblerrorlogin").html(result.Message);
+                }
+            },
+            error: function (result) {
+                $("#lblerrorlogin").html("sorry error occured");
+            }
+        })
+    }
+</script>

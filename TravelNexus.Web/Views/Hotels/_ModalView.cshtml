@@ -1,0 +1,166 @@
+﻿@model TravelNexus.Web.Models.WebbedsHotelBookingModel
+
+
+<div id="myModal-@Model.modalCount.ToString()" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@Model.RoomDetailsGetRooms.Name</h4>
+            </div>
+            <div class="modal-body">
+                <div id="hotel-features" class="tab-container">
+                    <ul class="tabs">
+                        <li class="active"><a href="#room-availability-@Model.modalCount.ToString()" data-toggle="tab">Availability</a></li>
+                        <li><a href="#room-amenities-@Model.modalCount.ToString()" data-toggle="tab">Amenities</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="room-availability-@Model.modalCount.ToString()">
+                            <div class="room-list listing-style3 hotel">
+                                @if (Model.RoomDetailsGetRooms.RateBases.RateBasis != null)
+                                {
+                                    if (Model.RoomDetailsGetRooms.RateBases.RateBasis.Count > 0)
+                                    {
+                                        int count = 0;
+                                        foreach (var item in Model.RoomDetailsGetRooms.RateBases.RateBasis)
+                                        {
+                                            Model.AllocationDetails = item.AllocationDetails;
+                                            Model.CityId = Model.HotelDetailsSearchHotels.CityCode;
+                                            Model.HotelId = Model.HotelDetailsSearchHotels.Hotelid;
+                                            Model.RoomTypeCode = Model.RoomDetailsGetRooms.Roomtypecode;
+                                            Model.HotelName = Model.HotelDetailsSearchHotels.HotelName;
+                                            Model.Price = Model.AddTaxes(double.Parse(item.Total.Text));
+
+
+
+                                            using (Html.BeginForm("BookARoom", "Transactions", FormMethod.Post, new { @id = "form-numb-" + count.ToString() }))
+                                            {
+                                                <article class="box">
+                                                    <div class="details col-xs-12 col-sm-8 col-md-9">
+                                                        <div>
+                                                            <div>
+                                                                <div class="box-title">
+                                                                    <dl class="description">
+                                                                        <dt>Is Bookable:</dt>
+                                                                        <dd>@item.IsBookable</dd>
+                                                                        <dt>Type:</dt>
+                                                                        <dd>@item.Description</dd>
+                                                                    </dl>
+                                                                </div>
+                                                            </div>
+                                                            <div class="price-section">
+                                                                <span class="price">
+                                                                    @item.Total.Formatted
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="action-section">
+
+                                                                @{
+
+                                                                    bool auth = Request.IsAuthenticated;
+
+                                                                    if (auth)
+                                                                    {
+                                                                        <div>
+                                                                            <button type="submit" id="form-numb-@count.ToString()" class="btn-medium login">Book Now</button>
+
+                                                                            @Html.HiddenFor(model => model.AllocationDetails)
+                                                                            @Html.HiddenFor(model => model.HotelId)
+                                                                            @Html.HiddenFor(model => model.HotelName)
+                                                                            @Html.HiddenFor(model => model.CityId)
+                                                                            @Html.HiddenFor(model => model.RoomTypeCode)
+                                                                            @Html.HiddenFor(model => model.Price)
+                                                                            @Html.HiddenFor(model => model.APIName)
+
+
+
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        TempData["ReturnUrl"] = Request.RawUrl;
+                                                                        TempData["HotelId"] = Model.HotelId;
+
+
+                                                                        <div><button class="btn-medium soap-popupbox" id="LoginClk" data-target="#travelo-login">LOGIN NOW TO BOOK</button></div>
+                                                                    }
+
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </article>
+                                                count += 1;
+                                            }
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <h2>No Room Available</h2>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="room-amenities-@Model.modalCount.ToString()">
+                            <ul class="amenities clearfix style1">
+
+                                @if (Model.RoomDetailsSearchHotels != null)
+                                {
+                                    if (Model.RoomDetailsSearchHotels.RoomAmenities != null && Model.RoomDetailsSearchHotels.RoomAmenities.Amenity != null)
+                                    {
+                                        if (Model.RoomDetailsSearchHotels.RoomAmenities.Amenity.Count > 0)
+                                        {
+                                            foreach (var amn in Model.RoomDetailsSearchHotels.RoomAmenities.Amenity)
+                                            {
+                                                <li class="col-md-6">
+                                                    <div class="icon-box style1"><i class="soap-icon-star"></i>@amn.Text</div>
+                                                </li>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li class="col-md-6">
+                                                <h2>No Amenities Available</h2>
+
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li class="col-md-6">
+                                            <h2>No Amenities Available</h2>
+
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="col-md-6">
+                                        <h2>No Amenities Available</h2>
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn-medium btn-success" data-toggle="modal" data-target="#myModal-@Model.modalCount.ToString()">Details</button>

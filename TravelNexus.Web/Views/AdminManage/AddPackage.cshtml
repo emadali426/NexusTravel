@@ -1,0 +1,106 @@
+﻿@model TravelNexus.Web.PackageViewModel
+@{
+    ViewBag.Title = "AddPackage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form name="PackageViewModel" id="AddPackageForm" action="AddPackage" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input id="titleId" type="text" value="@Model.Title" name="Title" class="form-control" style="border-color: #2b9ebd; " placeholder="Title" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Offer Start Date</label>
+                    <input type="date" required value="@Model.OfferStartDate.ToString("yyyy-MM-dd")" name="OfferStartDate" class="form-control" style="border-color: #2b9ebd" placeholder="Offer Start Date" />
+                </div>
+                <label>Offer End Date</label>
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input type="date" required value="@Model.OfferEndDate.ToString("yyyy-MM-dd")" name="OfferEndDate" class="form-control" style="border-color: #2b9ebd" placeholder="Offer End Date" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Package Start Date</label>
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input type="date" required value="@Model.PackageStartDate.ToString("yyyy-MM-dd")" name="PackageStartDate" class="form-control" style="border-color: #2b9ebd" placeholder="Package Start Date" />
+                </div>
+                <label>Package End Date</label>
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input type="date" required value="@Model.PackageEndDate.ToString("yyyy-MM-dd")" name="PackageEndDate" class="form-control" style="border-color: #2b9ebd" placeholder="Package End Date" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Price:</label>
+                    <input type="number" required name="Price"  min="1" value="@Model.Price" class="form-control" style="border-color: #2b9ebd" placeholder="Price" />
+                    <label>Images Width:</label>
+                    <input type="number" required name="Width" min="1" value="@Model.Width" class="form-control" style="border-color: #2b9ebd" placeholder="Width" />
+                    <label>Images Height:</label>
+                    <input type="number" required name="Height" min="1" value="@Model.Height" class="form-control" style="border-color: #2b9ebd" placeholder="Height" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Main Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input type="file" id="mainImage" required name="MainIamgeName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Package Images:</label>
+                <div id="FolderImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input type="file" id="otherImage" required name="ImgsFiles" multiple accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Html Description:</label>
+                <div class="col-md-12 form-group" style="margin-bottom:15px">
+                    @*<textarea required name="DescriptionFileName" rows="6" style="border-color: #2b9ebd" class="form-control" placeholder="Put Description in HTML Format Here"></textarea>*@
+                    <div class="">
+                        <textarea name="PackageDescription" id="body" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Add Package" id="btnSubmitAddPachage" class="pull-right btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+@section AddPackagePage {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script>
+        $(document).ready(function(){
+            ClassicEditor.create( document.querySelector( '#body' ) )
+                .catch( error => {
+                    console.error(error);
+                    
+                });
+            $('#btnSubmitAddPachage').on('click', function (e) {
+                e.preventDefault();
+                var mainImageSize = document.getElementById('mainImage').files[0].size;
+                var otherImageSize = 0;
+                var otherImage = document.getElementById('otherImage').files;
+                
+                for (var i = 0; i < otherImage.length; i++) {
+                    otherImageSize += otherImage[i].size;
+                }
+
+                if (( mainImageSize + otherImageSize) > 3000000) {
+                    alert('images size exceded 3MB');
+                }
+                else {
+                    $('#AddPackageForm').submit();
+                }
+            })
+        });
+    </script>
+}
+
+
+

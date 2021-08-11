@@ -1,0 +1,41 @@
+﻿@model string[]
+
+<h2>Amenities</h2>
+<ul class="amenities clearfix style1">
+    @foreach (var amn in Model)
+    {
+        string append = "";
+        if (amn.ToLower().Contains("swimming"))
+        { append = "swimming"; }
+        else if (amn.ToLower().Contains("wifi"))
+        { append = "wifi"; }
+        else if (amn.ToLower().Contains("coffee") || amn.ToLower().Contains("cafe"))
+        { append = "coffee"; }
+        else if (amn.ToLower().Contains("bar"))
+        { append = "winebar"; }
+        else if (amn.ToLower().Contains("air conditioning"))
+        { append = "aircon"; }
+        else if (amn.ToLower().Contains("park"))
+        { append = "parking"; }
+        else if (amn.ToLower().Contains("movie") || amn.ToLower().Contains("television"))
+        { append = "television"; }
+        else if (amn.ToLower().Contains("fitness"))
+        { append = "fitnessfacility"; }
+        else if (amn.ToLower().Contains("elevator"))
+        { append = "elevator"; }
+        else if (amn.ToLower().Contains("car rental"))
+        { append = "pickanddrop"; }
+        else if (amn.ToLower().Contains("music") || amn.ToLower().Contains("audio"))
+        { append = "entertainment"; }
+        else if (amn.ToLower().Contains("phone") || amn.ToLower().Contains("call") || amn.ToLower().Contains("room service"))
+        { append = "phone"; }
+        else if (amn.ToLower().Contains("sauna") || amn.ToLower().Contains("jacuzzi"))
+        { append = "tub"; }
+        else if (amn.ToLower().Contains("handicap") || amn.ToLower().Contains("wheelchair") || amn.ToLower().Contains("disabled"))
+        { append = "handicapaccessiable"; }
+        else { append = "star"; }
+        <li class="col-md-4 col-sm-6">
+            <div class="icon-box style1"><i class="soap-icon-@append"></i>@amn</div>
+        </li>
+    }
+</ul>

@@ -1,0 +1,646 @@
+﻿@using Microsoft.Owin.Security
+@*@{
+        var uow = new Fawaterk.Service.RepoServices.UnitOfWork(new Fawaterk.Service.FawaterksDbContext());
+        var lastNexNews = uow.nexusNews.GetAll().OrderByDescending(p => p.Id).Take(1).FirstOrDefault();
+    }*@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Page Title -->
+    <title>Nexus Travel - @ViewBag.Title</title>
+    <!-- Page Title -->
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Nexus - Travel, Tour Booking">
+    <meta name="author" content="SoapTheme">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/LinkCSS/font-awesome.min.css">
+    <link rel="shortcut icon" href="~/Content/images/favicon.png" type="image/x-icon">
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link href='~/Content/LinkCSS/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Content/css/animate.min.css">
+
+    <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href="~/Content/components/revolution_slider/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Content/components/revolution_slider/css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Content/components/jquery.bxslider/jquery.bxslider.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Content/components/flexslider/flexslider.css" media="screen" />
+
+    <!-- Main Style -->
+    <link id="main-style" rel="stylesheet" href="~/Content/css/style.css">
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="~/Content/css/updates.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/Content/css/custom.css">
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond~/js/1.4.2/respond.js"></script>
+    <![endif]-->
+    <!-- Javascript Page Loader -->
+    <script type="text/javascript" src="~/Content/js/pace.min.js" data-pace-options='{ "ajax": false }'></script>
+    <!-- <script type="text/javascript" src="~/Content/js/page-loading.js"></script> -->
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="~/Content/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
+
+
+    <link href="~/Content/css/custom.css" rel="stylesheet" />
+
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/Content/css/ie.css" rel="stylesheet" />
+
+
+
+    <link href="~/Content/css/style-dark-orange.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style-light-blue.css" rel="stylesheet" />
+    <link href="~/Content/css/style-light-orange.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style-light-yellow.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style-orange.css" rel="stylesheet" />
+    <link href="~/Content/css/style-purple.css" rel="stylesheet" />
+    <link href="~/Content/css/style-red.css" rel="stylesheet" />
+    <link href="~/Content/css/style-sea-blue.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style-sky-blue.css" rel="stylesheet" />
+
+
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+
+    <link href="~/Content/css/updates.css" rel="stylesheet" />
+    <link href="~/Content/LinkCSS/css.css" rel="stylesheet" />
+    <link href="~/Content/LinkCSS/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/sass/style.min.css" rel="stylesheet" />
+    <link href="~/Content/css/custom-style.css" rel="stylesheet" />
+
+
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #header .logo a, #footer .logo a, .chaser .logo a {
+            width: 150px !important;
+            height: 60px;
+            background-size: cover !important;
+        }
+
+        .login {
+            height: 34px;
+            line-height: 34px;
+            font-size: 1em;
+            padding: 10px 15px;
+            font-weight: bold;
+            background: #98ce44;
+            border: hidden;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .signup {
+            height: 34px;
+            line-height: 34px;
+            font-size: 1em;
+            padding: 10px 15px;
+            font-weight: bold;
+            background: #01b7f2;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .login:hover, .signup:hover {
+                color: #333 !important;
+            }
+
+        .carousel-inner img {
+            width: 80%;
+            height: 200px;
+        }
+
+        .border-button {
+            border: 1px solid #01b7f2 !important;
+        }
+
+        #header.style6 .main-navigation {
+            background: #2d3e52 !important;
+        }
+
+        #header.style6 #main-menu > ul.menu > li > a,
+        #header.style6 .social-icons li > a {
+            color: #01b7f2 !important;
+        }
+
+            #header.style6 #main-menu > ul.menu > li > a:hover,
+            #header.style6 .social-icons li > a:hover {
+                color: #FFF !important;
+            }
+
+        #btnSendMail {
+            position: absolute;
+            top: 120px;
+            right: 15px;
+            width: 30px;
+            height: 34px;
+            background: url(../images/icon/icon-check.png) no-repeat center center #7db921;
+        }
+    </style>
+    <link href="~/Content/LinkCSS/select2.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="header" class="navbar-static-top style6">
+            <div class="container">
+                <h1 class="logo navbar-brand">
+                    <a href="/home/index" title="Travelo - home">
+                        <img src="~/Content/images/logo.png" alt="Travelo HTML5 Template" />
+                    </a>
+                </h1>
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="pull-right hidden-mobile">
+
+
+                        <a class="btn-medium signup" href="/account/SignOut">SIGN OUT</a>
+                        @if (User.IsInRole("ADMIN"))
+                        {
+
+
+                            <a class="btn-medium login" href="/adminmanage/Dashboard">ADMIN PANEL</a>
+                        }
+                        else
+                        {
+                            <a class="btn-medium login" href="/Manage/Index">MY ACCOUNT</a>
+
+                        }
+                    </div>
+                }
+                else
+                { <div class="pull-right hidden-mobile">
+                        @*<button class="btn-medium blue-bg soap-popupbox" data-target="#travelo-signup">SIGNUP</button>*@
+                        <a class="btn-medium signup" href="/account/register">CLIENT SIGNUP</a>
+                        <a class="btn-medium signup" href="/account/partnerregister">PARTNER SIGNUP</a>
+                        <button class="btn-medium soap-popupbox" id="LoginClk" data-target="#travelo-login">LOGIN</button>
+                    </div>
+
+
+                    @*<div class="pull-right hidden-mobile">
+                            <a class="btn-medium signup" href="/account/register">SIGNUP</a>
+                            <a class="btn-medium login" href="/account/login">LOGIN</a>
+                        </div>*@
+                }
+
+            </div>
+            <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                Mobile Menu Toggle
+            </a>
+
+            <div class="main-navigation">
+                <div class="container">
+                    <nav id="main-menu" role="navigation">
+                        <ul class="menu">
+                            <li class="menu-item-has-children">
+                                <a href="/home/index">Home</a>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                                <a href="/home/about">About Us</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                @if (Request.Url.AbsolutePath == "/" || Request.Url.AbsolutePath == "/home/index")
+                                {
+                                    <a href="#NexusServices">Our Services</a>
+                                }
+                                else
+                                {
+                                    <a href="/home/index#NexusServices">Our Services</a>
+                                }
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/Transactions/Packages">Packages</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="/home/contact">Contact Us</a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                    <ul class="social-icons clearfix pull-right hidden-mobile">
+                        <li class="linkedin"><a title="Linkedin" href="https://www.linkedin.com/company/travel-nexus-egypt/?viewAsMember=true" data-toggle="tooltip"><i class="soap-icon-linkedin"></i></a></li>
+                        <li class="facebook"><a title="facebook" href="https://www.facebook.com/TravelNexusEG/" data-toggle="tooltip"><i class="soap-icon-facebook"></i></a></li>
+                        <li class="instagram"><a title="instagram" href="https://www.instagram.com/travel_nexus/" data-toggle="tooltip"><i class="soap-icon-instagram"></i></a></li>
+                        <li class="whatsapp"><a title="Whatsapp" href="#" data-toggle="tooltip"><i class="soap-icon-phone"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <nav id="mobile-menu-01" class="mobile-menu collapse">
+                <ul id="mobile-primary-menu" class="menu">
+                    <li class="menu-item-has-children">
+                        <a href="/home/index">Home</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Tours</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Blog</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/home/about">About Us</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/home/contact">Contact Us</a>
+                    </li>
+                </ul>
+
+                <ul class="mobile-topnav container">
+                    <li><a href="#">MY ACCOUNT</a></li>
+                    <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
+                    <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
+                    <li class="ribbon currency menu-color-skin">
+                        <a href="#">USD</a>
+                        <ul class="menu mini">
+                            <li><a href="#" title="AUD">AUD</a></li>
+                            <li><a href="#" title="BRL">BRL</a></li>
+                            <li class="active"><a href="#" title="USD">USD</a></li>
+                            <li><a href="#" title="CAD">CAD</a></li>
+                            <li><a href="#" title="CHF">CHF</a></li>
+                            <li><a href="#" title="CNY">CNY</a></li>
+                            <li><a href="#" title="CZK">CZK</a></li>
+                            <li><a href="#" title="DKK">DKK</a></li>
+                            <li><a href="#" title="EUR">EUR</a></li>
+                            <li><a href="#" title="GBP">GBP</a></li>
+                            <li><a href="#" title="HKD">HKD</a></li>
+                            <li><a href="#" title="HUF">HUF</a></li>
+                            <li><a href="#" title="IDR">IDR</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <!-- Start Of Login Popup View -->
+
+            <div id="travelo-login" class="travelo-login-box travelo-box">
+                <div class="login-social">
+                    @{
+                        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                        if (loginProviders.Count() != 0)
+                        {
+                            using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = "/" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    @foreach (AuthenticationDescription p in loginProviders)
+                                    {
+                                        if (p.AuthenticationType.Equals("Google"))
+                                        {
+                                            <button type="submit" class="button login-googleplus" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="soap-icon-googleplus"></i>Login with Google</button>
+                                        }
+                                        else if (p.AuthenticationType.Equals("Facebook"))
+                                        {
+                                            <button type="submit" class="button login-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
+                                        }
+                                    }
+                                </div>
+                            }
+                        }
+                    }
+
+                    @*@using (Html.BeginForm("Facebook", "Account", FormMethod.Post, null))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div id="socialLoginList">
+                            <button type="submit" class="button login-facebook" id="Facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
+                        </div>
+                    }*@
+
+                    @*<a href="/Account/" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>*@
+                    @* <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>*@
+                </div>
+                <div class="seperator"><label>OR</label></div>
+                <div id="InvalidId" class="text-danger message-error"></div>
+                <form id="LoginForm">
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger message-error" })
+
+                    <div class="form-group">
+                        <input type="text" id="EmailId" name="Email" value="" class="input-text full-width" required placeholder="email address" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="PasswordId" name="Password" class="input-text full-width" required placeholder="password" />
+                    </div>
+                    <div class="form-group">
+                        <a href="/Account/ForgotPassword" class="forgot-password pull-right">Forgot password?</a>
+                        <div class="checkbox checkbox-inline">
+                            <label>
+                                <input type="checkbox" id="rememberMe" value="" /> Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="LoginBtn" type="submit" class="input-text full-width" >Login</button>
+                    </div>
+                </form>
+                <div class="seperator"></div>
+                <p>Don't have an account? <a href="/Account/Register" class="">Sign up</a></p>
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+            <!-- End Of Login Popup View -->
+
+        </header>
+    </div>
+    <!-- Start Of Page Body -->
+
+    @RenderBody()
+
+    <!-- End Of Page Body -->
+
+
+    <footer id="footer">
+        <div class="footer-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <h2>
+                            Site Map
+                        </h2>
+                        <ul class="discover triangle hover row">
+                            <li class="col-xs-6">
+                                <a href="#">
+                                    Our Services
+                                </a>
+                            </li>
+                            <li class="col-xs-6">
+                                <a href="/home/about">About Us</a>
+                            </li>
+                            <li class="col-xs-6"><a href="#">Hotel Bookings</a></li>
+                            <li class="col-xs-6">
+                                <a href="/home/contact">Contact Us</a>
+                            </li>
+                            <li class="active col-xs-6"><a href="#">Flight Reservations</a></li>
+                            <li class="col-xs-6"><a href="#">Login</a></li>
+                            <li class="col-xs-6"><a href="#">Cruises</a></li>
+                            <li class="col-xs-6"><a href="#">My Account</a></li>
+                            <li class="col-xs-6"><a href="#">Transportation</a></li>
+                            <li class="col-xs-6"><a href="#">My Bookings</a></li>
+                            <li class="col-xs-6"><a href="#">Tours</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <h2>Travel News</h2>
+                        <ul class="travel-news">
+                            <li>
+                                <div class="thumb">
+                                    <a href="#">
+                                        <img src="~/Content/images/travel.jpg" alt="" width="63" height="63">
+                                    </a>
+                                </div>
+                                <div class="description">
+                                    <h5 class="s-title"><a href="#">Amazing Places</a></h5>
+                                    <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
+                                    <span class="date">25 Sep, 2013</span>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="thumb">
+                                    <a href="#">
+                                        <img src="http://placehold.it/63x63" alt="" width="63" height="63" />
+                                    </a>
+                                </div>
+                                <div class="description">
+                                    <h5 class="s-title"><a href="#">Travel Insurance</a></h5>
+                                    <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
+                                    <span class="date">24 Sep, 2013</span>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <h2>Mailing List</h2>
+                        <p>Sign up for our mailing list to get latest updates and offers.</p>
+                        <br />
+                        <form id="mailList" action="/home/SentToMailList" method="post">
+                            <div class="">
+                                <input type="email" name="Email" id="MailAddress" required class="input-text full-width" placeholder="your email" />
+                            </div>
+                            <button id="btnSendMail" type="submit"><span><i class="fa fa-check"></i></span></button>
+                        </form>
+                        <br />
+                        <span>We respect your privacy</span>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <h2>About Us</h2>
+                        <p>
+                            Welcome to the official Travel Nexus Website. We are here to share with you the best places, experiences, and amazing deals. Book with Us, for the traveler in you!
+                        </p>
+                        <br />
+                        <address class="contact-details">
+                            <span class="contact-phone">
+                                <i class="soap-icon-phone"></i> +20 22900 850
+                            </span>
+                            <br />
+                            <span class="contact-phone">
+                                <i class="soap-icon-phone"></i> +20 22900 857
+                            </span>
+                            <br />
+                            <a href="#" class="contact-email">info@travel-nexus.com</a>
+                        </address>
+                        <ul class="social-icons clearfix">
+                            @*<li class="twitter"><a title="twitter" href="#" data-toggle="tooltip"><i class="soap-icon-twitter"></i></a></li>*@
+                            @*<li class="googleplus"><a title="googleplus" href="#" data-toggle="tooltip"><i class="soap-icon-googleplus"></i></a></li>*@
+                            <li class="facebook"><a title="facebook" href="https://www.facebook.com/TravelNexusEG/" data-toggle="tooltip"><i class="soap-icon-facebook"></i></a></li>
+                            <li class="linkedin"><a title="linkedin" href="https://www.linkedin.com/company/travel-nexus-egypt/?viewAsMember=true" data-toggle="tooltip"><i class="soap-icon-linkedin"></i></a></li>
+                            <li class="instagram"><a title="instagram" href="https://www.instagram.com/travel_nexus/" data-toggle="tooltip"><i class="soap-icon-instagram"></i></a></li>
+                            <li class="whatsapp"><a title="whatsapp" href="#" data-toggle="tooltip"><i class="soap-icon-phone"></i></a></li>
+                            @*<li class="vimeo"><a title="vimeo" href="#" data-toggle="tooltip"><i class="soap-icon-vimeo"></i></a></li>
+                                <li class="dribble"><a title="dribble" href="#" data-toggle="tooltip"><i class="soap-icon-dribble"></i></a></li>
+                                <li class="flickr"><a title="flickr" href="#" data-toggle="tooltip"><i class="soap-icon-flickr"></i></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom gray-area">
+            <div class="container">
+                <div class="logo pull-left">
+                    <a href="~/index.html" title="Travelo - home" style="top: -14px;position: relative;">
+                        <img src="~/Content/images/logo.png" alt="Travelo HTML5 Template" />
+                    </a>
+                </div>
+                <div class="pull-right">
+                    <a id="back-to-top" href="#" class="animated" data-animation-type="bounce"><i class="soap-icon-longarrow-up circle"></i></a>
+                </div>
+                <div class="copyright pull-right">
+                    <p>&copy; @DateTime.Now.Year Travel Nexus</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- Javascript -->
+
+
+    <script type="text/javascript" src="~/Content/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.noconflict.js"></script>
+    <script type="text/javascript" src="~/Content/js/modernizr.2.7.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui.1.10.4.min.js"></script>
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+
+    <!-- load revolution slider scripts -->
+    <script type="text/javascript" src="~/Content/components/revolution_slider/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Content/components/revolution_slider/js/jquery.themepunch.revolution.min.js"></script>
+
+    <!-- load BXSlider scripts -->
+    <script type="text/javascript" src="~/Content/components/jquery.bxslider/jquery.bxslider.min.js"></script>
+
+    <!-- Flex Slider -->
+    <script type="text/javascript" src="~/Content/components/flexslider/jquery.flexslider.js"></script>
+
+    <!-- parallax -->
+    <script type="text/javascript" src="~/Content/js/jquery.stellar.min.js"></script>
+
+    <!-- parallax -->
+    <script type="text/javascript" src="~/Content/js/jquery.stellar.min.js"></script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src="~/Content/js/waypoints.min.js"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="~/Content/js/theme-scripts.js"></script>
+    <script type="text/javascript" src="~/Content/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <!-- Bootstrap JS -->
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+    <!--<script src="~/Scripts/map-input.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=KeyRequired" async defer></script>-->
+    @*@RenderSection("styles", required: false)*@
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Content/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/Scripts/jquery-3.4.1.slim.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Content/Scripts/modernizr-2.8.3.js"></script>
+
+    <script src="~/Content/Scripts/gridmvc.min.js"></script>
+
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+
+    @RenderSection("IndexPage", required: false)
+    @RenderSection("DashboardPage", required: false)
+    @RenderSection("AddPackagePage", required: false)
+    @RenderSection("AddNewsPage", required: false)
+    @RenderSection("AddPopHotelPage", required: false)
+    @RenderSection("AddFavDestPage", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var token = $('[name=__RequestVerificationToken]').val();
+            $("#LoginForm").submit(e => {
+                e.preventDefault();
+                $.ajax({
+                    url: '/Account/Login',
+                    datatype: "json",
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                        Email: $("#EmailId").val(),
+                        Password: $("#PasswordId").val(),
+                        RememberMe: $("#rememberMe").val()
+                    },
+                    success: function (data) {
+
+                        if (data.reload === false) {
+                            document.getElementById("InvalidId").innerHTML = data.value;
+                            $("#InvalidId").fadeOut(4000);
+
+                        } else {
+                            window.location.reload();
+                        }
+
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+
+            });
+
+            $('#btnSendMail').click(function (e) {
+                $('#btnSendMail').prop('disabled', true);
+                e.preventDefault();
+                    $.ajax({
+                        url: "/home/SentToMailList",
+                        type: 'POST',
+                        data: {
+                            Email: $('#MailAddress').val()
+                        },
+                        success: function (result) {
+                            alert(result);
+                            $('#btnSendMail').prop('disabled',false);
+                        },
+                        error: function (result) {
+                            alert(result);
+                            $('#btnSendMail').prop('disabled',false);
+                        }
+                    });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
+

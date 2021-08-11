@@ -1,0 +1,238 @@
+﻿@model TravelNexus.Web.Models.HotelBookingModel
+@{
+    var options = new List<SelectListItem>() { new SelectListItem() { Text = "select a card", Value = "0", Selected = true }, new SelectListItem() { Text = "Limit", Value = "1" }, new SelectListItem() { Text = "Credit Card", Value = "2" }, new SelectListItem() { Text = "Fawry", Value = "3" } };
+}
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("HotelBook", "Hotels", FormMethod.Post))
+        {
+            <div id="main" class="col-sms-6 col-sm-8 col-md-9">
+                <div class="booking-section travelo-box">
+                    @if (!string.IsNullOrEmpty(Model.Error))
+                    {
+                        <div class="alert small-box">
+                            @Model.Error
+                        </div>
+                    }
+                    <div class="person-information">
+                        <h2>Your Personal Information</h2>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>first name</label>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input-text full-width" })
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label>last name</label>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "input-text full-width" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>email address</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "input-text full-width" })
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label>Verify E-mail Address</label>
+                                @Html.TextBoxFor(m => m.VEmail, new { @class = "input-text full-width" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>Country code</label>
+                                <div class="selector">
+                                    @Html.DropDownListFor(m => m.CountryCode, Model.CountryCodes)
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label>Phone number</label>
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input-text full-width" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(x => x.RecievePromotions)
+                                    I want to receive <span class="skin-color">Travelo</span> promotional offers in the future
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="card-information">
+                        <h2>Your Card Information</h2>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>Credit Card Type</label>
+                                <div class="selector">
+                                    @*<select name="card_type" class="full-width">
+                                            <option>select a card</option>
+                                            <option value="1">Credit Card</option>
+                                            <option value="2">Visa</option>
+                                        </select>*@
+                                    @Html.DropDownListFor(m => m.CardType, options)
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label>Card number</label>
+                                @Html.TextBoxFor(m => m.CardNumber, new { @class = "input-text full-width" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>Card holder first name</label>
+                                @Html.TextBoxFor(m => m.CardHolderFirstName, new { @class = "input-text full-width" })
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <label>Card holder last name</label>
+                                @Html.TextBoxFor(m => m.CardHolderlastName, new { @class = "input-text full-width" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <label>Card identification number</label>
+                                @Html.TextBoxFor(m => m.CardidentificationNo, new { @class = "input-text full-width" })
+                                @*<input type="text" name="card_id_number" class="input-text full-width" value="" placeholder="" />*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-md-5">
+                            <label>Expiration Date</label>
+                            <div class="constant-column-2">
+                                <div class="selector">
+                                    @Html.TextBoxFor(m => m.CardExpirationMonth, new { @class = "input-text full-width", @placeholder = "Month" })
+                                </div>
+                                <div class="selector">
+                                    @Html.TextBoxFor(m => m.CardExpirationYear, new { @class = "input-text full-width", @placeholder = "Year" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label>billing zip code</label>
+                            @Html.TextBoxFor(m => m.CvvNumber, new { @class = "input-text full-width", @placeholder = "Zip Code" })
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(x => x.IsAgree)
+                                By continuing, you agree to the <a href="#"><span class="skin-color">Terms and Conditions</span></a>.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-md-5">
+                            <button type="submit" class="full-width btn-large">CONFIRM BOOKING</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div style="color: red">
+                            @Html.ValidationSummary(false, "")
+                            @Html.HiddenFor(model => Model.ResultIndex)
+                            @Html.HiddenFor(model => Model.RoomIndex)
+                            @Html.HiddenFor(model => Model.SessionId)
+                            @Html.HiddenFor(model => Model.HotelCode)
+                            @Html.HiddenFor(model => Model.NoOfRooms)
+                            @Html.HiddenFor(model => Model.CheckInDate)
+                            @Html.HiddenFor(model => Model.CheckOutDate)
+                            @Html.HiddenFor(model => Model.NoOfPersons)
+                            @Html.HiddenFor(model => Model.NoOfNight)
+                            @Html.HiddenFor(model => Model.HotelImage)
+
+                            @Html.HiddenFor(model => Model.CityName)
+                            @Html.HiddenFor(model => Model.CountryName)
+                            @Html.HiddenFor(model => Model.RoomFare)
+                            @Html.HiddenFor(model => Model.RoomTax)
+                            @Html.HiddenFor(model => Model.HotelName)
+                            @Html.HiddenFor(model => Model.RoomTypeName)
+                            @Html.HiddenFor(model => Model.RoomTypeCode)
+                            @Html.HiddenFor(model => Model.RatePlanCode)
+                            @Html.HiddenFor(model => Model.Currency)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="sidebar col-sms-6 col-sm-4 col-md-3">
+            <div class="booking-details travelo-box">
+                <h4>Booking Details</h4>
+                <article class="image-box hotel listing-style1">
+                    <figure class="clearfix">
+                        <a href="hotel-detailed.html" class="hover-effect middle-block"><img class="middle-item" width="270" height="160" alt="" src="@Model.HotelImage"></a>
+                        <div class="travel-title">
+                            <h5 class="box-title">@Model.HotelName<small>@Model.CityName @Model.CountryName</small></h5>
+                            @*<a href="hotel-detailed.html" class="button">EDIT</a>*@
+                        </div>
+                    </figure>
+                    <div class="details">
+                        <div class="feedback">
+                            @{ var Rate = 0;
+                                switch (@Model.HotelRating.ToString())
+                                {
+                                    case "OneStar": Rate = 1; break;
+                                    case "TwoStar": Rate = 2; break;
+                                    case "ThreeStar": Rate = 3; break;
+                                    case "FourStar": Rate = 4; break;
+                                    case "FiveStar": Rate = 5; break;
+                                    default: Rate = 0; break;
+                                }
+                                var Rating = ((Rate / 5.00) * 100) + "%";
+                            }
+                            <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="@Rate stars">
+                                <span style="width: @Rating;" class="five-stars"></span>
+                            </div>
+                            <span class="review">xxxx reviews</span>
+                        </div>
+                        <div class="constant-column-3 timing clearfix">
+                            <div class="check-in">
+                                <label>Check in</label>
+                                <span>@Model.CheckInDate.ToString("MM dd, yyyy") <br />@Model.CheckInDate.ToString("hh tt") </span>
+                            </div>
+                            <div class="duration text-center">
+                                <i class="soap-icon-clock"></i>
+                                <span>@Model.NoOfNight Nights</span>
+                            </div>
+                            <div class="check-out">
+                                <label>Check out</label>
+                                <span>@Model.CheckOutDate.ToString("MM dd, yyyy") <br />@Model.CheckOutDate.ToString("hh tt") </span>
+                            </div>
+                        </div>
+                        <div class="guest">
+                            <small class="uppercase">@Model.NoOfRooms @Model.RoomTypeName for <span class="skin-color">@Model.NoOfPersons Persons</span></small>
+                        </div>
+                    </div>
+                </article>
+
+                <h4>Other Details</h4>
+                <dl class="other-details">
+                    <dt class="feature">room Type:</dt>
+                    <dd class="value">@Model.RoomTypeName</dd>
+                    <dt class="feature">per Room price:</dt>
+                    <dd class="value">@Model.Currency @Model.RoomFare</dd>
+                    <dt class="feature">@Model.NoOfNight night Stay:</dt>
+                    @{ decimal total = @Model.RoomFare * Convert.ToInt32(@Model.NoOfNight);}
+                    <dd class="value">@Model.Currency @total</dd>
+                    <dt class="feature">taxes and fees:</dt>
+                    <dd class="value">@Model.Currency @Model.RoomTax</dd>
+                    <dt class="total-price">Total Price</dt>
+                    @{ decimal RTotal = total + @Model.RoomTax;}
+                    <dd class="total-price-value">@Model.Currency @RTotal</dd>
+                </dl>
+            </div>
+
+            <div class="travelo-box contact-box">
+                <h4>Need TravelNexus Help?</h4>
+                <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+                <address class="contact-details">
+                    <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+                    <br>
+                    <a class="contact-email" href="#">help@TravelNexus.com</a>
+                </address>
+            </div>
+        </div>
+
+    </div>
+</div>

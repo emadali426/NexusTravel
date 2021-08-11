@@ -1,0 +1,26 @@
+﻿@model Fawaterk.Service.Entities.FawaterkTrackingModel
+@{
+    ViewBag.Title = "EditInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null)
+{
+    <h2>This Page Responsible of Invoice Editing Please Put the View Here and Options that Admin going to edit</h2>
+    <h2>Fatora Id:  @Model.Id</h2>
+    <h2>Fatora Description: @Model.FatoraDescription</h2>
+    <h2>Fatora Payment Method: @Model.PaymentMethod</h2>
+    <h2>Fatora Payment Status: @Model.PaymentStatus</h2>
+    <h2>Fatora Invoice Id: @Model.InvoiceId</h2>
+    <h2>Fatora User Id: @Model.UserId</h2>
+    <h2>Fatora User Email: @Model.UserEmail</h2>
+    <h2>Reservation Id: @Model.ReservationId</h2>
+}
+else
+{
+    <h2>This Page Responsible of Invoice Editing Please Put the View Here and Options that Admin going to edit</h2>
+    <h2>There is no Fatora</h2>
+}
+
+
+
+

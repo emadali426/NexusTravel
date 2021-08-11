@@ -1,0 +1,129 @@
+.image-100{
+  width: 100% !important;
+}
+.carousel-indicators{
+  bottom: -21px;
+  transform: translate(-50%, 0px) !important;
+  margin-left: 0 !important;
+  width: 100%;
+}
+
+.carousel-indicators li{
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.carousel-indicators li{
+  background-color: #7FB231;
+}
+.carousel-indicators li.active{
+  background-color: #01B7F2;
+  border: 2px solid #FFF;
+}
+.img-fluid{
+  max-width: 100%;
+}
+.sider-backgrond-image{
+  height: 500px !important;
+  background-size: cover !important;
+}
+#packageDetailsId{
+  padding: 15px;
+}
+.table th{
+    color:#000;
+    font-weight:bold;
+}
+.travelo-box{
+    padding:20px 10px;
+}
+.travelo-box h4.lead {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d3e52;
+    margin-bottom: 5px;
+}
+.travelo-box p.lead {
+    font-size: 16px !important;
+    margin-bottom:5px;
+}
+.Popular.section {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+.background-image-1 {
+    position: absolute;
+    display: inline-block;
+    height: 450px;
+    top: 104px;
+    left: 100px;
+}
+
+.background-image-2 {
+    position: absolute;
+    display: inline-block;
+    height: 423px;
+    top: 104px;
+    right: 76px;
+}
+
+.background-container1 {
+    background-repeat: no-repeat;
+    background-position: unset !important;
+    height: 570px;
+    position: relative;
+}
+
+@media (max-width:1199px) {
+    .background-image-1 {
+        height: 300px;
+        top: 100px;
+        left: 100px;
+    }
+
+    .background-image-2 {
+        height: 300px;
+        top: 100px;
+        right: 76px;
+    }
+
+    .background-container1 {
+        height: 400px;
+    }
+}
+
+@media (max-width:992px) {
+    .background-image-1 {
+        height: 200px;
+        top: 100px;
+        left: 20px;
+    }
+
+    .background-image-2 {
+        height: 200px;
+        top: 100px;
+        right: 20px;
+    }
+
+    .background-container1 {
+        height: 300px;
+    }
+}
+
+@media (max-width:576px) {
+    .background-image-1 {
+        height: 140px;
+        top: 60px;
+        left: 20px;
+    }
+
+    .background-image-2 {
+        height: 140px;
+        top: 60px;
+        right: 20px;
+    }
+
+    .background-container1 {
+        height: 200px;
+    }
+}

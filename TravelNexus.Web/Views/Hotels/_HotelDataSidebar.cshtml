@@ -1,0 +1,43 @@
+﻿@*@model TravelNexus.Services.TboServiceReference.APIHotelDetails*@
+@model TravelNexus.Web.Models.HotelDetailsModel
+
+@{ var Rate = 0;
+    switch (@Model.HotelDetails.HotelRating.ToString())
+    {
+        case "OneStar": Rate = 1; break;
+        case "TwoStar": Rate = 2; break;
+        case "ThreeStar": Rate = 3; break;
+        case "FourStar": Rate = 4; break;
+        case "FiveStar": Rate = 5; break;
+        default: Rate = 0; break;
+    }
+    var Rating = ((Rate / 5.00) * 100) + "%";
+}
+
+<article class="detailed-logo">
+    <figure>
+        <img width="114" height="85" src="@Model.HotelDetails.Image" alt="">
+    </figure>
+    <div class="details">
+        <h2 class="box-title">
+            @Model.HotelDetails.HotelName<small>
+                <i class="soap-icon-departure yellow-color"></i>
+                <span class="fourty-space">@Model.HotelDetails.Address, @Model.HotelDetails.CityName @Model.HotelDetails.CountryName</span>
+            </small>
+        </h2>
+        <span class="price clearfix">
+            <small class="pull-left">avg/night</small>
+            <span class="pull-right"> @Model.Rooms.HotelRooms[0].RoomRate.Currency@Model.AvgPerNight</span>
+        </span>
+        <div class="feedback clearfix">
+            <div title="4 stars" class="five-stars-container" data-toggle="tooltip" data-placement="bottom">
+                <span class="five-stars" style="width: @Rating;"></span>
+            </div>
+            <span class="review pull-right">xxx reviews</span>
+        </div>
+        <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;">
+            @Html.Raw(Model.HotelDetails.Description.Replace("<p>", "").Replace("</p>", ""))
+        </p>
+        <a class="button yellow full-width uppercase btn-small">add to wishlist</a>
+    </div>
+</article>

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "AddService";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form action="AddService" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Service Title:</label>
+                    <input id="titleId" type="text" name="ServiceTitle" class="form-control" style="border-color: #2b9ebd" placeholder="Service Title" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Service Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input type="file" required name="ServiceIamgeName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Description:</label>
+                <div class="col-md-12" style="margin-bottom:15px">
+                    @*<textarea required name="DescriptionFileName" rows="6" style="border-color: #2b9ebd" class="form-control" placeholder="Put Description in HTML Format Here"></textarea>*@
+                    <textarea maxlength="220" style="background-color:white;"  name="Description" rows="10" cols="50"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Add Service" class="pull-right btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+
+

@@ -1,0 +1,65 @@
+﻿@model List<Fawaterk.Service.Package>
+@{
+    ViewBag.Title = "Packages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tab-content">
+    <div id="packages" class="tab-pane active">
+        <h2>Avaliable Packages List</h2>
+        <div class="clearfix"></div>
+        <div class="row image-box listing-style2 add-clearfix">
+
+            @if (Model != null && Model.Count > 0)
+            {
+
+                foreach (var pck in Model)
+                {
+                    <div class="col-sm-4 col-md-2" style="margin-left:10px !important">
+                        <article class="box">
+                            <figure>
+                                <a class="hover-effect" title="@pck.Title" href="#"><img width="@pck.Width" height="@pck.Height" alt="No Images Found" src="@pck.MainImageName"></a>
+                            </figure>
+                            <form action="/AdminManage/PackageDetatils/@pck.Id" method="post">
+                                <div class="details">
+                                    <input type="submit" class="pull-right button uppercase" value="SELECT" />
+                                    <h4 class="box-title">@pck.Title</h4>
+                                    <label class="price-wrapper">
+                                        
+                                        <span id="PriceValueId" class="price-per-unit">@pck.Price</span><span id="UnitPriceId">EGP</span>
+                                    </label>
+                                </div>
+                            </form>
+                        </article>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="" style="margin-top:80px">
+
+                    <h1 class="text-center">No Created Packages Yet.</h1>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var s = $("#CurrChangeId");
+
+        s.change(function () {
+            document.getElementById("PriceValueId").innerHTML *= $(this).val();
+            [].forEach.call(document.querySelectorAll('#CurrChangeId :checked'), function (elm) {
+                document.getElementById("UnitPriceId").innerHTML = elm.innerHTML;
+            })
+            
+               
+            
+        });
+    });
+</script>

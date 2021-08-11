@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "AddPopularHotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form name="PackageViewModel" id="hotelForms" action="AddPopularHotel" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <input id="titleId" type="text" name="HotelName" class="form-control" style="border-color: #2b9ebd; " placeholder="Hotel Name" />
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Hotel Average Price Per Night:</label>
+                    <input type="number" required name="AvgPrice" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Price" />
+                    <label>Images Width:</label>
+                    <input type="number" required name="Width" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Width" />
+                    <label>Images Height:</label>
+                    <input type="number" required name="Height" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Height" />
+                </div>
+            </div>*@
+            <div class="row">
+                <label>Select Hotel Logo Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input id="logoImage" type="file" required name="logoIamgeName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Hotel Main Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input id="mainImage" type="file" required name="MainIamgeName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Inner Hotel Images:</label>
+                <div id="FolderImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input id="otherImage" type="file" required name="ImgsFiles" multiple accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Hotel Html Description:</label>
+                <div class="col-md-12 form-group" style="margin-bottom:15px">
+                    @*<textarea required name="DescriptionFileName" rows="6" style="border-color: #2b9ebd" class="form-control" placeholder="Put Description in HTML Format Here"></textarea>*@
+                    <div class="">
+                        <textarea name="PopHotelsDescription" id="body" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" id="btnSubmitHotelForm" value="Add Popular Hotel" class="pull-right btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+@section AddPopHotelPage {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script>
+        $(document).ready(function () {
+            ClassicEditor.create(document.querySelector('#body'))
+                .catch(error => {
+                    console.error(error);
+                });
+           
+            $('#btnSubmitHotelForm').on('click', function (e) {
+                e.preventDefault();
+                var logoImageSize = document.getElementById('logoImage').files[0].size;
+                var mainImageSize = document.getElementById('mainImage').files[0].size;
+                var otherImageSize = 0;
+                var otherImage = document.getElementById('otherImage').files;
+                
+                for (var i = 0; i < otherImage.length; i++) {
+                    otherImageSize += otherImage[i].size;
+                }
+
+                if ((logoImageSize + mainImageSize + otherImageSize) > 4000000) {
+                    alert('images size exceded 4MB');
+                }
+                else {
+                    $('#hotelForms').submit();
+                }
+            })
+        });
+    </script>
+}
+
+
+

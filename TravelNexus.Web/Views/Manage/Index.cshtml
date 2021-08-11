@@ -1,0 +1,276 @@
+﻿@model TravelNexus.Web.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<section id="content" style="padding-top:0px">
+    <div style="padding-top:25px;background-image: url(https://travel-nexus.com/wp-content/uploads/2015/06/homepage4.jpg);">
+        <div class="container">
+            <div class="row">
+                <div id="main" class="col-sm-12">
+                    <div class="search-box-wrapper style1">
+                        <div class="search-box">
+                            <ul class="search-tabs clearfix">
+                                <li class="active"><a href="#cruises-tab" data-toggle="tab"><i class="soap-icon-cruise"></i>WHISH LIST</a></li>
+                                <li><a href="#flight-status-tab" data-toggle="tab"><i class="soap-icon-status"></i>RESERVATIONS</a></li>
+                                <li><a href="#manage-acount-tab" data-toggle="tab"><i class="soap-icon-stories"></i>MANAGE ACCOUNT</a></li>
+                            </ul>
+                            <div class="visible-mobile">
+                                <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                                    <li class="active"><a href="#cruises-tab">WHISH LIST</a></li>
+                                    <li><a href="#flight-status-tab">RESERVATIONS</a></li>
+                                    <li><a href="#manage-acount-tab"> MANAGE ACCOUNT</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="search-tab-content">
+                                <div class="tab-pane fade active in" id="cruises-tab">
+                                    <div class="title-container">
+                                        <h2 class="search-title">My Whish List</h2>
+                                        
+
+                                        <i class="soap-icon-cruise"></i>
+                                    </div>
+                                    @if (Model.userWhishList != null)
+                                    {
+                                        foreach (var wl in Model.userWhishList)
+                                        {
+                                            <div class="search-content">
+                                                <div class="hotel-list listing-style3 hotel">
+                                                    <form action="/Hotels/HotelDetails" method="post">
+                                                        <article class="box">
+                                                            <figure class="col-sm-5 col-md-4">
+                                                                <a title="" href="ajax/slideshow-popup.html" class="hover-effect popup-gallery">
+                                                                    <img width="270" height="160" alt="" src="@wl.HotelImage">
+                                                                </a>
+                                                            </figure>
+
+                                                            <div class="details col-sm-7 col-md-8">
+                                                                <div>
+                                                                    <div>
+                                                                        <h4 class="box-title">
+                                                                            @wl.HotelName  <small>
+                                                                                <i class="soap-icon-departure yellow-color"></i>@wl.HotelAddress
+                                                                            </small>
+
+                                                                        </h4>
+                                                                        <div class="amenities">
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div>
+
+                                                                    <div>
+
+                                                                        <button class="button btn-small full-width text-center">SELECT</button>
+
+                                                                        <input id="HotelData_HotelInfo_HotelCode" name="HotelData.HotelInfo.HotelCode" type="hidden" value="@wl.HotelId">
+
+                                                                        <input id="HotelData_HotelInfo_HotelCode" name="HotelData.HotelInfo.CityId" type="hidden" value="@wl.CityId">
+
+                                                                        <input data-val="true" data-val-number="The field NoOfPersons must be a number." data-val-required="The NoOfPersons field is required." id="NoOfPersons" name="NoOfPersons" type="hidden" value="1">
+                                                                        <input id="ApiName" name="ApiName" type="hidden" value="@wl.ApiName">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </article>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="search-content">
+                                            <div class="hotel-list listing-style3 hotel">
+                                                <article class="box">
+                                                    <div>
+                                                        <h4 class="box-title">
+                                                            Your Whish List is Empty.
+
+                                                        </h4>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane fade tab-container full-width-style arrow-left dashboard" id="flight-status-tab">
+                                    <div class="title-container">
+                                        <h2 class="search-title">My Reservations List</h2>
+                                        <form>
+                                            <label class="radio radio-inline">
+                                                <input type="radio" name="filter" checked="checked" />
+                                                All Types
+                                            </label>
+                                            <label class="radio radio-inline">
+                                                <input type="radio" name="filter" />
+                                                Pending Reservations
+                                            </label>
+                                            <label class="radio radio-inline">
+                                                <input type="radio" name="filter" />
+                                                Cancelled Reservations
+                                            </label>
+                                            <label class="radio radio-inline">
+                                                <input type="radio" name="filter" />
+                                                Failed Reservations
+                                            </label>
+
+                                            <div class="pull-right col-md-6 action">
+                                                <h5 class="pull-left no-margin col-md-4">Sort results by:</h5>
+                                                <button class="btn-small white gray-color">UPCOMING</button>
+                                            </div>
+                                        </form>
+                                        <i class="soap-icon-breakfast"></i>
+                                    </div>
+                                    <div class="booking-history">
+
+                                        @if (Model.fawaters != null && Model.fawaters.Count > 0)
+                                        {
+
+
+                                            foreach (var fatora in Model.fawaters)
+                                            {
+                                                
+                                        <form action="EditInvoice/@fatora.Id" method="post">
+                                            <div class="booking-info clearfix">
+                                                <div class="date">
+                                                    <label class="month">@fatora.CreationDate.Day</label>
+                                                    <label class="date">@fatora.CreationDate.Month</label>
+                                                    <label class="day">@fatora.CreationDate.Year</label>
+                                                </div>
+                                                <h4 class="box-title"><i class="icon soap-icon-plane-right takeoff-effect yellow-color circle"></i>@fatora.FatoraDescription<small></small></h4>
+                                                <dl class="info">
+                                                    <dt>RESERVATION ID</dt>
+                                                    <dd>@fatora.UserId-@fatora.Id-@fatora.ReservationId</dd>
+                                                    <dt>BOOKED ON</dt>
+                                                    <dd>@fatora.CreationDate.ToLongDateString()</dd>
+                                                </dl>
+                                                @if (fatora.isDeleted == false)
+                                                {
+                                                    <input type="submit" class="btn-mini status" value="EDIT" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="submit" disabled class="btn-mini status" value="Out of Date" />
+
+                                                }
+                                                </div>
+                                        </form>
+                                                
+                                                    }
+                                                }
+                                                else
+                                                {
+                                            <div class="search-content">
+                                                <div class="hotel-list listing-style3 hotel">
+                                                    <article class="box">
+                                                        <div>
+                                                            <h4 class="box-title">
+                                                                Your Reservations List is Empty.
+
+                                                            </h4>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                <div class="tab-pane fade" id="manage-acount-tab">
+                                    <form>
+                                        <div class="title-container">
+                                            <h2 class="search-title">Manage Your Account</h2>
+                                            <p>Change your account settings</p>
+                                            <i class="soap-icon-stories"></i>
+                                        </div>
+                                        <div class="search-content">
+                                            <p class="text-success">@ViewBag.StatusMessage</p>
+                                            <div>
+
+
+                                                <dl class="dl-horizontal">
+                                                    <dt>Password:</dt>
+                                                    <dd>
+
+                                                        @Html.ActionLink("Change your password", "ChangePassword")
+
+                                                    </dd>
+                                                    @*<dt>External Logins:</dt>
+                                                        <dd>
+                                                            @Model.Logins.Count [
+                                                            @Html.ActionLink("Manage", "ManageLogins") ]
+                                                        </dd>
+
+
+
+                                                        <dt>Two-Factor Authentication:</dt>
+                                                        <dd>
+                                                            <p>
+                                                                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                                                                for details on setting up this ASP.NET application to support two-factor authentication.
+                                                            </p>
+
+                                                        </dd>*@
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    function getCheck(a) {
+        var rid = a.getAttribute("data-id");
+        $.ajax({
+            url: '/Hotels/CheckToggle',
+            datatype: "json",
+            type: "POST",
+            data: {
+                rId: rid
+            },
+            success: function (data) {
+
+
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+        //$(".FavouriteCode").click(e => {
+        //    var id = e.data()
+        //    debugger;
+        //    $.ajax({
+        //        url: '/Hotels/WishList',
+        //        datatype: "json",
+        //        type: "POST",
+        //        data: {
+        //            HotelId: id
+        //        },
+        //        success: function (data) {
+
+
+
+        //        },
+        //        error: function (xhr) {
+        //            alert('error');
+        //        }
+        //    });
+
+        //});
+</script>

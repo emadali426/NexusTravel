@@ -1,0 +1,78 @@
+﻿@model TravelNexus.Web.LoginViewModel
+
+
+
+
+
+<div id="travelo-login" class="travelo-login-box travelo-box">
+    <div class="login-social">
+        <a href="#" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>
+        <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>
+    </div>
+    <div class="seperator"><label>OR</label></div>
+    <div id="InvalidId" class="text-danger message-error"></div>
+    <form id="LoginForm">
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger message-error" })
+
+
+
+
+        <div class="form-group">
+            <input type="text" id="EmailId" name="Email" value="@Model.Email" class="input-text full-width" required placeholder="email address" />
+        </div>
+        <div class="form-group">
+            <input type="password" id="PasswordId" name="Password" class="input-text full-width" required placeholder="password" />
+        </div>
+        <div class="form-group">
+            <a href="/Account/ForgotPassword" class="forgot-password pull-right">Forgot password?</a>
+            <div class="checkbox checkbox-inline">
+                <label>
+                    <input type="checkbox" id="rememberMe" value="@Model.RememberMe" /> Remember me
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input id="LoginBtn" type="submit" class="input-text full-width" value="login" />
+        </div>
+    </form>
+    <div class="seperator"></div>
+    <p>Don't have an account? <a href="/Account/Register" class="">Sign up</a></p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var token = $('[name=__RequestVerificationToken]').val();
+        $("#LoginForm").submit(e => {
+            e.preventDefault();
+            $.ajax({
+                url: '/Account/Login',
+                datatype: "json",
+                type: "POST",
+                data: {
+                    __RequestVerificationToken: token,
+                    Email: $("#EmailId").val(),
+                    Password: $("#PasswordId").val(),
+                    RememberMe: $("#rememberMe").val()
+                },
+                success: function (data) {
+                    
+                    if (data.reload === false) {
+                    document.getElementById("InvalidId").innerHTML = data.value;
+
+                    } else {
+                        window.location.reload();
+                    }
+                    
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+            
+        });
+       
+    });
+</script>
+

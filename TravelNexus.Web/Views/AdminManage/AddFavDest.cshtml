@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "AddFavDest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" jstcache="0">
+    <div class="container" jstcache="0">
+        <form action="AddFavDest" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Destination Name:</label>
+                    <input id="titleId" type="text" name="DestinationName" class="form-control" style="border-color: #2b9ebd" placeholder="Service Title" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Description :</label>
+                    <textarea id="Description" type="text" name="Description" class="form-control" style="border-color: #2b9ebd" placeholder="Service Description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-bottom:15px">
+                    <label>Images Width:</label>
+                    <input type="number" required name="Width" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Width" />
+                    <label>Images Height:</label>
+                    <input type="number" required name="Height" min="1" class="form-control" style="border-color: #2b9ebd" placeholder="Height" />
+                </div>
+            </div>
+            <div class="row">
+                <label>Select Destination Image:</label>
+                <div id="MainImagesPathId" class="col-md-4" style="margin-bottom:15px">
+                    <input type="file" required name="ImgName" accept="image/*" value="Choose Images" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Add Service" class="pull-right btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+

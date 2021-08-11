@@ -1,0 +1,286 @@
+﻿
+@using Microsoft.AspNet.Identity
+
+@{
+    var IsAuthenticated = ViewBag.Authenticated == null ? false : ViewBag.Authenticated;
+
+}
+
+@if (@IsAuthenticated)
+{
+}
+else
+{
+    
+        <div class="simple-signup">
+            <div class="text-center signup-email-section">
+                <a href="#" class="signup-email" style=" margin: 5px;"><i class="soap-icon-letter"></i>Customer Sign up </a>
+                <a href="#" class="signup-email-partner" style=" margin: 5px;"><i class="soap-icon-letter"></i>Partner Sign up </a>
+            </div>
+        </div>
+
+        <div class="email-signup">
+
+            <form name="Customersignupform">
+                <div class="form-group">
+                    <input type="text" class="input-text full-width" placeholder="first name" id="signupfirstname" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-text full-width" placeholder="last name" id="signuplastname" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-text full-width" placeholder="User Name" id="signupusername" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-text full-width" placeholder="Address" id="signupaddress" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-text full-width" placeholder="email address" id="signupemail" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="input-text full-width" placeholder="password" id="signuppassword" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="input-text full-width" placeholder="confirm password" id="signupconfirmpassword" required>
+                </div>
+                <label id="lblerrorsignup" style="display:none;color:red;"></label>
+                @*<div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Tell me about Nexus travel news
+                </label>
+            </div>
+        </div>*@
+                <div class="form-group">
+                    <p class="description">By signing up, I agree to Nexus travel's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.</p>
+                </div>
+                <button class="full-width btn-medium" onclick="CustomerRegister()">SIGNUP</button>
+            </form>
+        </div>
+    
+    
+        <div class="email-signup-partner">
+            <form id="PartnerSignup">
+                <div id="Partnersignupform">
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="first name" id="psignupfirstname" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="last name" id="psignuplastname" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="email address" id="psignupemail" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="address" id="psignupaddress" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="commercial register" id="psignupcommercialregister" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="input-text full-width" placeholder="tax card" id="psignuptaxcard" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="input-text full-width" placeholder="password" id="psignuppassword" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="input-text full-width" placeholder="confirm password" id="psignupconfirmpassword" required>
+                    </div>
+                    <label id="lblerrorpartnersignup" style="display:none;color:red;"></label>
+                    <div class="form-group">
+                        <p class="description">By signing up, I agree to Nexus travel's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.</p>
+                    </div>
+                    <button class="full-width btn-medium" onclick="submit">SIGNUP</button>
+
+                </div>
+            </form>
+                </div>
+        
+        <div class="seperator"></div>
+        <p>Already a Nexus travel member? <a href="#travelo-login" class="goto-login soap-popupbox">Login</a></p>
+
+
+        }
+        <script>
+            
+
+            function CustomerRegister() {
+
+                //debugger;
+
+                $("#lblerrorsignup").hide();
+                if ($("#signupfirstname").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("First name must be filled out");
+                    return false;
+                }
+                if ($("#signuplastname").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("Last name must be filled out");
+                    return false;
+                }
+                if ($("#signupusername").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("User Name must be filled out");
+                    return false;
+                }
+                if ($("#signupaddress").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("Address must be filled out");
+                    return false;
+                }
+                if ($("#signupemail").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("Email name must be filled out");
+                    return false;
+                }
+                if ($("#signuppassword").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("Password must be filled out");
+                    return false;
+                }
+                if ($("#signupconfirmpassword").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("Confirm password must be filled out and Matched with Password");
+                    return false;
+                }
+
+                if ($("#signuppassword").val() != $("#signupconfirmpassword").val()) {
+
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorsignup").html("password not matched");
+                    return;
+                } else {
+                    
+                    $.ajax({
+                        url: 'Account/CustomerRegister',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data:
+                            {
+                            FirstName: $("#signupfirstname").val(),
+                                LastName:$("#signuplasttname").val(),
+                                Email:$("#signupemail").val(),
+                                Address:$("#signupaddress").val(),
+                                Type:"1",
+                                Password:$("#signuppassword").val(),
+                                ConfirmPassword:$("#signupconfirmpassword").val(),
+                                UserName:$("#signusername").val()
+
+                        }
+                    ,
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.Result) {
+                                $("#lblerrorlogin").html("Saved Success");
+                                $("#travelo-signup").hide();
+                            }
+                            else {
+                                $("#lblerrorlogin").show();
+                                $("#lblerrorlogin").html(result.Message);
+                            }
+                        },
+                        error: function (result) {
+
+                        }
+                    })
+                    //$("#CustomerRegister").submit(function (e) {
+                    //    //debugger;
+                    //    e.preventDefault();
+                    //    var form = $(this);
+                    //    var url = 'Acount/CustomerRegister';
+
+                    //    $.ajax({
+                    //        type: "POST",
+                    //        url: url,
+                    //        data: form.serialize(), // serializes the form's elements.
+                    //        success: function (data) {
+                    //            alert(data); // show response from the php script.
+                    //        }
+                    //    });
+                    //})
+                }
+            }
+            function PartnerRegister() {
+                e.preventDefault();
+                $("#lblerrorpartnersignup").hide();
+                if ($("#psignupfirstname").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("first name must be filled out");
+                    return false;
+                }
+                if ($("#psignuplastname").val() == "") {
+                    $("#lblerrorsignup").show();
+                    $("#lblerrorlogin").html("last name must be filled out");
+                    return false;
+                }
+                else if ($("#psignupemail").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("email name must be filled out");
+                    return false;
+                }
+                else if ($("#psignupaddress").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("address must be filled out");
+                    return false;
+                }
+                else if ($("#psignupcommercialregister").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("commercial register must be filled out");
+                    return false;
+                }
+                if ($("#psignuptaxcard").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("tax card register must be filled out");
+                    return false;
+                }
+                else if ($("#psignupconfirmpassword").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("confirm password must be filled out");
+                    return false;
+                }
+                else if ($("#psignuppassword").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("password must be filled out");
+                    return false;
+                }
+                else if ($("#psignuppassword").val() != $("#psignupconfirmpassword").val() == "") {
+                    $("#lblerrorpartnersignup").show();
+                    $("#lblerrorpartnersignup").html("password not matched");
+                    return;
+                } else {
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "Account/PartnerRegister",
+                        data: {
+                            "FirstName": $("#psignupfirstname").val(),
+                            "LastName": $("#psignuplastname").val(),
+                            "Email": $("#psignupemail").val(),
+                            "Address": $("#psignupaddress").val(),
+                            "CommercialRegister": $("#psignupcommercialregister").val(),
+                            "TaxCard": $("#psignuptaxcard").val(),
+                            "Type": 2,
+                            "Password": $("#psignuppassword").val(),
+                            "ConfirmPassword": $("#psignupconfirmpassword").val(),
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.Result) {
+                                $("#lblerrorpartnersignup").html("Saved Success");
+                                $("#travelo-signup").hide();
+                            }
+                            else {
+                                $("#lblerrorpartnersignup").show();
+                                $("#lblerrorpartnersignup").html(result.Message);
+                            }
+                        },
+                        error: function (result) {
+
+                        }
+                    })
+                }
+            }
+        </script>

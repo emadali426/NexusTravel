@@ -1,0 +1,82 @@
+﻿@model TravelNexus.Web.Models.HotelItem
+@{
+    var ApiColor = Model.ApiName == "Webbeds Api" ? "green-color" : "red-color";
+}
+<!-- TravelNexus.Services.Hotel-->
+
+<div class="hotel-list listing-style3 hotel">
+    <article class="box">
+        @using (Html.BeginForm("HotelDetails", "Hotels", FormMethod.Post))
+            {
+            <figure class="col-sm-5 col-md-4">
+                <a title="" href="ajax/slideshow-popup.html" class="hover-effect popup-gallery">
+                    <img width="270" height="160" alt="" src="@Model.HotelData.HotelInfo.HotelPicture">
+                </a>
+            </figure>
+
+            <div class="details col-sm-7 col-md-8">
+                <div>
+                    <div>
+                        <h4 class="box-title">
+                            @Model.HotelData.HotelInfo.HotelName   <small>
+                            <i class="soap-icon-departure yellow-color"></i>@Model.HotelData.HotelInfo.HotelAddress
+                        </small>
+                        <small class="fa-bold @ApiColor">  @Model.ApiName</small>
+                    </h4>
+                    <div class="amenities">
+                        @*<i class="soap-icon-wifi circle"></i>
+                            <i class="soap-icon-fitnessfacility circle"></i>
+                            <i class="soap-icon-fork circle"></i>
+                            <i class="soap-icon-television circle"></i>*@
+                    </div>
+                </div>
+                <div>
+                    <div class="five-stars-container">
+                        @*@{ var rate = ((@Model.Rating / 5.00) * 100) + "%";}*@
+                        @{ var Rate = 0;
+                            switch (@Model.HotelData.HotelInfo.Rating.ToString())
+                            {
+                                case "OneStar": Rate = 1; break;
+                                case "TwoStar": Rate = 2; break;
+                                case "ThreeStar": Rate = 3; break;
+                                case "FourStar": Rate = 4; break;
+                                case "FiveStar": Rate = 5; break;
+                                default: Rate = 0; break;
+                            }
+                            var Rating = ((Rate / 5.00) * 100) + "%";
+                        }
+                        <span class="five-stars" style="width:@Rating"></span>
+                    </div>
+                    <span class="review">xxx reviews</span>
+                    @if (Request.IsAuthenticated)
+                    { 
+                        <a class="FavouriteCode" data-id="@Model.HotelData.HotelInfo.HotelCode" onclick="getCode(this)" title="add to wish list"><i class="fa fa-thumbs-up fa-2x FavouriteCode"></i></a>
+                    }
+                    
+                </div>
+            </div>
+            <div>
+                <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                    @Html.Raw(Model.HotelData.HotelInfo.HotelDescription)
+                </p>
+                <div>
+                    <span class="price"><small>AVG/NIGHT</small>@Model.HotelData.MinHotelPrice.Currency@Model.HotelData.MinHotelPrice.TotalPrice</span>
+                    <button class="button btn-small full-width text-center">SELECT</button>
+
+                    @Html.HiddenFor(model => Model.HotelData.HotelInfo.HotelCode)
+                    @Html.HiddenFor(model => Model.SessionId)
+                    @Html.HiddenFor(model => Model.ResultIndex)
+                    @Html.HiddenFor(model => Model.CheckInDate)
+                    @Html.HiddenFor(model => Model.CheckOutDate)
+                    @Html.HiddenFor(model => Model.NoOfRequestedRoom)
+                    @Html.HiddenFor(model => Model.NoOfPersons)
+                    @Html.HiddenFor(model => Model.HotelImage)
+                    @Html.HiddenFor(model => Model.ApiName)
+                </div>
+            </div>
+        </div>
+
+    }
+    </article>
+</div>
+

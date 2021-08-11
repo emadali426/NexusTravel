@@ -1,0 +1,39 @@
+﻿@model List<ApplicationUser>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Approve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Approve</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Grid(Model).Named("AccountsGrid").Columns(c =>
+       {
+
+       c.Add(x => x.Id).Titled("Account Id").Filterable(true).Sortable(true);
+       c.Add(x => x.Email).Titled("Email").Filterable(true).Sortable(true);
+       c.Add().Encoded(false).Sanitized(false).Titled("").Filterable(true).Sortable(true).RenderValueAs(x =>
+                            @<b>
+                                @Html.ActionLink("Approve", "ApproveUser", "AdminManage", new { Id = x.Id, Email = x.Email }, FormMethod.Post)
+                            </b>);
+
+
+}).WithPaging(5).EmptyText("No Accounts Created.")
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section styles{
+    @Styles.Render("~/Content/Gridmvc")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/Gridmvc")
+}
+

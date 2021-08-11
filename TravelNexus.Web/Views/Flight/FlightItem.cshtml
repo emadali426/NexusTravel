@@ -1,0 +1,61 @@
+﻿@model TravelNexus.Services.Flight
+    <div class="flight-list listing-style3 flight">
+        <article class="box">
+            <figure class="col-xs-3 col-sm-2">
+                <span><img alt="" src="http://placehold.it/270x160"></span>
+            </figure>
+            <div class="details col-xs-9 col-sm-10">
+                @using (Html.BeginForm("FlightDetails", "Flight", FormMethod.Post))
+                {
+                    <div class="details-wrapper">
+                        <div class="first-row">
+                            <div>
+                                <h4 class="box-title">@Model.Name<small>@(Model.oneWay ? "Oneway flight" : "")</small><small>@Model.Airline</small></h4>
+                                <a class="button btn-mini stop">@Model.NoOfStops STOP</a>
+                                <div class="amenities">
+                                    <i class="soap-icon-wifi circle"></i>
+                                    <i class="soap-icon-entertainment circle"></i>
+                                    <i class="soap-icon-fork circle"></i>
+                                    <i class="soap-icon-suitcase circle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="price"><small>AVG/PERSON</small>@Model.AvgPrice @Model.Currency</span>
+                            </div>
+                        </div>
+                        <div class="second-row">
+                            <div class="time">
+                                <div class="take-off col-sm-4">
+                                    <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                    <div>
+                                        <span class="skin-color">Take off</span><br />@Model.DepartureDate.ToString("ddd MMM dd. yyyy hh:mm tt")
+                                    </div>
+                                </div>
+                                <div class="landing col-sm-4">
+                                    <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                    <div>
+                                        <span class="skin-color">landing</span><br />@Model.ArrivalDate.ToString("ddd MMM dd. yyyy hh:mm tt")
+                                    </div>
+                                </div>
+                                <div class="total-time col-sm-4">
+                                    <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                    <div>
+                                        <span class="skin-color">total time</span><br />@Model.TotalTime
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action">
+
+
+                                <button class="button btn-small full-width" id="@Model.id">SELECT NOW</button>
+                                @Html.HiddenFor(model => Model.FlightOffer)
+
+                            </div>
+                        </div>
+                    </div>
+                } 
+            </div>
+        </article>
+    </div>
+
+
