@@ -52,8 +52,6 @@ namespace TravelNexus.Web
         public string TaxCard { get; set; }
         public double NexusTax { get; set; }
         public CustomerType Type { get; set; }
-
-
     }
 
 

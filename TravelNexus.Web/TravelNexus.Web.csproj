@@ -244,11 +244,6 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="ManageViewModels.cs" />
     <Compile Include="MapDOTWResponseToTboResponse.cs" />
-    <Compile Include="Migrations\202108101212481_initial.cs" />
-    <Compile Include="Migrations\202108101212481_initial.designer.cs">
-      <DependentUpon>202108101212481_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\APIsKeysConfig.cs" />
     <Compile Include="Models\CitiesName.cs" />
     <Compile Include="Models\CountryVATsConfig.cs" />
@@ -799,11 +794,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108101212481_initial.resx">
-      <DependentUpon>202108101212481_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

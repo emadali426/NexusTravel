@@ -47,20 +47,14 @@ namespace TravelNexus.Web.Controllers
 
         //} 
 
-        public string AppID { get; private set; }
-        public string AppSecret { get; private set; }
         public AccountController()
         {
-            AppID = ConfigurationManager.AppSettings["AppID"];
-            AppSecret = ConfigurationManager.AppSettings["AppSecret"];
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInMang)
         {
             UserManager = userManager;
             SignInManager = signInMang;
-            AppID = ConfigurationManager.AppSettings["AppID"];
-            AppSecret = ConfigurationManager.AppSettings["AppSecret"];
         }
 
         //public ApplicationUserManager UserManager { get; private set; }
@@ -854,7 +848,7 @@ namespace TravelNexus.Web.Controllers
 
 
 
-        internal class ChallengeResult : HttpUnauthorizedResult
+        public class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)
@@ -1062,7 +1056,7 @@ namespace TravelNexus.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -1119,7 +1113,7 @@ namespace TravelNexus.Web.Controllers
         {
             get
             {
-                return HttpContext.GetOwinContext().Authentication;
+                return System.Web.HttpContext.Current.GetOwinContext().Authentication;
             }
         }
 
@@ -1216,7 +1210,7 @@ namespace TravelNexus.Web.Controllers
                 // JSON object
                 var json = Encoding.UTF8.GetString(dataBuffer);
 
-                byte[] appSecretBytes = Encoding.UTF8.GetBytes("6f6ee8df82c2fa5faa75d7b8e9de33f8");
+                byte[] appSecretBytes = Encoding.UTF8.GetBytes("59ab7631714cfec32f2aa654944b4576");
                 System.Security.Cryptography.HMAC hmac = new System.Security.Cryptography.HMACSHA256(appSecretBytes);
                 byte[] expectedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(split[1]));
                 if (!expectedHash.SequenceEqual(signature))
@@ -1224,7 +1218,7 @@ namespace TravelNexus.Web.Controllers
                     throw new Exception("Invalid signature");
                 }
                 var fbUser = JsonConvert.DeserializeObject<FacebookUserDTO>(json);
-                return Json(new { url = $"https://travel-nexus.com.com/fb/info/{fbUser.user_id}", confirmation_code = $"{fbUser.user_id}" });
+                return Json(new { url = $"https://travel-nexus.com/fb/info/{fbUser.user_id}", confirmation_code = $"{fbUser.user_id}" });
             }
             return null;
         }
@@ -1240,97 +1234,6 @@ namespace TravelNexus.Web.Controllers
             return Encoding.UTF8.GetString(valueBytes);
         }
 
-        private Uri RedirectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Headers["Referer"].ToString());
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallback");
-                return uriBuilder.Uri;
-            }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Facebook()
-        {
-            var fb = new FacebookClient();
-            var loginurl = fb.GetLoginUrl(new
-            {
-                client_id = AppID,
-                client_secret = AppSecret,
-                redirect_uri = RedirectUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email"
-            });
-
-            return Redirect(loginurl.AbsoluteUri);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> FacebookCallback(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
-            {
-                client_id = AppID,
-                client_secret = AppSecret,
-                redirect_uri = RedirectUri.AbsoluteUri,
-                code=code
-            });
-            var accesstoken = result.access_token;
-            fb.AccessToken = accesstoken;
-            dynamic data = fb.Get("me?fields=link,first_name,currency,last_name,email,gender,locale,timezone,verified,picture,age_range");
-
-            var User = await UserManager.FindByEmailAsync(data.email);
-
-            if (User != null)
-            {
-                var loginVM = new LoginViewModel
-                {
-                    Email = data.email,
-                    Password = "Facebook@123!",
-                    RememberMe = false
-                };
-
-                await ExLogin(loginVM);
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            if (data != null || data.email != null)
-            {
-                var registerVM = new RegisterViewModel
-                {
-                    Email = data.email,
-                    Password = "Facebook@123!",
-                    FirstName = data.first_name,
-                    LastName = data.last_name,
-                    PhoneNumber = "01023436359"
-                };
-
-                bool resReg = await ExRegister(registerVM);
-
-                if (resReg)
-                {
-                    var loginVM2 = new LoginViewModel
-                    {
-                        Email = data.email,
-                        Password = "Facebook@123!",
-                        RememberMe = false
-                    };
-
-                    await ExLogin(loginVM2);
-
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
+        
     }
 }
