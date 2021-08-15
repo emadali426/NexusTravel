@@ -23,7 +23,7 @@ namespace TravelNexus.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            
+
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
@@ -38,17 +38,17 @@ namespace TravelNexus.Web
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                     //Enables the application to validate the security stamp when the user logs in.
-                     //This is a security feature which is used when you change a password or add an external login to your account.
+                    //Enables the application to validate the security stamp when the user logs in.
+                    //This is a security feature which is used when you change a password or add an external login to your account.
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser, long>(
                         validateInterval: TimeSpan.FromMinutes(30), (m, u) => u.GenerateUserIdentityAsync(m), c => c.GetUserId<long>()
                         )
                 },
                 CookieManager = new SystemWebCookieManager()
             });
-          
 
-         
+
+
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -73,13 +73,15 @@ namespace TravelNexus.Web
             //   );
 
 
-            app.UseFacebookAuthentication(new FacebookAuthenticationOptions() {
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions()
+            {
                 AppId = "560661181773385",
                 AppSecret = "59ab7631714cfec32f2aa654944b4576",
                 UserInformationEndpoint = "https://graph.facebook.com/v11.0/me?fields=id,first_name,last_name,email,name",
                 AuthorizationEndpoint = "https://www.facebook.com/v11.0/dialog/oauth",
                 Provider = new FacebookAuthenticationProvider(),
                 CookieManager = new SystemWebCookieManager(),
+                SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie,
                 Scope = { "email" }
             });
 
@@ -89,10 +91,11 @@ namespace TravelNexus.Web
                 ClientSecret = "1J6owCZCxPWQT6VJ-MjZdodw",
                 Provider = new GoogleOAuth2AuthenticationProvider(),
                 CookieManager = new SystemWebCookieManager(),
+                SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie,
                 Scope = { "email" }
             });
         }
 
-        
+
     }
 }

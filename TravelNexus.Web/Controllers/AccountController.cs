@@ -24,7 +24,7 @@ using TravelNexus.Web.RepoServices;
 
 namespace TravelNexus.Web.Controllers
 {
-    
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -77,7 +77,7 @@ namespace TravelNexus.Web.Controllers
             private set
             {
                 _userManager = value;
-                
+
             }
         }
 
@@ -152,7 +152,7 @@ namespace TravelNexus.Web.Controllers
 
                     if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                     {
-                        
+
                         SignOutHelper();
                         return Json(new
                         {
@@ -173,7 +173,7 @@ namespace TravelNexus.Web.Controllers
                     }
                     else
                     {
-                       
+
                         if (string.IsNullOrEmpty(ReturnUrl))
                             return RedirectToAction("Index", "Home");
 
@@ -188,7 +188,7 @@ namespace TravelNexus.Web.Controllers
                         hotelId.redirectUrl = true;
 
                         return RedirectToAction(redReturn[2], redReturn[1], hotelId);
-                        
+
                     }
 
                 case SignInStatus.LockedOut:
@@ -200,7 +200,7 @@ namespace TravelNexus.Web.Controllers
                     //ModelState.AddModelError("", "Invalid Login Attempt.");
                     return Json(new { value = "Invalid Login Attempt.", reload = false }, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         [AllowAnonymous]
@@ -245,8 +245,8 @@ namespace TravelNexus.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ResendEmailConfirmationCode(RSECViewModel user)
         {
-         
-            
+
+
             UserManager.UserTokenProvider = tokenProvider(UserManager);
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
@@ -258,22 +258,22 @@ namespace TravelNexus.Web.Controllers
             body = body.Replace("{ConfirmationLink}", callbackUrl).Replace("{UserName}", user.Email).Replace("{MessageHeader}", "Confirmation Mail").Replace("{Message}", "Confirming Your Email").Replace("{btnName}", "Confirm My Account");
 
 
-                var status = new SMTP2Go.Service.SMTP2GoService().SendEmail(new SendEmailDataModel
-                {
-                    APIKey = SMTP2GoConfig.APIKey,
-                    Body = body,
-                    ReplyTo = SMTP2GoConfig.SenderEmail,
-                    Sender = SMTP2GoConfig.UserName,
-                    Subject = "Travel Nexus Confirmation Mail",
-                    To = user.Email
-                });
+            var status = new SMTP2Go.Service.SMTP2GoService().SendEmail(new SendEmailDataModel
+            {
+                APIKey = SMTP2GoConfig.APIKey,
+                Body = body,
+                ReplyTo = SMTP2GoConfig.SenderEmail,
+                Sender = SMTP2GoConfig.UserName,
+                Subject = "Travel Nexus Confirmation Mail",
+                To = user.Email
+            });
 
-                if (status == false)
-                {
-                    ViewBag.EMessage2 = "Sorry, Something Wrong Happend.";
-                    return View("Error");
-                }
-           
+            if (status == false)
+            {
+                ViewBag.EMessage2 = "Sorry, Something Wrong Happend.";
+                return View("Error");
+            }
+
             return View();
         }
 
@@ -369,24 +369,25 @@ namespace TravelNexus.Web.Controllers
                     Type = CustomerType.PARTNER,
 
                 };
-                try { 
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                try
                 {
-                    UserManager.SetLockoutEnabled(user.Id, false);
-                    await UserManager.AddToRoleAsync(user.Id, "PARTNER");
-                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    UserManager.UserTokenProvider = tokenProvider(UserManager);
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    string body = string.Empty;
-                    using (StreamReader reader = new StreamReader(Server.MapPath("~/App_Data/MailTemplate/AccountConfirmation.html")))
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
                     {
-                        body = reader.ReadToEnd();
-                    }
-                    body = body.Replace("{ConfirmationLink}", callbackUrl).Replace("{UserName}", model.Email).Replace("{MessageHeader}", "Confirmation Mail").Replace("{Message}", "Confirming Your Email").Replace("{btnName}", "Confirm My Account");
+                        UserManager.SetLockoutEnabled(user.Id, false);
+                        await UserManager.AddToRoleAsync(user.Id, "PARTNER");
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        UserManager.UserTokenProvider = tokenProvider(UserManager);
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        string body = string.Empty;
+                        using (StreamReader reader = new StreamReader(Server.MapPath("~/App_Data/MailTemplate/AccountConfirmation.html")))
+                        {
+                            body = reader.ReadToEnd();
+                        }
+                        body = body.Replace("{ConfirmationLink}", callbackUrl).Replace("{UserName}", model.Email).Replace("{MessageHeader}", "Confirmation Mail").Replace("{Message}", "Confirming Your Email").Replace("{btnName}", "Confirm My Account");
 
 
                         var status = new SMTP2Go.Service.SMTP2GoService().SendEmail(new SendEmailDataModel
@@ -399,7 +400,7 @@ namespace TravelNexus.Web.Controllers
                             To = user.Email
                         });
 
-                        if(status == false)
+                        if (status == false)
                         {
                             ViewBag.EMessage2 = "Sorry, Something Wrong Happend.";
                             return View("Error");
@@ -411,11 +412,11 @@ namespace TravelNexus.Web.Controllers
                         //}
                         //else
                         //    return RedirectToAction("Error", "Home");
-                    ViewBag.EMessage1 = "Thanks For Your Registeration...";
-                    ViewBag.EMessage2 = "Please Check Your Email To Confirm It...";
-                    return View("Error");
+                        ViewBag.EMessage1 = "Thanks For Your Registeration...";
+                        ViewBag.EMessage2 = "Please Check Your Email To Confirm It...";
+                        return View("Error");
 
-                }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -483,10 +484,11 @@ namespace TravelNexus.Web.Controllers
                     IsDeleted = false,
                     NexusTax = 10.0,
                     Type = CustomerType.CUSTOMER,
-                    
+
                 };
-                try { 
-                var result = await UserManager.CreateAsync(user, model.Password);
+                try
+                {
+                    var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
                         UserManager.SetLockoutEnabled(user.Id, false);
@@ -532,13 +534,13 @@ namespace TravelNexus.Web.Controllers
                         return View("Error");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ViewBag.EMessage1 = ex.Message;
                     ViewBag.EMessage2 = "Sorry, Something Wrong Happend in Server...Try To Login Later.";
                     return View("Error");
                 }
-               
+
 
             }
 
@@ -557,11 +559,11 @@ namespace TravelNexus.Web.Controllers
             //string HotelId = TempData["HotelIdRegister"] as string;
 
 
-                //if (!model.Password.Equals(model.ConfirmPassword))
-                //{
-                //    ModelState.AddModelError("", "Password Does not Match......");
-                //    return View(model);
-                //}
+            //if (!model.Password.Equals(model.ConfirmPassword))
+            //{
+            //    ModelState.AddModelError("", "Password Does not Match......");
+            //    return View(model);
+            //}
 
             var User = await UserManager.FindByEmailAsync(model.Email);
 
@@ -621,10 +623,10 @@ namespace TravelNexus.Web.Controllers
             try
             {
                 result = await UserManager.ConfirmEmailAsync(userId, code);
-            } 
-            catch 
+            }
+            catch
             {
-                
+
             }
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
@@ -782,7 +784,7 @@ namespace TravelNexus.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            ControllerContext.HttpContext.Session.RemoveAll();
+            //ControllerContext.HttpContext.Session.RemoveAll();
             var loginInfo = AuthenticationManager.GetExternalLoginInfoAsync().Result;
             if (loginInfo == null)
             {
@@ -814,8 +816,8 @@ namespace TravelNexus.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            Session["Workaround"] = 0;
-            //ControllerContext.HttpContext.Session.RemoveAll();
+            //Session["Workaround"] = 0;
+            ControllerContext.HttpContext.Session.RemoveAll();
             //HttpContext.Session["RunSession"] = "1";
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
@@ -868,6 +870,7 @@ namespace TravelNexus.Web.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                context.RequestContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {
@@ -1187,7 +1190,7 @@ namespace TravelNexus.Web.Controllers
         {
             var provider = new DpapiDataProtectionProvider("TravelNexusWebApp");
             return new DataProtectorTokenProvider<ApplicationUser, long>(provider.Create("TravelNexus"));
-           
+
         }
 
         #endregion
@@ -1234,6 +1237,6 @@ namespace TravelNexus.Web.Controllers
             return Encoding.UTF8.GetString(valueBytes);
         }
 
-        
+
     }
 }

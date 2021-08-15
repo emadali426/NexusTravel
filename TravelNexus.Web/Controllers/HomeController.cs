@@ -144,13 +144,13 @@ namespace TravelNexus.Web.Controllers
         [AllowAnonymous]
         public ActionResult SentToMailList(string Email)
         {
-            string Host =  SMTP2GoConfig.Host;
-            string Password =  SMTP2GoConfig.Password;
+            string Host = SMTP2GoConfig.Host;
+            string Password = SMTP2GoConfig.Password;
             int Port = SMTP2GoConfig.Port;
             string SenderEmail = SMTP2GoConfig.SenderEmail;
             string Username = SMTP2GoConfig.UserName;
 
-            SmtpClient smtpClient = new SmtpClient(Host,Port);
+            SmtpClient smtpClient = new SmtpClient(Host, Port);
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new System.Net.NetworkCredential(Username, Password);
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;

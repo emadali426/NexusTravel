@@ -110,6 +110,7 @@
         #header .logo a, #footer .logo a, .chaser .logo a {
             width: 150px !important;
             height: 60px;
+            margin-left: 15px;
             background-size: cover !important;
         }
 
@@ -182,6 +183,7 @@
             <div class="container">
                 <h1 class="logo navbar-brand">
                     <a href="/home/index" title="Travelo - home">
+                     
                         <img src="~/Content/images/logo.png" alt="Travelo HTML5 Template" />
                     </a>
                 </h1>
@@ -191,7 +193,6 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="pull-right hidden-mobile">
-
 
                         <a class="btn-medium signup" href="/account/SignOut">SIGN OUT</a>
                         @if (User.IsInRole("ADMIN"))
@@ -338,15 +339,6 @@
                             }
                         }
                     }
-
-                    @*@using (Html.BeginForm("Facebook", "Account", FormMethod.Post, null))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div id="socialLoginList">
-                                <button type="submit" class="button login-facebook" id="Facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="soap-icon-facebook"></i>Login with Facebook</button>
-                            </div>
-                        }*@
-
                     @*<a href="/Account/" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>*@
                     @* <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>*@
                 </div>
@@ -372,7 +364,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button id="LoginBtn" type="submit" class="input-text full-width">Login</button>
+                        <input id="LoginBtn" type="submit" class="input-text full-width" value="login" />
+                        
                     </div>
                 </form>
                 <div class="seperator"></div>
@@ -629,21 +622,21 @@
             $('#btnSendMail').click(function (e) {
                 $('#btnSendMail').prop('disabled', true);
                 e.preventDefault();
-                $.ajax({
-                    url: "/home/SentToMailList",
-                    type: 'POST',
-                    data: {
-                        Email: $('#MailAddress').val()
-                    },
-                    success: function (result) {
-                        alert(result);
-                        $('#btnSendMail').prop('disabled', false);
-                    },
-                    error: function (result) {
-                        alert(result);
-                        $('#btnSendMail').prop('disabled', false);
-                    }
-                });
+                    $.ajax({
+                        url: "/home/SentToMailList",
+                        type: 'POST',
+                        data: {
+                            Email: $('#MailAddress').val()
+                        },
+                        success: function (result) {
+                            alert(result);
+                            $('#btnSendMail').prop('disabled',false);
+                        },
+                        error: function (result) {
+                            alert(result);
+                            $('#btnSendMail').prop('disabled',false);
+                        }
+                    });
             });
 
         });

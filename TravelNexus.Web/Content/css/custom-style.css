@@ -1,69 +1,58 @@
-.image-100 {
-    width: 100% !important;
+.image-100{
+  width: 100% !important;
+}
+.carousel-indicators{
+  bottom: -21px;
+  transform: translate(-50%, 0px) !important;
+  margin-left: 0 !important;
+  width: 100%;
 }
 
-.carousel-indicators {
-    bottom: -21px;
-    transform: translate(-50%, 0px) !important;
-    margin-left: 0 !important;
-    width: 100%;
+.carousel-indicators li{
+    width: 10px !important;
+    height: 10px !important;
 }
 
-    .carousel-indicators li {
-        width: 10px !important;
-        height: 10px !important;
-    }
-
-    .carousel-indicators li {
-        background-color: #7FB231;
-    }
-
-        .carousel-indicators li.active {
-            background-color: #01B7F2;
-            border: 2px solid #FFF;
-        }
-
-.img-fluid {
-    max-width: 100%;
+.carousel-indicators li{
+  background-color: #7FB231;
 }
-
-.sider-backgrond-image {
-    height: 500px !important;
-    background-size: cover !important;
+.carousel-indicators li.active{
+  background-color: #01B7F2;
+  border: 2px solid #FFF;
 }
-
-#packageDetailsId {
-    padding: 15px;
+.img-fluid{
+  max-width: 100%;
 }
-
-.table th {
-    color: #000;
-    font-weight: bold;
+.sider-backgrond-image{
+  height: 500px !important;
+  background-size: cover !important;
 }
-
-.travelo-box {
-    padding: 20px 10px;
-    top: 45px;
+#packageDetailsId{
+  padding: 15px;
+}
+.table th{
+    color:#000;
+    font-weight:bold;
+}
+.travelo-box{
+    padding:20px 10px;
+        top: 45px;
     margin-top: -5px;
 }
-
-    .travelo-box h4.lead {
-        font-size: 16px;
-        font-weight: bold;
-        color: #2d3e52;
-        margin-bottom: 5px;
-    }
-
-    .travelo-box p.lead {
-        font-size: 16px !important;
-        margin-bottom: 5px;
-    }
-
+.travelo-box h4.lead {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d3e52;
+    margin-bottom: 5px;
+}
+.travelo-box p.lead {
+    font-size: 16px !important;
+    margin-bottom:5px;
+}
 .Popular.section {
     padding-top: 15px;
     padding-bottom: 10px;
 }
-
 .background-image-1 {
     position: absolute;
     display: inline-block;

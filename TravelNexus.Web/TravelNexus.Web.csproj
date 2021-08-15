@@ -584,6 +584,31 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="NexusImages\FavDestImages\download.jpg" />
+    <Content Include="NexusImages\FavDestImages\packagephotoslideahow11.jpg" />
+    <Content Include="NexusImages\FavDestImages\packagephotoslideahow3.jpg" />
+    <Content Include="NexusImages\NewsImages\global-map.jpg" />
+    <Content Include="NexusImages\NewsImages\maroma %281%29.jpg" />
+    <Content Include="NexusImages\NewsImages\packagephotoslideahow2.jpg" />
+    <Content Include="NexusImages\PackagesImages\aaa\1.jpeg" />
+    <Content Include="NexusImages\PackagesImages\Hurghada\1.jpeg" />
+    <Content Include="NexusImages\PackagesImages\PackagesMainImages\1 website homepage thumbnail desert rose.jpg.jpg" />
+    <Content Include="NexusImages\PackagesImages\PackagesMainImages\packagephotoslideahow1.jpg" />
+    <Content Include="NexusImages\PackagesImages\PackagesMainImages\packagephotoslideahow2.jpg" />
+    <Content Include="NexusImages\PackagesImages\PackagesMainImages\packagephotoslideahow6.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\gfhgfhgfhgfh\1.jpeg" />
+    <Content Include="NexusImages\PopularHotelsImages\new\1.jpeg" />
+    <Content Include="NexusImages\PopularHotelsImages\plapla\1.jpeg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsLogoImages\682374404.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsLogoImages\packagephotoslideahow10.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsLogoImages\Test2.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsMainImages\682374404.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsMainImages\packagephotoslideahow12.jpg" />
+    <Content Include="NexusImages\PopularHotelsImages\PopHotelsMainImages\packagephotoslideahow9.jpg" />
+    <Content Include="NexusImages\ServiceImages\1519801807380.jpg" />
+    <Content Include="NexusImages\ServiceImages\packagephotoslideahow6.jpg" />
+    <Content Include="NexusImages\ServiceImages\packagephotoslideahow7.jpg" />
+    <Content Include="NexusImages\ServiceImages\packagephotoslideahow8.jpg" />
     <Content Include="readme.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -752,12 +777,6 @@
     <Content Include="Views\AdminManage\popHotelDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NexusImages\FavDestImages\" />
-    <Folder Include="NexusImages\NewsImages\" />
-    <Folder Include="NexusImages\PackagesImages\PackagesMainImages\" />
-    <Folder Include="NexusImages\PopularHotelsImages\PopHotelsLogoImages\" />
-    <Folder Include="NexusImages\PopularHotelsImages\PopHotelsMainImages\" />
-    <Folder Include="NexusImages\ServiceImages\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Flight\PartialViews\" />
   </ItemGroup>
