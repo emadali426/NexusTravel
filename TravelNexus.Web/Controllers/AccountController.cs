@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using SMTP2Go.Service.Models;
 using TravelNexus.Web.Models;
 using TravelNexus.Web.RepoServices;
-using Facebook;
 
 namespace TravelNexus.Web.Controllers
 {
@@ -783,7 +782,8 @@ namespace TravelNexus.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            ControllerContext.HttpContext.Session.RemoveAll();
+            var loginInfo = AuthenticationManager.GetExternalLoginInfoAsync().Result;
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -814,7 +814,7 @@ namespace TravelNexus.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            //Session["Workaround"] = 0;
+            Session["Workaround"] = 0;
             //ControllerContext.HttpContext.Session.RemoveAll();
             //HttpContext.Session["RunSession"] = "1";
             // Request a redirect to the external login provider
@@ -848,7 +848,7 @@ namespace TravelNexus.Web.Controllers
 
 
 
-        public class ChallengeResult : HttpUnauthorizedResult
+        internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)
@@ -1113,7 +1113,7 @@ namespace TravelNexus.Web.Controllers
         {
             get
             {
-                return System.Web.HttpContext.Current.GetOwinContext().Authentication;
+                return HttpContext.GetOwinContext().Authentication;
             }
         }
 

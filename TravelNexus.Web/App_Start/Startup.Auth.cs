@@ -5,9 +5,11 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Owin;
 //using HelperPro.Models;
@@ -42,6 +44,7 @@ namespace TravelNexus.Web
                         validateInterval: TimeSpan.FromMinutes(30), (m, u) => u.GenerateUserIdentityAsync(m), c => c.GetUserId<long>()
                         )
                 },
+                CookieManager = new SystemWebCookieManager()
             });
           
 
@@ -69,15 +72,24 @@ namespace TravelNexus.Web
             //   appSecret: "6f6ee8df82c2fa5faa75d7b8e9de33f8"
             //   );
 
-            app.UseFacebookAuthentication(
-               appId: "560661181773385",
-               appSecret: "59ab7631714cfec32f2aa654944b4576"
-               );
+
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions() {
+                AppId = "560661181773385",
+                AppSecret = "59ab7631714cfec32f2aa654944b4576",
+                UserInformationEndpoint = "https://graph.facebook.com/v11.0/me?fields=id,first_name,last_name,email,name",
+                AuthorizationEndpoint = "https://www.facebook.com/v11.0/dialog/oauth",
+                Provider = new FacebookAuthenticationProvider(),
+                CookieManager = new SystemWebCookieManager(),
+                Scope = { "email" }
+            });
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "991017023383-74fb211uii3r6o3fuj0ubdl074qnifm3.apps.googleusercontent.com",
-                ClientSecret = "1J6owCZCxPWQT6VJ-MjZdodw"
+                ClientSecret = "1J6owCZCxPWQT6VJ-MjZdodw",
+                Provider = new GoogleOAuth2AuthenticationProvider(),
+                CookieManager = new SystemWebCookieManager(),
+                Scope = { "email" }
             });
         }
 
